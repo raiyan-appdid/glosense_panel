@@ -16,21 +16,19 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|string|min:3',
+            'first_name' => 'required|string|min:3',
             'email' => 'required|email|max:255',
-            'phone' => 'required|numeric|min:10',
-            // 'gender' => 'required',
             'password' => 'required|confirmed',
+            'phone' => 'required|unique:users,phone'
         ]);
         if (!empty($request->image)) {
             $image = FileUploader::uploadFile($request->file('image'), 'images/usersimage');
         }
         // return $image;
         $user = User::create([
-            'user_name' => $request->name,
+            'first_name' => $request->first_name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'image' => $image,
             'address' => $request->address,
             'gender' => $request->gender,
             'password' => Hash::make($request->password),

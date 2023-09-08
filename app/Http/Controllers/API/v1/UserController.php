@@ -13,6 +13,15 @@ use DB;
 
 class UserController extends Controller
 {
+
+    public function detail(Request $request){
+        $data = User::where('id',request()->user()->id)->first();
+        return response([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
     public function index(Request $request)
     {
 
