@@ -1,0 +1,14 @@
+.imgDuo:before {
+    content: "";
+    height: 100%;
+    top: 0;
+    left: 25%;
+    background-color: black;
+    z-index: 2;
+}
+
+.imgDuo img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
