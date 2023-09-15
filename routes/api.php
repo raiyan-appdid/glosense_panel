@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\Auth\AuthController;
+use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\BasicController;
 use App\Http\Controllers\API\v1\Post\FavouriteController;
 
@@ -15,7 +16,7 @@ Route::prefix('v1')->group(function () {
     });
     Route::group(['middleware' => 'auth:sanctum'], function () {
 
-        Route::get('user-detail', 'detail')->prefix('user');
+        Route::get('user-detail', [UserController::class, 'detail']);
 
         Route::controller(PostController::class)->prefix('post')->group(function () {
             Route::post('store', 'store')->name('store');
@@ -25,8 +26,8 @@ Route::prefix('v1')->group(function () {
             Route::post('store', 'store');
         });
 
-        Route::get('slider', [BasicController::class, 'getSlider']);
     });
+        Route::get('slider', [BasicController::class, 'getSlider']);
     
     
     Route::get('example', function () {
