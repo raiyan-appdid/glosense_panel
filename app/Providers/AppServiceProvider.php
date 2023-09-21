@@ -25,13 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $businessSettings = BusinessSetting::all();
-        foreach ($businessSettings as $data) {
-            $info[] = [
-                $data->key => $data->value,
-            ];
-        }
-        $businessSettings = (!$businessSettings->isEmpty()) ? (array_merge(...$info)) : [];
-        view()->share('businessSettings', $businessSettings);
+        // $businessSettings = BusinessSetting::all();
+        // foreach ($businessSettings as $data) {
+        //     $info[] = [
+        //         $data->key => $data->value,
+        //     ];
+        // }
+        // $businessSettings = (!$businessSettings->isEmpty()) ? (array_merge(...$info)) : [];
+        // view()->share('businessSettings', $businessSettings);
     }
 }
