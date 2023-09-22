@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\FileUploader;
 use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
@@ -29,7 +30,13 @@ class SliderController extends Controller
         $request->validate([
             'image' => 'required|mimes:png,jpg,jpeg,svg,webp|max:512'
         ]);
-        $image = FileUploader::uploadFile($request->file('image'), 'images/sliders');
+
+        // request()->file('image')->store('test', 'do');
+        $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
+        $spaceUrl = Storage::disk('do')->url($url);
+        $spaceUrl = Storage::disk('do')->delete($url);
+
+        $image = $spaceUrl;
         Slider::create([
             'image' => $image
         ]);
@@ -82,7 +89,9 @@ class SliderController extends Controller
 
     public function destroy($id)
     {
-        Slider::findOrFail($id)->delete();
+       $data = Slider::findOrFail($id)->delete();
+        $spaceUrl = Storage::disk('do')->delete($data->image);
+
         return response([
             'header' => 'Deleted!',
             'message' => 'slider deleted successfully',
