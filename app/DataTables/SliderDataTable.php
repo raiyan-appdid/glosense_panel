@@ -30,7 +30,7 @@ class SliderDataTable extends DataTable
             })
             ->editColumn('image', function ($data) {
                 $image = $data->image;
-                return $image;
+                // return $image;
                 return view('content.table-component.avatar', compact('image'));
             })
             ->editColumn('created_at', function ($data) {

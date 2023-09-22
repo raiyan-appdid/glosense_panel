@@ -32,7 +32,7 @@ class SliderController extends Controller
         ]);
 
         // request()->file('image')->store('test', 'do');
-        $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
+        $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
         // dd('asdf');
         $spaceUrl = Storage::disk('do')->url($url);
 
@@ -89,8 +89,10 @@ class SliderController extends Controller
 
     public function destroy($id)
     {
-       $data = Slider::findOrFail($id)->delete();
+       $data = Slider::findOrFail($id);
         $spaceUrl = Storage::disk('do')->delete($data->image);
+
+        $data->delete();
 
         return response([
             'header' => 'Deleted!',
