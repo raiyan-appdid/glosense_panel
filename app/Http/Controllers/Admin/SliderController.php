@@ -31,31 +31,15 @@ class SliderController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg,svg,webp|max:512'
         ]);
 
-        $storagePath = Storage::disk('spaces')->put($request->file('image'), 'slider');
-
-        if($storagePath) {
-
-            $request->merge([
-                'filename' => $request->file('image')->hashName()
-            ]);
-    
-            Slider::create([
-                'image' => $request->all(),
-            ]);
-    
-            // return redirect('image-upload')->with('status', 'Image Uploaded!');
-    
-        }
-
         // request()->file('image')->store('test', 'do');
-        // $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
+        $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
         // dd('asdf');
-        // $spaceUrl = Storage::disk('do')->url($url);
+        $spaceUrl = Storage::disk('do')->url($url);
 
-        // $image = $spaceUrl;
-        // Slider::create([
-        //     'image' => $image
-        // ]);
+        $image = $spaceUrl;
+        Slider::create([
+            'image' => $image
+        ]);
         return response([
             'header' => 'Success!',
             'message' => 'Slider created successfully!',
