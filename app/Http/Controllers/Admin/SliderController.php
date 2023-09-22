@@ -32,13 +32,13 @@ class SliderController extends Controller
         ]);
 
         // request()->file('image')->store('test', 'do');
-        $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
-        dd('asdf');
-        $spaceUrl = Storage::disk('do')->url($url);
+        // $url =  Storage::disk('do')->putFile('slider', $request->file('image'));
+        // dd('asdf');
+        // $spaceUrl = Storage::disk('do')->url($url);
 
-        $image = $spaceUrl;
+        // $image = $spaceUrl;
         Slider::create([
-            'image' => $image
+            'image' => $image ?? ''
         ]);
         return response([
             'header' => 'Success!',
