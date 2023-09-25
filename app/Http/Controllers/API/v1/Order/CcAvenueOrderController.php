@@ -40,10 +40,14 @@ class CcAvenueOrderController extends Controller
         //     'success' => true,
         //     'message' => "Order Created",
         // ]);
-
         $paymentService = new PaymentService();
-        $order = $paymentService->createOrder(1, "https://glosense.in/billing-details", "https://glosense.in/billing-details", $request->all());
 
+        $order = $paymentService->createOrder(
+            amount: 1,
+            redirect_url: "https://glosense.in/billing-details",
+            cancel_url: "https://glosense.in/billing-details",
+            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->address]
+        );
         return $order->rendered();
     }
 }
