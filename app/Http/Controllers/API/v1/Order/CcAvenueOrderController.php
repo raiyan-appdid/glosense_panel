@@ -50,7 +50,7 @@ class CcAvenueOrderController extends Controller
             cancel_url: "https://glosense.in/billing-details",
             additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->address]
         );
-        return 'raiyan';
+        // return 'raiyan';
         return $order->rendered();
     }
 }
