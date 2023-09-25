@@ -15,15 +15,15 @@ class CcAvenueOrderController extends Controller
     {
         // return "raiyan";
         $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'pincode' => 'required',
-            'country' => 'required',
-            'number' => 'required',
-            'email' => 'required',
-            'total_price' => 'required',
+            // 'name' => 'required',
+            // 'address' => 'required',
+            // 'city' => 'required',
+            // 'state' => 'required',
+            // 'pincode' => 'required',
+            // 'country' => 'required',
+            // 'number' => 'required',
+            // 'email' => 'required',
+            // 'total_price' => 'required',
         ]);
         return "raiyan";
         $data = new CcAvenueOrder;
