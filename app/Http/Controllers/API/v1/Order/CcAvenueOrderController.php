@@ -25,7 +25,7 @@ class CcAvenueOrderController extends Controller
             // 'email' => 'required',
             // 'total_price' => 'required',
         ]);
-        return "raiyan";
+        // return "raiyan";
         $data = new CcAvenueOrder;
         // $data->user_id = $request->user()->id;
         $data->name = $request->name;
