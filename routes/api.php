@@ -10,6 +10,11 @@ use App\Http\Controllers\API\v1\Post\FavouriteController;
 
 Route::prefix('v1')->group(function () {
 
+
+    Route::get('tp', function(){
+        return "raiyan";
+    });
+
     Route::controller(AuthController::class)->prefix('user')->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'loginOne');
