@@ -25,7 +25,7 @@ class CcAvenueOrderController extends Controller
             'total_price' => 'required',
         ]);
         $data = new CcAvenueOrder;
-        $data->user_id = $request->user()->id;
+        // $data->user_id = $request->user()->id;
         $data->name = $request->name;
         $data->address = $request->address;
         $data->city = $request->city;
