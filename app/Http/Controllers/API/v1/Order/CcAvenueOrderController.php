@@ -41,7 +41,7 @@ class CcAvenueOrderController extends Controller
         //     'message' => "Order Created",
         // ]);
 
-        $paymentService = new PaymentService;
+        $paymentService = new PaymentService();
         $order = $paymentService->createOrder(1, "https://glosense.in/billing-details", "https://glosense.in/billing-details", $request->all());
 
         return $order->rendered();
