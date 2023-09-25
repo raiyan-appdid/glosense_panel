@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\Auth\AuthController;
 use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\BasicController;
+use App\Http\Controllers\API\v1\Order\CcAvenueOrderController;
 use App\Http\Controllers\API\v1\Post\FavouriteController;
 
 Route::prefix('v1')->group(function () {
@@ -23,6 +24,10 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::controller(FavouriteController::class)->prefix('favourite')->group(function () {
+            Route::post('store', 'store');
+        });
+
+        Route::prefix('order')->controller(CcAvenueOrderController::class)->group(function(){
             Route::post('store', 'store');
         });
 

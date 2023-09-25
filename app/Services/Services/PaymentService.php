@@ -99,7 +99,7 @@ class PaymentService
                 'status' => 'success'
             ]);
 
-            $cart = Cart::where('user_id', $order->user_id)->get();
+            $cart = Cart::where('user_id', $order->user_id)->get(); 
             $cart->each->delete();
             DB::commit();
         } elseif ($payment_detail->order_status == 'FAILED' || now()->diffInMinutes($order->created_at) >= 120) {
