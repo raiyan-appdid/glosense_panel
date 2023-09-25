@@ -15,7 +15,6 @@ Route::prefix('v1')->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'loginOne');
         Route::post('logout', 'logout')->middleware(['auth:sanctum']);
-        
     });
     Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -28,15 +27,13 @@ Route::prefix('v1')->group(function () {
         Route::controller(FavouriteController::class)->prefix('favourite')->group(function () {
             Route::post('store', 'store');
         });
-
-        Route::prefix('order')->controller(CcAvenueOrderController::class)->group(function(){
-            Route::get('store', 'store');
-        });
-
     });
-        Route::get('slider', [BasicController::class, 'getSlider']);
-    
-    
+    Route::prefix('order')->controller(CcAvenueOrderController::class)->group(function () {
+        Route::get('store', 'store');
+    });
+    Route::get('slider', [BasicController::class, 'getSlider']);
+
+
     Route::get('example', function () {
         return "raiyan";
     });
