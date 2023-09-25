@@ -19,6 +19,7 @@ class CcAvenueOrderController extends Controller
             'country' => 'required',
             'number' => 'required',
             'email' => 'required',
+            'total_price' => 'required',
         ]);
         $data = new CcAvenueOrder;
         $data->user_id = $request->user()->id;
@@ -30,6 +31,7 @@ class CcAvenueOrderController extends Controller
         $data->country = $request->country;
         $data->number = $request->number;
         $data->email = $request->email;
+        $data->total_price = $request->total_price;
         $data->save();
         return response([
             'success' => true,
