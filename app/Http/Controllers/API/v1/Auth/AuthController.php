@@ -111,4 +111,13 @@ class AuthController extends Controller
     {
         return response(['msg' => 'not implemented']);
     }
+
+    public function logout(Request $request)
+    {
+        request()->user()->currentAccessToken()->delete();
+        return response([
+            'success' => true,
+            'message' => "Logged Out",
+        ]);
+    }
 }
