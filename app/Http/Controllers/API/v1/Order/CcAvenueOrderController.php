@@ -46,8 +46,8 @@ class CcAvenueOrderController extends Controller
 
         $order = $paymentService->createOrder(
             amount: 1,
-            redirect_url: "https://glosense.in/billing-details",
-            cancel_url: "https://glosense.in/billing-details",
+            redirect_url: "{{route('admin.blogs.index)}}",
+            cancel_url: "{{route('admin.blogs.index)}}",
             additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->address]
         );
         // return 'raiyan';
