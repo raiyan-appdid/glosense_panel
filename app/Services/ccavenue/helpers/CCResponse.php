@@ -60,7 +60,7 @@ class CCResponse extends PaymentConstants
         $mode = (env('CC_MODE') === 'test') ? 'test' : 'secure';
         $html = <<<HTML
         <form method="post" name="redirect"
-            action="https://$mode.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+            action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
             <input type=hidden name=encRequest value="$encryptedData">
             <input type=hidden name=access_code value="$this->accessCode">
         </form>
