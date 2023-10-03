@@ -48,7 +48,7 @@ class CcAvenueOrderController extends Controller
             amount: 1,
             redirect_url: "{{route('admin.blogs.index)}}",
             cancel_url: "{{route('admin.blogs.index)}}",
-            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->address, 'zip_code' => $request->pincode, 'mobile_number' => $request->pincode]
+            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'address' => $request->address, 'zipcode' => $request->pincode, 'mobile_number' => $request->pincode]
         );
         // return 'raiyan';
         return $order->rendered();
