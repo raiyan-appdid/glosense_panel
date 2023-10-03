@@ -32,7 +32,7 @@ use App\Models\ComboProduct;
 
 
 Route::prefix('ccavenue')->name('ccavenue.')->controller(BasicController::class)->group(function () {
-    Route::get('success', 'successCallBack')->name('success');
+    Route::post('success', 'successCallBack')->name('success');
     Route::post('failed', 'failedCallBack')->name('failed');
 });
 
