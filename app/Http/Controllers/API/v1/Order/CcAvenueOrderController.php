@@ -46,7 +46,7 @@ class CcAvenueOrderController extends Controller
 
         $order = $paymentService->createOrder(
             amount: 1,
-            redirect_url: route("ccavenue.success"),
+            redirect_url: "",
             cancel_url: "",
             additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'address' => $request->billing_address, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country]
         );
