@@ -10,9 +10,8 @@ class BasicController extends Controller
     {
         return $request->all();
     }
-    public function failedCallBack($gateway, Request $request)
+    public function failedCallBack(Request $request)
     {
-        return $gateway;
         return "raiyan";
         return $request->all();
     }
