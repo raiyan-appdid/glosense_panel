@@ -12,7 +12,6 @@ class BasicController extends Controller
     }
     public function failedCallBack(Request $request)
     {
-        return "raiyan";
         return $request->all();
     }
 }
