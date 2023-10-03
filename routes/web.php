@@ -31,7 +31,7 @@ use App\Http\Controllers\ShipRocketController;
 use App\Models\ComboProduct;
 
 
-Route::prefix('ccavenue')->name('ccavenue')->controller(BasicController::class)->group(function () {
+Route::prefix('ccavenue')->name('ccavenue.')->controller(BasicController::class)->group(function () {
     Route::get('success', 'successCallBack')->name('success');
     Route::get('failed', 'failedCallBack')->name('failed');
 });
