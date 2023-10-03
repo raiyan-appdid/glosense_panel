@@ -9,7 +9,9 @@ class BasicController extends Controller
 {
     public function successCallBack(Request $request)
     {
-        return $request->all();
+        $ccCrypto = new CCCrypto();
+        $avenue_payment = $ccCrypto->decrypt($request->encResp);
+        return $avenue_payment;
     }
     public function failedCallBack(Request $request)
     {
