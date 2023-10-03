@@ -26,8 +26,16 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\VideoGalleryController;
+use App\Http\Controllers\BasicController;
 use App\Http\Controllers\ShipRocketController;
 use App\Models\ComboProduct;
+
+
+Route::prefix('ccavenue')->name('ccavenue')->controller(BasicController::class)->group(function () {
+    Route::get('success', 'successCallBack')->name('success');
+    Route::get('failed', 'failedCallBack')->name('failed');
+});
+
 
 Route::prefix('admin')->middleware(['web'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -43,7 +51,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     });
     Route::name('users.')->prefix('users')->controller(UsersController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-             Route::get('edit/{id}', 'edit')->name('edit');
+        Route::get('edit/{id}', 'edit')->name('edit');
         Route::delete('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
@@ -203,6 +211,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     });
 });
 
-Route::prefix('ship-rocket')->name('ship-rocket.')->controller(ShipRocketController::class)->group(function(){
+Route::prefix('ship-rocket')->name('ship-rocket.')->controller(ShipRocketController::class)->group(function () {
     Route::get('create',  'createOrder')->name('create');
 });
