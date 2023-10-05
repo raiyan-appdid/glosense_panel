@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CcAvenueOrder;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
+use Str;
 
 use function Termwind\render;
 
@@ -44,11 +45,13 @@ class CcAvenueOrderController extends Controller
         // ]);
         $paymentService = new PaymentService();
 
+        $CCAvenueorderId = Str::uuid();
         $order = $paymentService->createOrder(
             amount: 1,
             redirect_url: route("ccavenue.success"),
             cancel_url: route("ccavenue.failed"),
-            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'address' => $request->billing_address, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country]
+            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'address' => $request->billing_address, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country],
+            CCAvenueorderId : $CCAvenueorderId,
         );
         // return 'raiyan';
         return $order->rendered();
