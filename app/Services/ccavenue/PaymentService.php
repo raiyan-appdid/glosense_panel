@@ -28,6 +28,7 @@ class PaymentService extends PaymentConstants
         string $redirect_url,
         string $cancel_url,
         ?array $additional_data = [],
+        $CCAvenueorderId
     ): CCResponse {
 
         /** @var string */
@@ -40,9 +41,8 @@ class PaymentService extends PaymentConstants
         foreach ($additional_data as $key => $value) {
             $data .= $key . '=' . $value . '&';
         }
-        $orderId = Str::uuid();
-        $data .= "order_id=" . $orderId;
-        return new CCResponse($data, $orderId);
+        $data .= "order_id=" . $CCAvenueorderId;
+        return new CCResponse($data, $CCAvenueorderId);
     }
 
 
