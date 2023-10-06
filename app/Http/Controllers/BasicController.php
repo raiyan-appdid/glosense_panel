@@ -64,9 +64,9 @@ class BasicController extends Controller
 
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
-        return $response['order_id'];
-
+        
         $updateOrder->save();
+        return $response['order_id'];
         return [$updateTransaction, $updateOrder];
 
 
