@@ -8,26 +8,26 @@ use Illuminate\Support\Facades\Http;
 
 class CreateOrderService
 {
-    public function create($token, $updateOrder)
+    public function create($token)
     {
         $response = Http::withHeaders([
             'Authorization' => "Bearer $token",
             "Content-Type" => "application/json",
         ])->post('https://apiv2.shiprocket.in/v1/external/orders/create/adhoc', [
-            "order_id" => $updateOrder->order_id,
-            "order_date" => now(),
+            "order_id" => "224-901",
+            "order_date" => "2023-07-24 11:11",
             "pickup_location" => "Primary",
             // "channel_id" => "",
             // "comment" => "Reseller=> M/s Goku",
-            "billing_customer_name" => $updateOrder->name,
+            "billing_customer_name" => "Naruto",
             "billing_last_name" => "",
-            "billing_address" => $updateOrder->address,
-            "billing_city" => $updateOrder->city,
-            "billing_pincode" => $updateOrder->pincode,
-            "billing_state" => $updateOrder->state,
-            "billing_country" => $updateOrder->country,
-            "billing_email" => $updateOrder->email,
-            "billing_phone" => $updateOrder->number,
+            "billing_address" => "806, 8th floor, Sunshine Tower, near Dadar Phool Market, Senapati Bapat Marg, Dadar",
+            "billing_city" => "Mumbai",
+            "billing_pincode" => "400013",
+            "billing_state" => "Maharashtra",
+            "billing_country" => "India",
+            "billing_email" => "naruto@uzumaki.com",
+            "billing_phone" => "8097750991",
             "shipping_is_billing" => true,
             // "shipping_customer_name" => "",
             // "shipping_last_name" => "",
