@@ -55,10 +55,11 @@ class BasicController extends Controller
 
         $token = new GenerateTokenService;
         $token = $token->getToken();
-        return $token;
 
         $shiprocketOrder = new CreateOrderService;
         $response = $shiprocketOrder->create($token);
+        return $response;
+
 
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
         $updateOrder->status = $response['status'];
