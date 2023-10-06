@@ -17,6 +17,6 @@ class BasicController extends Controller
     {
         $ccCrypto = new CCCrypto();
         $avenue_payment = $ccCrypto->decrypt($request->encResp);
-        return $avenue_payment['order_status'];
+        return $avenue_payment;
     }
 }
