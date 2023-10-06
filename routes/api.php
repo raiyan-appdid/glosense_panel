@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
         });
     });
     Route::prefix('order')->controller(CcAvenueOrderController::class)->group(function () {
-        Route::get('store', 'store');
+        Route::get('store', 'store')->middleware(['auth:sanctum']);
     });
     Route::get('slider', [BasicController::class, 'getSlider']);
 

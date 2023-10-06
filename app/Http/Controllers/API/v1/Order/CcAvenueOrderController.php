@@ -45,8 +45,6 @@ class CcAvenueOrderController extends Controller
         $data->sub_total = 899;
         $data->save();
 
-        return 'aiyan';
-
         $CCAvenueorderId = Str::uuid();
 
         $transaction = new CcAvenueTransaction;
