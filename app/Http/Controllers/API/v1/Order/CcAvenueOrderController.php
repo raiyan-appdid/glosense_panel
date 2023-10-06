@@ -16,7 +16,6 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request)
     {
-        return  $request->user()->id;
         $request->validate([
             // 'name' => 'required',
             // 'address' => 'required',
@@ -45,6 +44,7 @@ class CcAvenueOrderController extends Controller
         $data->discount = $request->discount;
         $data->sub_total = 899;
         $data->save();
+        return $data;
 
         $CCAvenueorderId = Str::uuid();
 
