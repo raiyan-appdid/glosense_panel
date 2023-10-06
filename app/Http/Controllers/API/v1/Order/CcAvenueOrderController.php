@@ -16,7 +16,7 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request)
     {
-        return  $request->user();
+        return  $request->user()->id;
         $request->validate([
             // 'name' => 'required',
             // 'address' => 'required',
