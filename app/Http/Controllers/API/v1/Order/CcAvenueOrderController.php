@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\v1\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\CcAvenueOrder;
+use App\Models\CcAvenueTransaction;
+use App\Models\Order;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
 use Str;
@@ -14,7 +16,6 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request)
     {
-        // return "raiyan";
         $request->validate([
             // 'name' => 'required',
             // 'address' => 'required',
@@ -26,9 +27,9 @@ class CcAvenueOrderController extends Controller
             // 'email' => 'required',
             // 'total_price' => 'required',
         ]);
-        // return "raiyan";
-        $data = new CcAvenueOrder;
-        // $data->user_id = $request->user()->id;
+        $data = new Order;
+        $data->order_id = mt_rand(100000, 999999);
+        $data->user_id = $request->user()->id;
         $data->name = $request->name;
         $data->address = $request->address;
         $data->city = $request->city;
@@ -37,21 +38,29 @@ class CcAvenueOrderController extends Controller
         $data->country = $request->country;
         $data->number = $request->number;
         $data->email = $request->email;
-        $data->total_price = $request->total_price;
+        $data->product_name = $request->product_name;
+        $data->units = 1;
+        $data->price = 899;
+        $data->discount = $request->discount;
+        $data->sub_total = 899;
         $data->save();
-        // return response([
-        //     'success' => true,
-        //     'message' => "Order Created",
-        // ]);
-        $paymentService = new PaymentService();
 
         $CCAvenueorderId = Str::uuid();
+
+        $transaction = new CcAvenueTransaction;
+        $transaction->user_id = $request->user()->id;
+        $transaction->order_id = $data->id;
+        $transaction->transaction_order_id = $CCAvenueorderId;
+        $transaction->save();
+
+        $paymentService = new PaymentService();
+
         $order = $paymentService->createOrder(
             amount: 1,
             redirect_url: route("ccavenue.success"),
             cancel_url: route("ccavenue.failed"),
             additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'address' => $request->billing_address, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country],
-            CCAvenueorderId : $CCAvenueorderId,
+            CCAvenueorderId: $CCAvenueorderId,
         );
         // return 'raiyan';
         return $order->rendered();
