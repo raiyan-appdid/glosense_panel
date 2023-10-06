@@ -53,7 +53,6 @@ class CcAvenueOrderController extends Controller
         $transaction->order_id = $data->id;
         $transaction->transaction_order_id = $CCAvenueorderId;
         $transaction->save();
-        return $transaction;
 
         $paymentService = new PaymentService();
 
