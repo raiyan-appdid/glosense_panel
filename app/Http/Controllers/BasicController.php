@@ -32,7 +32,8 @@ class BasicController extends Controller
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
         $updateOrder->save();
-        return $updateTransaction;
+        return [$updateTransaction, $updateOrder];
+
     }
     public function failedCallBack(Request $request)
     {
@@ -48,6 +49,6 @@ class BasicController extends Controller
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
-        return $updateTransaction;
+        return [$updateTransaction, $updateOrder];
     }
 }
