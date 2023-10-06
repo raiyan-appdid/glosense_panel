@@ -30,8 +30,8 @@ class BasicController extends Controller
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
 
         $shiprocketOrder = new CreateOrderService;
-        $response = $shiprocketOrder->create($token);
-        
+        $response = $shiprocketOrder->create($token, $updateOrder);
+
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
         // $updateOrder->save();
