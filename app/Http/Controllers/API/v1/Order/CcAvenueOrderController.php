@@ -44,12 +44,12 @@ class CcAvenueOrderController extends Controller
         $data->discount = $request->discount;
         $data->sub_total = 899;
         $data->save();
-       
+
 
         $CCAvenueorderId = Str::uuid();
 
         $transaction = new CcAvenueTransaction;
-        $transaction->user_id = $request->user()->id;
+        $transaction->user_id = $data->user_id;
         $transaction->order_id = $data->id;
         $transaction->transaction_order_id = $CCAvenueorderId;
         $transaction->save();
