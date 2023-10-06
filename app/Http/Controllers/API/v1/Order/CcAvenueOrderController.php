@@ -27,6 +27,7 @@ class CcAvenueOrderController extends Controller
             // 'email' => 'required',
             // 'total_price' => 'required',
         ]);
+        return 'as';
         $data = new Order;
         $data->order_id = mt_rand(100000, 999999);
         $data->user_id = $request->user()->id;
