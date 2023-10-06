@@ -31,14 +31,14 @@ class CcAvenueOrderController extends Controller
         $data->order_id = mt_rand(100000, 999999);
         $data->user_id = $request->user_id;
         $data->name = $request->name;
-        $data->address = $request->address;
+        $data->address = $request->addresss;
         $data->city = $request->city;
         $data->state = $request->state;
         $data->pincode = $request->pincode;
         $data->country = $request->country;
         $data->number = $request->number;
         $data->email = $request->email;
-        $data->product_name = $request->product_name;
+        $data->product_name = "Hair you glo";
         $data->units = 1;
         $data->price = 899;
         $data->discount = $request->discount;
