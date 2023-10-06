@@ -25,13 +25,16 @@ class BasicController extends Controller
         $token = new GenerateTokenService;
         $token = $token->getToken();
 
-        $shiprocketOrder = new CreateOrderService;
-        $response = $shiprocketOrder->create($token);
+        
 
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
+
+        $shiprocketOrder = new CreateOrderService;
+        $response = $shiprocketOrder->create($token, $updateOrder);
+
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
-        $updateOrder->save();
+        // $updateOrder->save();
         return [$updateTransaction, $updateOrder];
 
     }
@@ -51,26 +54,6 @@ class BasicController extends Controller
         $updateOrder->save();
 
 
-
-
-        $token = new GenerateTokenService;
-        $token = $token->getToken();
-
-        $shiprocketOrder = new CreateOrderService;
-        $response = $shiprocketOrder->create($token);
-
-
-        $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
-
-        $updateOrder->status = $response['status'];
-        $updateOrder->shipment_id = $response['shipment_id'];
-        
-        // $updateOrder->save();
-        // return $response['order_id'];
         return [$updateTransaction, $updateOrder];
-
-
-
-        // return [$updateTransaction, $updateOrder];
     }
 }
