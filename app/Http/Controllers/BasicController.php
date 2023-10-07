@@ -25,7 +25,7 @@ class BasicController extends Controller
         $token = new GenerateTokenService;
         $token = $token->getToken();
 
-
+        
 
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
 
@@ -34,8 +34,9 @@ class BasicController extends Controller
 
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
-        $updateOrder->save();
+        // $updateOrder->save();
         return [$updateTransaction, $updateOrder];
+
     }
     public function failedCallBack(Request $request)
     {
@@ -48,29 +49,9 @@ class BasicController extends Controller
         $updateTransaction->payment_response_json = $avenue_payment;
         $updateTransaction->save();
 
-
-
-
-
-        $token = new GenerateTokenService;
-        $token = $token->getToken();
-
-
-
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
-
-        $shiprocketOrder = new CreateOrderService;
-        $response = $shiprocketOrder->create($token, $updateOrder);
-        $updateOrder->status = $response['status'];
-        $updateOrder->shipment_id = $response['shipment_id'];
-        
-        // $updateOrder->save();
-        return $response;
-        return [$updateTransaction, $updateOrder];
-
-
-
-
+        $updateOrder->status = "Payment Failed";
+        $updateOrder->save();
 
         return [$updateTransaction, $updateOrder];
     }
