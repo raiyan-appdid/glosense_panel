@@ -64,11 +64,12 @@ class BasicController extends Controller
         $shiprocketOrder = new CreateOrderService;
         $response = $shiprocketOrder->create($token, $updateOrder);
 
-        return "raiyan";
 
 
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
+        return "raiyan";
+
         // $updateOrder->save();
         return [$updateTransaction, $updateOrder];
 
