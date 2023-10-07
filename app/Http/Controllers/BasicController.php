@@ -49,9 +49,28 @@ class BasicController extends Controller
         $updateTransaction->payment_response_json = $avenue_payment;
         $updateTransaction->save();
 
+      
+
+
+
+        $token = new GenerateTokenService;
+        $token = $token->getToken();
+
+        
+
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
-        $updateOrder->status = "Payment Failed";
+
+        $shiprocketOrder = new CreateOrderService;
+        $response = $shiprocketOrder->create($token, $updateOrder);
+
+        $updateOrder->status = $response['status'];
+        $updateOrder->shipment_id = $response['shipment_id'];
         $updateOrder->save();
+        return [$updateTransaction, $updateOrder];
+        
+
+
+
 
         return [$updateTransaction, $updateOrder];
     }
