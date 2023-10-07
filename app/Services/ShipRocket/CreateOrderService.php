@@ -43,8 +43,8 @@ class CreateOrderService
                 [
                     "name" => "Hair you glo",
                     "sku" => "test123",
-                    "units" => 10,
-                    "selling_price" => "900",
+                    "units" => 1,
+                    "selling_price" => 899,
                     "discount" => "",
                 ],
             ],
