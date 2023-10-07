@@ -63,9 +63,9 @@ class BasicController extends Controller
         $response = $shiprocketOrder->create($token, $updateOrder);
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
-        return $response;
-
+        
         $updateOrder->save();
+        return $response;
         return [$updateTransaction, $updateOrder];
 
 
