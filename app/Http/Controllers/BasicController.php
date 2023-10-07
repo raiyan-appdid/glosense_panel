@@ -25,7 +25,7 @@ class BasicController extends Controller
         $token = new GenerateTokenService;
         $token = $token->getToken();
 
-        
+
 
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
 
@@ -35,7 +35,10 @@ class BasicController extends Controller
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
         // $updateOrder->save();
-        return [$updateTransaction, $updateOrder];
+
+        $url = "https://glosense.in/order-placed";
+        return redirect()->away($url);
+        // return [$updateTransaction, $updateOrder];
 
     }
     public function failedCallBack(Request $request)
@@ -53,9 +56,9 @@ class BasicController extends Controller
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
 
-        $url = "https://glosense.in/";
+        $url = "https://glosense.in/order-cancelled";
         return redirect()->away($url);
 
-        return [$updateTransaction, $updateOrder];
+        // return [$updateTransaction, $updateOrder];
     }
 }
