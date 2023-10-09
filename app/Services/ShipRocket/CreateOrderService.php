@@ -53,7 +53,7 @@ class CreateOrderService
             "giftwrap_charges" => 0,
             "transaction_charges" => 0,
             "total_discount" => 0,
-            "sub_total" => 10,
+            "sub_total" => 899,
             "length" => 9.5,
             "breadth" => 9.5,
             "height" => 9.5,
