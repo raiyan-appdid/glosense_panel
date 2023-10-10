@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Invoice;
 use App\Models\Enquiry;
 use App\Models\Product;
 use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {

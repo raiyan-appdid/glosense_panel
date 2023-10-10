@@ -20,9 +20,9 @@ class Invoice extends Mailable
      * @return void
      */
     public $data;
-    public function __construct($data)
+    public function __construct($order)
     {
-        $this->data = $data;
+        $this->data = $order;
     }
 
     /**
@@ -32,10 +32,12 @@ class Invoice extends Mailable
      */
     public function build()
     {
-        $date = Carbon::now()->format('d-m-Y');
-        $delivery_address = json_decode($this->data->shipping_address);
-        $state = State::where('id', $delivery_address->state_id)->first();
-        $city = City::where('id', $delivery_address->city_id)->first();
-        return $this->subject('Your Order Invoice')->view('emails.invoice', compact('date', 'state', 'city'));
+        // $date = Carbon::now()->format('d-m-Y');
+        // $delivery_address = json_decode($this->data->shipping_address);
+        // $state = State::where('id', $delivery_address->state_id)->first();
+        // $city = City::where('id', $delivery_address->city_id)->first();
+        $data = $this->data;
+        return $this->subject('Your Order Invoice')->view('emails.invoice', compact('data'));
+        // return $this->subject('Your Order Invoice')->view('emails.invoice');
     }
 }

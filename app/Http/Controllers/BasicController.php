@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Invoice;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
 use App\Services\ccavenue\helpers\CCCrypto;
 use App\Services\ShipRocket\CreateOrderService;
 use App\Services\ShipRocket\GenerateTokenService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class BasicController extends Controller
 {
@@ -56,6 +59,8 @@ class BasicController extends Controller
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
 
+        Mail::to($updateOrder->email)->send(new Invoice($updateOrder));
+        
         $url = "https://glosense.in/order-cancelled";
         return redirect()->away($url);
 

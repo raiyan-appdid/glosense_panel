@@ -108,6 +108,7 @@
 
 <body style="background-color: #D2C7BA;">
 
+    @dump($data)
     <!-- start preheader -->
     <div class="preheader"
         style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
@@ -122,27 +123,19 @@
         <!-- start logo -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-                <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+          
+                {{-- <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="center" valign="top" style="padding: 36px 24px;">
                             <a href="https://maryammanemaddu.com/" target="_blank" style="display: inline-block;">
-                                <img src="https://maryam.maryammanemaddu.com/images/logo/favicon.ico" alt="Logo"
+                                <img src="https://maryammanemaddu.com/images/logo/favicon.ico" alt="Logo"
                                     border="0" width="48"
                                     style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
                             </a>
                         </td>
                     </tr>
-                </table>
-                <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
+                </table> --}}
+               
             </td>
         </tr>
         <!-- end logo -->
@@ -150,11 +143,7 @@
         <!-- start hero -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-                <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
+            
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="left" bgcolor="#ffffff"
@@ -165,11 +154,6 @@
                         </td>
                     </tr>
                 </table>
-                <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
             </td>
         </tr>
         <!-- end hero -->
@@ -177,11 +161,7 @@
         <!-- start copy block -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-                <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
+          
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
 
                     <!-- start copy -->
@@ -189,8 +169,8 @@
                         <td align="left" bgcolor="#ffffff"
                             style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                             <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or
-                                concerns about your order, please <a
-                                    href="https://maryam.maryammanemaddu.com/contact">contact us</a>.</p>
+                                concerns about your order, please <a href="https://glosense.in">contact
+                                    us</a>.</p>
                         </td>
                     </tr>
                     <!-- end copy -->
@@ -206,7 +186,7 @@
                                     </td>
                                     <td align="right" width="20%"
                                         style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                        <strong>{{ $data->transaction[0]->transaction_id }}</strong>
+                                        <strong>135asf</strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -223,17 +203,17 @@
                                         <strong>Price</strong>
                                     </td>
                                 </tr>
-                                @forelse ($data->orderItem as $item)
+                                @forelse ($data->orderItem ?? [] as $item)
                                     <tr>
                                         <td align="left" width="50%"
                                             style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                            {{ $item->product_name }}</td>
+                                            {{ $item->product_name ?? '' }}</td>
                                         <td align="left" width="20%"
                                             style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                            {{ $item->quantity }}</td>
+                                            {{ $item->quantity ?? '' }}</td>
                                         <td align="left" width="30%"
                                             style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; white-space: nowrap;">
-                                            ₹ {{ $item->discounted_price }}</td>
+                                            ₹ {{ $item->discounted_price ?? '' }}</td>
 
                                     </tr>
                                 @empty
@@ -247,7 +227,7 @@
                                     </td>
                                     <td align="left" width="25%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; white-space: nowrap;">
-                                        ₹ {{ $data->delivery_charges }}</td>
+                                        ₹ {{ $data->delivery_charges ?? '' }}</td>
 
                                 </tr>
                                 <tr>
@@ -260,7 +240,7 @@
                                     </td>
                                     <td align="left" width="25%"
                                         style="padding: 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA; white-space: nowrap;">
-                                        <strong>₹ {{ $data->final_total }}</strong>
+                                        <strong>₹ {{ $data->final_total ?? '' }}</strong>
                                     </td>
 
                                 </tr>
@@ -270,11 +250,7 @@
                     <!-- end reeipt table -->
 
                 </table>
-                <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
+
             </td>
         </tr>
         <!-- end copy block -->
@@ -282,22 +258,14 @@
         <!-- start receipt address block -->
         <tr>
             <td align="center" bgcolor="#D2C7BA" valign="top" width="100%">
-                <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
+             
                 <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0"
                     width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
-                            <!--[if (gte mso 9)|(IE)]>
-              <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-              <tr>
-              <td align="left" valign="top" width="300">
-              <![endif]-->
+                        
                             @php
-                                $delivery_address = json_decode($data->shipping_address);
+                                $delivery_address = json_decode($data?->shipping_address ?? '');
                             @endphp
                             <div
                                 style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
@@ -307,55 +275,33 @@
                                         <td align="left" valign="top"
                                             style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                                             <p><strong>Delivery Address</strong></p>
-                                            <p>{{ $delivery_address->address_one }},<br>{{ $delivery_address->address_two . ' ' . $city->name }},<br>{{ $state->name }},
-                                                {{ $delivery_address->pincode }}</p>
+                                            <p>{{ $delivery_address->address_one ?? '' }},<br>{{ $delivery_address->address_two ?? '' . ' ' }},<br>{{ "state" }},
+                                                {{ $delivery_address->pincode ?? '' }}</p>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <!--[if (gte mso 9)|(IE)]>
-              </td>
-              <td align="left" valign="top" width="300">
-              <![endif]-->
                             <div
                                 style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
-                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"
+                                {{-- <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"
                                     style="max-width: 300px;">
                                     <tr>
                                         <td align="left" valign="top"
                                             style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                                             <p><strong>Billing Address</strong></p>
-                                            <p>{{ $delivery_address->address_one }},<br>{{ $delivery_address->address_two . ' ' . $city->name }},<br>{{ $state->name }},
-                                                {{ $delivery_address->pincode }}</p>
+                                            <p>{{ $delivery_address?->address_one ?? '' }},<br>{{ $delivery_address?->address_two ?? '' . ' ' ."vapi" ?? '' }},<br>{{ "state" ?? '' }},
+                                                {{ $delivery_address?->pincode ?? '' }}</p>
                                         </td>
                                     </tr>
-                                </table>
+                                </table> --}}
                             </div>
-                            <!--[if (gte mso 9)|(IE)]>
-              </td>
-              </tr>
-              </table>
-              <![endif]-->
                         </td>
                     </tr>
                 </table>
-                <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
             </td>
         </tr>
-        <!-- end receipt address block -->
-
-        <!-- start footer -->
         <tr>
             <td align="center" bgcolor="#D2C7BA" style="padding: 24px;">
-                <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
 
                     <!-- start permission -->
@@ -369,23 +315,8 @@
                     </tr>
                     <!-- end permission -->
 
-                    <!-- start unsubscribe -->
-                    {{-- <tr>
-                        <td align="center" bgcolor="#D2C7BA"
-                            style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                            <p style="margin: 0;">To stop receiving these emails, you can <a
-                                    href="https://sendgrid.com" target="_blank">unsubscribe</a> at any time.</p>
-                            <p style="margin: 0;">Paste 1234 S. Broadway St. City, State 12345</p>
-                        </td>
-                    </tr> --}}
-                    <!-- end unsubscribe -->
 
                 </table>
-                <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
             </td>
         </tr>
         <!-- end footer -->
