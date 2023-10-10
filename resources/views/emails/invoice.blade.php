@@ -108,7 +108,7 @@
 
 <body style="background-color: #D2C7BA;">
 
-    @dump($updateOrder)
+    {{-- @dump($updateOrder) --}}
     <!-- start preheader -->
     <div class="preheader"
         style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
@@ -123,7 +123,7 @@
         <!-- start logo -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-          
+
                 {{-- <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="center" valign="top" style="padding: 36px 24px;">
@@ -135,7 +135,7 @@
                         </td>
                     </tr>
                 </table> --}}
-               
+
             </td>
         </tr>
         <!-- end logo -->
@@ -143,7 +143,7 @@
         <!-- start hero -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-            
+
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="left" bgcolor="#ffffff"
@@ -161,7 +161,7 @@
         <!-- start copy block -->
         <tr>
             <td align="center" bgcolor="#D2C7BA">
-          
+
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
 
                     <!-- start copy -->
@@ -186,7 +186,7 @@
                                     </td>
                                     <td align="right" width="20%"
                                         style="padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                        <strong>135asf</strong>
+                                        <strong>{{ $updateOrder->order_id }}</strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -203,21 +203,18 @@
                                         <strong>Price</strong>
                                     </td>
                                 </tr>
-                                @forelse ($data->orderItem ?? [] as $item)
-                                    <tr>
-                                        <td align="left" width="50%"
-                                            style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                            {{ $item->product_name ?? '' }}</td>
-                                        <td align="left" width="20%"
-                                            style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                            {{ $item->quantity ?? '' }}</td>
-                                        <td align="left" width="30%"
-                                            style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; white-space: nowrap;">
-                                            ₹ {{ $item->discounted_price ?? '' }}</td>
+                                <tr>
+                                    <td align="left" width="50%"
+                                        style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                                        {{ $updateOrder->product_name ?? '' }}</td>
+                                    <td align="left" width="20%"
+                                        style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                                        {{ $updateOrder->units ?? '' }}</td>
+                                    <td align="left" width="30%"
+                                        style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; white-space: nowrap;">
+                                        ₹ {{ $updateOrder->price ?? '' }}</td>
 
-                                    </tr>
-                                @empty
-                                @endforelse
+                                </tr>
                                 <tr>
                                     <td align="left" width="75%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
@@ -227,7 +224,7 @@
                                     </td>
                                     <td align="left" width="25%"
                                         style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; white-space: nowrap;">
-                                        ₹ {{ $data->delivery_charges ?? '' }}</td>
+                                        ₹ 0</td>
 
                                 </tr>
                                 <tr>
@@ -240,7 +237,7 @@
                                     </td>
                                     <td align="left" width="25%"
                                         style="padding: 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA; white-space: nowrap;">
-                                        <strong>₹ {{ $data->final_total ?? '' }}</strong>
+                                        <strong>₹ {{ $updateOrder->sub_total ?? '' }}</strong>
                                     </td>
 
                                 </tr>
@@ -258,15 +255,11 @@
         <!-- start receipt address block -->
         <tr>
             <td align="center" bgcolor="#D2C7BA" valign="top" width="100%">
-             
-                <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0"
-                    width="100%" style="max-width: 600px;">
+
+                <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%"
+                    style="max-width: 600px;">
                     <tr>
                         <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
-                        
-                            @php
-                                $delivery_address = json_decode($data?->shipping_address ?? '');
-                            @endphp
                             <div
                                 style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
                                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%"
@@ -275,8 +268,8 @@
                                         <td align="left" valign="top"
                                             style="padding-bottom: 36px; padding-left: 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                                             <p><strong>Delivery Address</strong></p>
-                                            <p>{{ $delivery_address->address_one ?? '' }},<br>{{ $delivery_address->address_two ?? '' . ' ' }},<br>{{ "state" }},
-                                                {{ $delivery_address->pincode ?? '' }}</p>
+                                            <p>{{ $updateOrder->address}},<br>{{ $updateOrder->city }},<br>{{ $updateOrder->state }},
+                                                {{ $updateOrder->pincode ?? '' }}</p>
                                         </td>
                                     </tr>
                                 </table>
