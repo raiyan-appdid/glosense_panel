@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Carbon\Carbon;
 use App\Models\City;
+use App\Models\Order;
 use App\Models\State;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -37,7 +38,8 @@ class Invoice extends Mailable
         // $state = State::where('id', $delivery_address->state_id)->first();
         // $city = City::where('id', $delivery_address->city_id)->first();
         $data = $this->data;
-        return $this->subject('Your Order Invoice')->view('emails.invoice', compact('data'));
+        $updateOrder = Order::where('id', $data)->first();
+        return $this->subject('Your Order Invoice')->view('emails.invoice', compact('updateOrder'));
         // return $this->subject('Your Order Invoice')->view('emails.invoice');
     }
 }
