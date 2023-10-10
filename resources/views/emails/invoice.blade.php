@@ -113,7 +113,7 @@
     <div class="preheader"
         style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
         Here is a summary of your recent order. If you have any questions or concerns about your order, please <a
-            href="https://maryam.maryammanemaddu.com/contact">contact us.</a>
+            href="https://glosense.in">contact us.</a>
     </div>
     <!-- end preheader -->
 
