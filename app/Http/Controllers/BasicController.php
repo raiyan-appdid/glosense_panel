@@ -38,6 +38,7 @@ class BasicController extends Controller
         $updateOrder->status = $response['status'];
         $updateOrder->shipment_id = $response['shipment_id'];
         // $updateOrder->save();
+        Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
 
         $url = "https://glosense.in/order-placed";
         return redirect()->away($url);
@@ -58,7 +59,6 @@ class BasicController extends Controller
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
-        Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
 
         $url = "https://glosense.in/order-cancelled";
         return redirect()->away($url);
