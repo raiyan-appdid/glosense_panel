@@ -59,8 +59,8 @@ class BasicController extends Controller
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
         $updateOrder->toArray();
-
-        Mail::to($updateOrder->email)->send(new Invoice($updateOrder));
+        return $updateOrder->email;
+        Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
 
         $url = "https://glosense.in/order-cancelled";
         return redirect()->away($url);
