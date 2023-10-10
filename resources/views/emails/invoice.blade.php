@@ -108,7 +108,7 @@
 
 <body style="background-color: #D2C7BA;">
 
-    @dump($data)
+    @dump($updateOrder)
     <!-- start preheader -->
     <div class="preheader"
         style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
