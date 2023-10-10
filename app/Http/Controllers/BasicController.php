@@ -58,9 +58,10 @@ class BasicController extends Controller
         $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
         $updateOrder->status = "Payment Failed";
         $updateOrder->save();
+        $updateOrder->toArray();
 
         Mail::to($updateOrder->email)->send(new Invoice($updateOrder));
-        
+
         $url = "https://glosense.in/order-cancelled";
         return redirect()->away($url);
 
