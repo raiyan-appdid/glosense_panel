@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\CcAvenueOrder;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
+use App\Models\Promocode;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
+use PDO;
 use Str;
 
 use function Termwind\render;
@@ -27,6 +29,10 @@ class CcAvenueOrderController extends Controller
             // 'email' => 'required',
             // 'total_price' => 'required',
         ]);
+
+
+
+
         $data = new Order;
         $data->order_id = mt_rand(100000, 999999);
         $data->user_id = $request->user_id;
@@ -40,9 +46,17 @@ class CcAvenueOrderController extends Controller
         $data->email = $request->email;
         $data->product_name = "Hair you glo";
         $data->units = 1;
-        $data->price = 899;
+
+        $code = Promocode::where('promocode', $request->promocode)->first();
+        if ($code) {
+            $data->price = 899 - $code->discount;
+            $data->sub_total = 899  - $code->discoun;
+        } else {
+            $data->price = 899;
+            $data->sub_total = 899;
+        }
+
         $data->discount = $request->discount;
-        $data->sub_total = 899;
         $data->save();
 
 
@@ -57,7 +71,7 @@ class CcAvenueOrderController extends Controller
         $paymentService = new PaymentService();
 
         $order = $paymentService->createOrder(
-            amount: 1,
+            amount: $data->sub_total,
             redirect_url: route("ccavenue.success"),
             cancel_url: route("ccavenue.failed"),
             additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->addresss, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country],
