@@ -35,7 +35,8 @@ class BasicController extends Controller
             $verified = true;
         }
         return response([
-            'verified' => $verified
+            'verified' => $verified,
+            'data' => $code,
         ]);
     }
 }
