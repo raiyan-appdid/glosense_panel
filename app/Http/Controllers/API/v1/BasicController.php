@@ -29,7 +29,7 @@ class BasicController extends Controller
         $request->validate([
             'promocode' => 'required',
         ]);
-        $code = Promocode::where('promocode', $request->code)->first();
+        $code = Promocode::where('promocode', $request->promocode)->first();
         $verified = false;
         if ($code) {
             $verified = true;
