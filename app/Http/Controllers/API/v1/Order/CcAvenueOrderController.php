@@ -49,11 +49,11 @@ class CcAvenueOrderController extends Controller
 
         $code = Promocode::where('promocode', $request->promocode)->first();
         if ($code) {
-            $data->price = 899 - $code->discount;
-            $data->sub_total = 899  - $code->discount;
+            $data->price = 1299 - $code->discount;
+            $data->sub_total = 1299  - $code->discount;
         } else {
-            $data->price = 899;
-            $data->sub_total = 899;
+            $data->price = 1299;
+            $data->sub_total = 1299;
         }
 
         $data->discount = $request->discount;
