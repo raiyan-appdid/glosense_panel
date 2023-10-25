@@ -26,24 +26,23 @@ class BasicController extends Controller
         $updateTransaction->save();
         \Log::info($avenue_payment);
 
-        $token = new GenerateTokenService;
-        $token = $token->getToken();
+        if ($avenue_payment['order_status'] == "Success") {
+            $token = new GenerateTokenService;
+            $token = $token->getToken();
+            $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
+            $shiprocketOrder = new CreateOrderService;
+            $response = $shiprocketOrder->create($token, $updateOrder);
+            \Log::info($response);
+            Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
+
+            $url = "https://glosense.in/order-placed";
+            return redirect()->away($url);
+        } else {
+            $url = "https://glosense.in/order-cancelled";
+            return redirect()->away($url);
+        }
 
 
-
-        $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
-
-        $shiprocketOrder = new CreateOrderService;
-        $response = $shiprocketOrder->create($token, $updateOrder);
-        \Log::info($response);
-
-        // $updateOrder->status = $response['status'];
-        // $updateOrder->shipment_id = $response['shipment_id'];
-        // $updateOrder->save();
-        Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
-
-        $url = "https://glosense.in/order-placed";
-        return redirect()->away($url);
         // return [$updateTransaction, $updateOrder];
 
     }
