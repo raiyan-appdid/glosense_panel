@@ -53,7 +53,7 @@ class CreateOrderService
             "giftwrap_charges" => 0,
             "transaction_charges" => 0,
             "total_discount" => $updateOrder->discount,
-            "sub_total" => $updateOrder->sub_total,
+            "sub_total" => $updateOrder->price,
             "length" => 9.5,
             "breadth" => 9.5,
             "height" => 9.5,
