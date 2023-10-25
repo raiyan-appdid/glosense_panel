@@ -18,7 +18,7 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request)
     {
-    return $request->all();   
+        return $request->all();
         $request->validate([
             // 'name' => 'required',
             // 'address' => 'required',
@@ -46,16 +46,16 @@ class CcAvenueOrderController extends Controller
         $data->number = $request->number;
         $data->email = $request->email;
         $data->product_name = "Hair you glo";
-        $data->units = 1;
+        $data->units = $request->units;
 
-        $code = Promocode::where('promocode', $request->promocode)->first();
-        if ($code) {
-            $data->price = 1299 - $code->discount;
-            $data->sub_total = 1299  - $code->discount;
-        } else {
-            $data->price = 1299;
-            $data->sub_total = 1299;
-        }
+        // $code = Promocode::where('promocode', $request->promocode)->first();
+        // if ($code) {
+        //     $data->price = 1299 - $code->discount;
+        //     $data->sub_total = 1299  - $code->discount;
+        // } else {
+        $data->price = $request->sub_total;
+        $data->sub_total = $request->total;
+        // }
 
         $data->discount = $request->discount;
         $data->save();
