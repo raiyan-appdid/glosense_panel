@@ -18,6 +18,7 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request)
     {
+     $request->all();   
         $request->validate([
             // 'name' => 'required',
             // 'address' => 'required',
