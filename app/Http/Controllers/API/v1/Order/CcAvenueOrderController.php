@@ -20,7 +20,7 @@ class CcAvenueOrderController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'tnc' => 'required',
+            // 'tnc' => 'required',
             // 'name' => 'required',
             // 'address' => 'required',
             // 'city' => 'required',
