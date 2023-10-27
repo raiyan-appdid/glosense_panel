@@ -88,17 +88,29 @@ class OrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
+            Column::make('order_id'),
+            Column::make('name'),
+            Column::make('address'),
+            Column::make('city'),
+            Column::make('state'),
+            Column::make('pincode'),
+            Column::make('number'),
+            Column::make('email'),
+            Column::make('units'),
+            Column::make('price'),
+            Column::make('sub_total'),
+            Column::make('discount'),
             Column::make('created_at'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            Column::computed('status')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
+            // Column::computed('status')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
         ];
     }
 
