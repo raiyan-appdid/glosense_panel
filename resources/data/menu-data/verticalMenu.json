@@ -46,6 +46,12 @@
       "slug": "admin.orders.index"
     },
     {
+      "url": "admin/transaction-orders",
+      "name": "Transaction Orders",
+      "icon": "circle",
+      "slug": "admin.transaction-orders.index"
+    },
+    {
       "navheader": "Product Management",
       "slug": ""
     },

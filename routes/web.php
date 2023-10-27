@@ -6,6 +6,7 @@ use App\DataTables\PromocodeDataTable;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BusinessSettingController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CcAvenueTransactionController;
 use App\Http\Controllers\Admin\ComboProductController;
 use App\Http\Controllers\Admin\ContentManagementController;
 use Illuminate\Support\Facades\Hash;
@@ -166,6 +167,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::put('status', 'status')->name('status');
     });
     Route::name('orders.')->prefix('orders')->controller(OrderController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('blocked', 'blockedBlog')->name('blocked');
+        Route::post('/', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::delete('destroy/{id}', 'destroy')->name('destroy');
+        Route::post('update', 'update')->name('update');
+        Route::put('status', 'status')->name('status');
+    });
+    Route::name('transaction-orders.')->prefix('transaction-orders')->controller(CcAvenueTransactionController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::get('blocked', 'blockedBlog')->name('blocked');
