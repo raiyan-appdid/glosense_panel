@@ -26,7 +26,7 @@ class BasicController extends Controller
         $updateTransaction->save();
         \Log::info($avenue_payment);
 
-        if ($avenue_payment['order_status'] == "Success") {
+        if ($avenue_payment['order_status'] == "Success" || $avenue_payment['order_status'] == "Shipped") {
             $token = new GenerateTokenService;
             $token = $token->getToken();
             $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
