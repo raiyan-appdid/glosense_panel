@@ -22,40 +22,40 @@
             <div class="col-md-12 col-12 ">
                 <x-input name="promocode" />
             </div>
+            {{-- <div class="col-md-12 col-12 ">
+                <x-input :required="false" name="message" />
+            </div> --}}
+            {{-- <div class="col-md-12 col-12 ">
+                <x-input :required="false" name="start_date" />
+            </div> --}}
+            {{-- <div class="col-md-12 col-12 ">
+                <x-input :required="false" name="end_date" />
+            </div> --}}
+            {{-- <div class="col-md-12 col-12 ">
+                <x-input :required="false" name="minimum_order_amount" type="number" />
+            </div> --}}
+            {{-- <div class="col-md-12 col-12 ">
+                <x-input :required="false" name="max_discount_amount" type="number" />
+            </div> --}}
             <div class="col-md-12 col-12 ">
-                <x-input name="message" />
+                <x-input  name="discount" type="number" />
             </div>
-            <div class="col-md-12 col-12 ">
-                <x-input name="start_date" />
-            </div>
-            <div class="col-md-12 col-12 ">
-                <x-input name="end_date" />
-            </div>
-            <div class="col-md-12 col-12 ">
-                <x-input name="minimum_order_amount" type="number" />
-            </div>
-            <div class="col-md-12 col-12 ">
-                <x-input name="max_discount_amount" type="number" />
-            </div>
-            <div class="col-md-12 col-12 ">
-                <x-input name="discount" type="number" />
-            </div>
-            <div class="col-md-12 col-12 ">
+            {{-- <div class="col-md-12 col-12 ">
                 <select class="select2  form-control " id="" name="discount_type">
                     <option value="" disabled>Select Type</option>
                     <option value="percentage">Percentage</option>
                     <option value="flat">Flat</option>
                 </select>
-            </div>
+            </div> --}}
         </x-form>
     </x-side-modal>
     <x-side-modal title="Update promocode" id="edit-promocode-modal">
         <x-form id="edit-promocode" method="POST" class="" :route="route('admin.promocodes.update')">
             <div class="col-md-12 col-12 ">
-                <x-input name="promocode" />
+                <x-input  name="promocode" />
                 <x-input name="id" type="hidden" />
             </div>
-            <div class="col-md-12 col-12 ">
+            {{-- <div class="col-md-12 col-12 ">
                 <x-input name="message" />
             </div>
             <div class="col-md-12 col-12 ">
@@ -69,17 +69,17 @@
             </div>
             <div class="col-md-12 col-12 ">
                 <x-input name="max_discount_amount" type="number" />
-            </div>
+            </div> --}}
             <div class="col-md-12 col-12 ">
                 <x-input name="discount" type="number" />
             </div>
-            <div class="col-md-12 col-12 ">
+            {{-- <div class="col-md-12 col-12 ">
                 <select class="select2  form-control " id="discount_type" name="discount_type">
                     <option value="" disabled>Select Type</option>
                     <option value="percentage">Percentage</option>
                     <option value="flat">Flat</option>
                 </select>
-            </div>
+            </div> --}}
 
         </x-form>
     </x-side-modal>
