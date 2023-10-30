@@ -69,13 +69,13 @@ class PromocodeController extends Controller
 
         $promocode = Promocode::findOrFail($request->id)->update([
             'promocode' => $request->promocode,
-            'message' => $request->message,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'minimum_order_amount' => $request->minimum_order_amount,
-            'max_discount_amount' => $request->max_discount_amount,
+            'message' => "test",
+            'start_date' => now(),
+            'end_date' => now(),
+            'minimum_order_amount' => 1,
+            'max_discount_amount' => 1,
             'discount' => $request->discount,
-            'discount_type' => $request->discount_type,
+            'discount_type' => 'flat',
         ]);
         return response([
             'header' => 'Success!',
