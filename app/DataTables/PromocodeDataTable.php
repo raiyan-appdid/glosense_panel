@@ -88,23 +88,23 @@ class PromocodeDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('promocode'),
-            Column::make('start_date'),
-            Column::make('end_date'),
-            Column::make('minimum_order_amount'),
-            Column::make('max_discount_amount'),
+            // Column::make('start_date'),
+            // Column::make('end_date'),
+            // Column::make('minimum_order_amount'),
+            // Column::make('max_discount_amount'),
             Column::make('discount'),
-            Column::make('discount_type'),
+            // Column::make('discount_type'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::computed('status')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('status')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
 
         ];
     }
