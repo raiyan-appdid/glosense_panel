@@ -17,17 +17,10 @@
       "slug": ""
     },
     {
+      "url": "admin/promocodes",
       "name": "Promocode",
       "icon": "<i data-feather='aperture'></i>",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "admin/promocodes",
-          "name": "Add / View",
-          "icon": "circle",
-          "slug": "admin.promocodes.index"
-        }
-      ]
+      "slug": "admin.promocodes.index"
     },
     {
       "navheader": "Order Management",
