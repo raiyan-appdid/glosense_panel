@@ -25,11 +25,12 @@ class BasicController extends Controller
         $updateTransaction->payment_response_json = $avenue_payment;
         $updateTransaction->save();
         \Log::info($avenue_payment);
-
+        $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
         if ($avenue_payment['order_status'] == "Success" || $avenue_payment['order_status'] == "Shipped") {
+            $updateOrder->status = "Payment Success";
+            $updateOrder->save();
             $token = new GenerateTokenService;
             $token = $token->getToken();
-            $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
             $shiprocketOrder = new CreateOrderService;
             $response = $shiprocketOrder->create($token, $updateOrder);
             \Log::info($response);
@@ -38,6 +39,8 @@ class BasicController extends Controller
             $url = "https://glosense.in/order-placed";
             return redirect()->away($url);
         } else {
+            $updateOrder->status = "Payment Failed";
+            $updateOrder->save();
             $url = "https://glosense.in/order-cancelled";
             return redirect()->away($url);
         }
