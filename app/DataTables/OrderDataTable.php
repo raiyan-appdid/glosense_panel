@@ -90,6 +90,7 @@ class OrderDataTable extends DataTable
             Column::make('id'),
             Column::make('order_id'),
             Column::make('name'),
+            Column::make('status'),
             Column::make('address'),
             Column::make('city'),
             Column::make('state'),
