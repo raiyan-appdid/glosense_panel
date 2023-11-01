@@ -10,6 +10,7 @@ use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Services\ccavenue\PaymentService;
+use Http;
 use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
@@ -24,6 +25,7 @@ class DashboardController extends Controller
     public function home()
     {
 
+
         $this->workingKey = env('CC_WORKING_KEY');
         $this->accessCode = env('CC_ACCESS_CODE');
         $this->merchantId = env('CC_MERCHANT_ID');
@@ -31,10 +33,36 @@ class DashboardController extends Controller
         $this->currency = "INR";
         $this->version = 1.1;
 
-        $command = "orderStatusTracker";
-        $final_data = "request_type=JSON&access_code=" . "   $this->accessCode " . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
+        $merchant_json_data = array(
+            'order_no' => 'ceb82bd2-a62a-453c-a5d3-bef0230f26d0', //your app's internal order no
+            'reference_no' => '113062410532' //ccavenue tracking no
+        );
 
-        return $final_data;
+        $merchant_data = json_encode($merchant_json_data);
+        $encrypted_data = encrypt($merchant_data, $this->workingKey);
+
+        $response = Http::asForm()->post('https://api.ccavenue.com/apis/servlet/DoWebTrans', [
+            'enc_request' => $encrypted_data,
+            'access_code' => $this->accessCode,
+            'command' => 'orderStatusTracker',
+            'request_type' => 'JSON',
+            'response_type' => 'JSON',
+            'version' => '1.2'
+        ])->body();
+
+        dd($response);
+
+
+
+
+
+
+        
+
+        $command = "orderStatusTracker";
+        $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
+
+        // return $final_data;
 
 
         $ch = curl_init();
