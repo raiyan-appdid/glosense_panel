@@ -43,7 +43,7 @@ class DashboardController extends Controller
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS,$final_data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$final_data);
 
         $result = curl_exec($ch);
         curl_close($ch);
