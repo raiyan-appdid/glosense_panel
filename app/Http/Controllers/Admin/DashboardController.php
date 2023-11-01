@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
         $response = Http::asForm()->post('https://apitest.ccavenue.com/apis/servlet/DoWebTrans', [
             'enc_request' => $encrypted_data,
-            'access_code' => $this->accessCode,
+            // 'access_code' => $this->accessCode,
             'command' => 'orderStatusTracker',
             'request_type' => 'JSON',
             'response_type' => 'JSON',
