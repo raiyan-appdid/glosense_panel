@@ -47,7 +47,7 @@ class DashboardController extends Controller
             'command' => 'orderStatusTracker',
             'request_type' => 'JSON',
             'response_type' => 'JSON',
-            'version' => '1.2'
+            'version' => '1.3'
         ])->body();
 
         dd($response);
