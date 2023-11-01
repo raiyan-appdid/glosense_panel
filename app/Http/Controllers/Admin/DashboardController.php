@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://login.ccavenue.com/apis/servlet/DoWebTrans");
+        curl_setopt($ch, CURLOPT_URL, "https://api.ccavenue.com/apis/servlet/DoWebTrans");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
