@@ -30,10 +30,11 @@ class DashboardController extends Controller
         $this->language = "EN";
         $this->currency = "INR";
         $this->version = 1.1;
-        
+
         $command = "orderStatusTracker";
         $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
 
+        return $final_data;
 
 
         $ch = curl_init();
