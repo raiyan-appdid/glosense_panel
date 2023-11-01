@@ -53,6 +53,7 @@ class DashboardController extends Controller
         $status2 = explode('=', $information[1]);
         // $status3 = explode('=', $information[2]);
         if ($status1[1] == '1') {
+            return [$information, $status1, $status2];
             $recorddata = $status2[1];
             return $recorddata . " Error Code:" . $status2[1];
         } else {
