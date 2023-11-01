@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $this->version = 1.1;
 
         $command = "orderStatusTracker";
-        $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON;
+        $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON";
 
 
 
