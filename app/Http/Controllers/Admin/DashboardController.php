@@ -46,10 +46,10 @@ class DashboardController extends Controller
         $dataSize = sizeof($information);
         $status1 = explode('=', $information[0]);
         $status2 = explode('=', $information[1]);
-        $status3 = explode('=', $information[2]);
+        // $status3 = explode('=', $information[2]);
         if ($status1[1] == '1') {
             $recorddata = $status2[1];
-            return $recorddata . " Error Code:" . $status3[1];
+            return $recorddata . " Error Code:" . $status2[1];
         } else {
             // $status = self::decrypt($status2[1], $this->working_key);
             return $status2;
