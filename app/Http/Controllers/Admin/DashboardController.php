@@ -14,9 +14,26 @@ use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
+    protected string $workingKey;
+    protected string $accessCode;
+    protected string $merchantId;
+    protected string $language;
+    protected string $currency;
+    protected string $version;
 
     public function home()
     {
+
+        $this->workingKey = env('CC_WORKING_KEY');
+        $this->accessCode = env('CC_ACCESS_CODE');
+        $this->merchantId = env('CC_MERCHANT_ID');
+        $this->language = "EN";
+        $this->currency = "INR";
+        $this->version = 1.1;
+
+        $command = "orderStatusTracker";
+        $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
+
 
 
         $ch = curl_init();
@@ -25,19 +42,6 @@ class DashboardController extends Controller
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_POST, 1);
-
-        // curl_setopt_array($ch, [
-        //     CURLOPT_URL => "https://login.ccavenue.com/apis/servlet/DoWebTrans",
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => "",
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 30,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => "POST",
-        //     CURLOPT_HTTPHEADER => [
-        //         "Accept: application/json"
-        //     ],
-        // ]);
 
         $result = curl_exec($ch);
         curl_close($ch);
