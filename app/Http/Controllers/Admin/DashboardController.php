@@ -17,6 +17,11 @@ class DashboardController extends Controller
 
     public function home()
     {
+
+        $data = new PaymentService;
+        $data->fetchOrder("3f8fe7df-a4b7-4c5e-8550-652fb1ebe95e");
+        return $data;
+
         $users = User::withoutadmin()->count();
         $products = Product::count();
         $enquiry = Enquiry::count();
