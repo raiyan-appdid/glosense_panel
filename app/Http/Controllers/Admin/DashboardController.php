@@ -41,7 +41,9 @@ class DashboardController extends Controller
         $merchant_data = json_encode($merchant_json_data);
         $encrypted_data = encrypt($merchant_data, $this->workingKey);
 
-        $response = Http::asForm()->post('https://api.ccavenue.com/apis/servlet/DoWebTrans', [
+        $response = Http::asForm()->withHeaders([
+            'Content-Type' => 'application/x-www-form-urlencoded',
+        ])->post('https://api.ccavenue.com/apis/servlet/DoWebTrans', [
             'enc_request' => $encrypted_data,
             'access_code' => $this->accessCode,
             'command' => 'orderStatusTracker',
