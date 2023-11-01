@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
-    protected string $workingKey;
-    protected string $accessCode;
-    protected string $merchantId;
-    protected string $language;
-    protected string $currency;
-    protected string $version;
+    public $workingKey;
+    public $accessCode;
+    public $merchantId;
+    public $language;
+    public $currency;
+    public $version;
 
     public function home()
     {
@@ -31,6 +31,7 @@ class DashboardController extends Controller
         $this->currency = "INR";
         $this->version = 1.1;
 
+        return $this->accessCode;
         $command = "orderStatusTracker";
         $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
 
