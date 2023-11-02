@@ -159,7 +159,7 @@
                 </tr> --}}
                 <tr>
                     <td colspan="3">Delivery Charges</td>
-                    <td>Rs. 0.00</td>
+                    <td>Rs. 0</td>
                 </tr>
                 <tr>
                     <td colspan="3">Discount</td>
@@ -167,7 +167,7 @@
                 </tr>
                 <tr>
                     <td colspan="3">Total:</td>
-                    <td>{{ 'Rs. ' . $updateOrder->total }}</td>
+                    <td>{{ 'Rs. ' . $updateOrder->sub_total }}</td>
                 </tr>
             </table>
             <div style="text-align: center;">
