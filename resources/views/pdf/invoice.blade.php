@@ -110,7 +110,7 @@
             </div>
             <div class="address">
                 <strong>To:</strong><br>
-                {{ $updateOrder['address'] }}<br>
+                {{ $updateOrder->address }}<br>
                 {{ $updateOrder['city'] . ' - ' . $updateOrder['state'] }}
                 {{ $updateOrder['pincode'] }}<br>
             </div>
