@@ -102,7 +102,7 @@ class DashboardController extends Controller
         Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('716'));
 
 
-        $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
+        $updateOrder = Order::where('id', 716)->with(['transaction'])->first();
         
         $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
         return $pdf->download('invoice.pdf');
