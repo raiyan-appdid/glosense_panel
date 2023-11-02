@@ -119,6 +119,10 @@
         <div class="invoice-details">
             <table>
                 <tr>
+                    <td>Order Id</td>
+                    <td>{{ $updateOrder->transaction?->transaction_order_id ?? '' }}</td>
+                </tr>
+                <tr>
                     <td>Customer Name</td>
                     <td>{{ $updateOrder->name ?? '' }}</td>
                 </tr>
@@ -141,7 +145,7 @@
             <table>
                 <tr>
                     <th>Sr No</th>
-                    <th>Title</th>
+                    <th>Product</th>
                     <th>Quantity</th>
                     <th>Amount</th>
                 </tr>

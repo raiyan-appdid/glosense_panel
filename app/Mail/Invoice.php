@@ -38,7 +38,7 @@ class Invoice extends Mailable
         // $state = State::where('id', $delivery_address->state_id)->first();
         // $city = City::where('id', $delivery_address->city_id)->first();
         $data = $this->data;
-        $updateOrder = Order::where('id', $data)->first();
+        $updateOrder = Order::where('id', $data)->with(['transaction'])->first();
         return $this->subject('Your Order Invoice')->view('emails.invoice', compact('updateOrder'));
         // return $this->subject('Your Order Invoice')->view('emails.invoice');
     }

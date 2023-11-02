@@ -99,14 +99,12 @@ class DashboardController extends Controller
         // $data->fetchOrder("3f8fe7df-a4b7-4c5e-8550-652fb1ebe95e");
         // return $data;
 
-        // Mail::to("info.appdid@gmail.com")->send(new Invoice('719'));
+        Mail::to("info.appdid@gmail.com")->send(new Invoice('719'));
 
 
-        $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
-        return $updateOrder;
-
-        $pdf = PDF::loadView('emails.invoice', $updateOrder);
-        return $pdf->download('invoice.pdf');
+        // $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
+        // $pdf = PDF::loadView('emails.invoice', $updateOrder);
+        // return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
         $products = Product::count();
