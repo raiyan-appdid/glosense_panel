@@ -25,6 +25,6 @@ class Order extends Model
 
     public function ccavenueTransaction()
     {
-        return $this->hasOne(CcAvenueTransaction::class);
+        return $this->belongsTo(CcAvenueTransaction::class);
     }
 }
