@@ -110,7 +110,9 @@
             </div>
             <div class="address">
                 <strong>To:</strong><br>
-                {{ $updateOrder->address }}
+                {{ $updateOrder->address }}<br>
+                {{ $updateOrder->city . ' - ' . $updateOrder->state }}
+                {{ $updateOrder->pincode }}<br>
             </div>
         </div>
 
@@ -122,7 +124,7 @@
                 </tr>
                 <tr>
                     <td>Customer Mobile</td>
-                    <td>{{ $updateOrde->number ?? '' }}</td>
+                    <td>{{ $updateOrder->number ?? '' }}</td>
                 </tr>
                 <tr>
                     <td>Invoice Number</td>
