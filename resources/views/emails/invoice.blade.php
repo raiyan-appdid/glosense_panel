@@ -103,10 +103,10 @@
         <div class="address-container">
             <div class="address">
                 <strong>From:</strong><br>
-                YCT Youth Publication<br>
-                12, Church Ln, The Adelphi, Allen Ganj, <br>
-                Prayagraj, Uttar Pradesh 211001
-
+                Glosense Lifecare Pvt Ltd<br>
+                806, 8th floor, Sunshine Tower, <br>
+                near Dadar Phool Market, Senapati Bapat Marg, <br />
+                Dadar, Mumbai - 400013
             </div>
             <div class="address">
                 <strong>To:</strong><br>
