@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\Invoice;
 use App\Models\Enquiry;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Services\ccavenue\PaymentService;
+use Barryvdh\DomPDF\PDF;
 use Http;
 use Illuminate\Support\Facades\Mail;
 
@@ -59,7 +61,7 @@ class DashboardController extends Controller
 
 
 
-        
+
 
         // $command = "orderStatusTracker";
         // $final_data = "request_type=JSON&access_code=" . $this->accessCode . "&command=" . $command . "&response_type=JSON&version=" . $this->version;
@@ -97,7 +99,14 @@ class DashboardController extends Controller
         // $data->fetchOrder("3f8fe7df-a4b7-4c5e-8550-652fb1ebe95e");
         // return $data;
 
-        Mail::to("info.appdid@gmail.com")->send(new Invoice('719'));
+        // Mail::to("info.appdid@gmail.com")->send(new Invoice('719'));
+
+
+        $updateOrder = Order::where('id', 719)->ccavenueTransaction()->first();
+        return $updateOrder;
+
+        $pdf = PDF::loadView('emails.invoice', $updateOrder);
+        return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
         $products = Product::count();
