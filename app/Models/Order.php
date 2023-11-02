@@ -20,11 +20,6 @@ class Order extends Model
     }
     public function transaction()
     {
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function ccavenueTransaction()
-    {
-        return $this->belongsTo(CcAvenueTransaction::class);
+        return $this->hasMany(CcAvenueTransaction::class);
     }
 }
