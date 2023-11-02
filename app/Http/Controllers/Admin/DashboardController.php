@@ -102,11 +102,8 @@ class DashboardController extends Controller
 
 
         $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
-
-        $pdf = new Barryvdh\DomPDF\PDF();
-        $pdf->loadView('emails.invoice', $updateOrder);
-
-        // $pdf = PDF::loadView('emails.invoice', $updateOrder);
+        
+        $pdf = \PDF::loadView('emails.invoice', $updateOrder);
         return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
