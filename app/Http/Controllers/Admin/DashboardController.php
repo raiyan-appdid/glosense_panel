@@ -99,10 +99,10 @@ class DashboardController extends Controller
         // $data->fetchOrder("3f8fe7df-a4b7-4c5e-8550-652fb1ebe95e");
         // return $data;
 
-        Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('650'));
+        Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('649'));
 
 
-        $updateOrder = Order::where('id', 650)->with(['transaction'])->first();
+        $updateOrder = Order::where('id', 649)->with(['transaction'])->first();
         
         $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
         return $pdf->download('invoice.pdf');
