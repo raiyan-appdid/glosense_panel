@@ -11,6 +11,7 @@ use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Services\ccavenue\PaymentService;
+use Barryvdh\DomPDF\PDF;
 use Http;
 use Illuminate\Support\Facades\Mail;
 
@@ -103,7 +104,7 @@ class DashboardController extends Controller
 
         $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
         
-        $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
+        $pdf = PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
         return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
