@@ -11,7 +11,7 @@ use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Services\ccavenue\PaymentService;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\PDF;
 use Http;
 use Illuminate\Support\Facades\Mail;
 
