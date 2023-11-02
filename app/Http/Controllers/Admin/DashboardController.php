@@ -101,9 +101,9 @@ class DashboardController extends Controller
         // Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('719'));
 
 
-        $updateOrder = Order::where('id', 719)->with(['transaction'])->first();
+        $updateOrder = Order::where('id', 719)->with(['transaction'])->first()->toArray();
         
-        $pdf = \PDF::loadView('emails.invoice', $updateOrder);
+        $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
         return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
