@@ -17,12 +17,6 @@ use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
-    public $workingKey;
-    public $accessCode;
-    public $merchantId;
-    public $language;
-    public $currency;
-    public $version;
 
     public function home()
     {
@@ -99,13 +93,13 @@ class DashboardController extends Controller
         // $data->fetchOrder("3f8fe7df-a4b7-4c5e-8550-652fb1ebe95e");
         // return $data;
 
-        Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('644'));
+        // Mail::to("raiyanmemon7860@gmail.com")->send(new Invoice('644'));
 
 
-        $updateOrder = Order::where('id', 644)->with(['transaction'])->first();
+        // $updateOrder = Order::where('id', 644)->with(['transaction'])->first();
         
-        $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
-        return $pdf->download('invoice.pdf');
+        // $pdf = \PDF::loadView('emails.invoice', ['updateOrder' => $updateOrder]);
+        // return $pdf->download('invoice.pdf');
 
         $users = User::withoutadmin()->count();
         $products = Product::count();
