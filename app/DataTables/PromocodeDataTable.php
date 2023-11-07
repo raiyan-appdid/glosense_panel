@@ -28,6 +28,16 @@ class PromocodeDataTable extends DataTable
                 $delete_route = route('admin.promocodes.destroy', $value->id);
                 return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
+            ->addColumn('Orders Count', function ($value) {
+
+                return $value->orders->count();
+
+                $edit_route = route('admin.promocodes.edit', $value->id);
+                $edit_callback = 'setValue';
+                $modal = '#edit-promocode-modal';
+                $delete_route = route('admin.promocodes.destroy', $value->id);
+                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })->addColumn('status', function ($data) {
@@ -88,6 +98,8 @@ class PromocodeDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('promocode'),
+            Column::make('Orders Count'),
+
             // Column::make('start_date'),
             // Column::make('end_date'),
             // Column::make('minimum_order_amount'),
