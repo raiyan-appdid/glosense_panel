@@ -89,6 +89,7 @@ class OrderDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('order_id'),
+            Column::make('promocode_id'),
             Column::make('name'),
             Column::make('status'),
             Column::make('address'),
