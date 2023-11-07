@@ -40,6 +40,7 @@ class BasicController extends Controller
             return redirect()->away($url);
         } else {
             $updateOrder->status = "Payment Failed";
+            $updateOrder->promocode_id = null;
             $updateOrder->save();
             $url = "https://glosense.in/order-cancelled";
             return redirect()->away($url);

@@ -48,6 +48,7 @@ class CcAvenueOrderController extends Controller
         $data->email = $request->email;
         $data->product_name = "Hair you glo";
         $data->units = $request->units;
+        $data->promocode_id = $request->promocode_id;
 
         // $code = Promocode::where('promocode', $request->promocode)->first();
         // if ($code) {
