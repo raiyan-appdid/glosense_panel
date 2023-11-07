@@ -30,7 +30,9 @@ class PromocodeDataTable extends DataTable
             })
             ->addColumn('Orders Count', function ($value) {
 
-                return $value->orders->count();
+                return $value->with('orders', function ($q) {
+                    return $q->where('status', 'Payment Success');
+                })->count();
 
                 $edit_route = route('admin.promocodes.edit', $value->id);
                 $edit_callback = 'setValue';
