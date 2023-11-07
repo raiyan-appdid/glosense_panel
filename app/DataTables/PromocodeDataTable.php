@@ -30,7 +30,7 @@ class PromocodeDataTable extends DataTable
             })
             ->addColumn('Orders Count', function ($value) {
 
-                return $value->with('orders', function ($q) {
+                return $value->whereHas('orders', function ($q) {
                     return $q->where('status', 'Payment Success');
                 })->count();
 
