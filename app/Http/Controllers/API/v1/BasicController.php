@@ -55,7 +55,7 @@ class BasicController extends Controller
         $data->otp = $otp;
         $data->save();
         \Log::info($data);
-        Mail::to($request->email)->send(new MailForgotPassword($otp));
+        Mail::to($request->email)->send(new MailForgotPassword($data->otp));
         return response([
             'success' => true,
             'message' => 'OTP Sent To Your Email',
