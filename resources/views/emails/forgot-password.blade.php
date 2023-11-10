@@ -10,7 +10,7 @@
 
 <body>
     <div class="otp-container">
-        <p>Your OTP is : 746328</p>
+        <p>Your OTP is : {{$otp}}</p>
     </div>
 </body>
 
