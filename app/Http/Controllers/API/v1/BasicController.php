@@ -54,6 +54,7 @@ class BasicController extends Controller
         $data->email = $request->email;
         $data->otp = $otp;
         $data->save();
+        \Log::info($data);
         Mail::to($request->email)->send(new MailForgotPassword($otp));
         return response([
             'success' => true,
@@ -69,7 +70,7 @@ class BasicController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $checkOtp = ForgotPassword::where('email', $request->email)->where('otp', $request->otp)->first();
+        $checkOtp = ForgotPassword::where('email', $request->email)->where('is_verified', 0)->where('otp', $request->otp)->first();
         if ($checkOtp) {
             if ($checkOtp->is_verified == 0) {
                 $user = User::where('email', $request->email)->first();
