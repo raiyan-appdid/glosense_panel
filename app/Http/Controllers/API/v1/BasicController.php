@@ -64,7 +64,7 @@ class BasicController extends Controller
     public function verifyOtpAndChangePassword(Request $request)
     {
         $request->validate([
-            'otp' => 'require',
+            'otp' => 'required',
             'email' => 'required',
             'password' => 'required|confirmed',
         ]);
