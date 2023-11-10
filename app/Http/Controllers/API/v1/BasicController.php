@@ -15,6 +15,7 @@ use App\Models\Promocode;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Mail;
 use DB;
+use Hash;
 
 class BasicController extends Controller
 {
@@ -58,5 +59,39 @@ class BasicController extends Controller
             'success' => true,
             'message' => 'OTP Sent To Your Email',
         ]);
+    }
+
+    public function verifyOtpAndChangePassword(Request $request)
+    {
+        $request->validate([
+            'otp' => 'require',
+            'email' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $checkOtp = ForgotPassword::where('email', $request->email)->where('otp', $request->otp)->first();
+        if ($checkOtp) {
+            if ($checkOtp->is_verified == 0) {
+                $user = User::where('email', $request->email)->first();
+                $user->password = Hash::make($request->password);
+                $user->save();
+                $checkOtp->is_verified = 1;
+                $checkOtp->save();
+            } else {
+                return response([
+                    'success' => false,
+                    'message' => 'Invalid Otp',
+                ]);
+            }
+            return response([
+                'success' => true,
+                'message' => 'Password Updated Successfully',
+            ]);
+        } else {
+            return response([
+                'success' => false,
+                'message' => 'Invalid Otp',
+            ]);
+        }
     }
 }
