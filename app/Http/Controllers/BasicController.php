@@ -33,6 +33,12 @@ class BasicController extends Controller
             $token = $token->getToken();
             $shiprocketOrder = new CreateOrderService;
             $response = $shiprocketOrder->create($token, $updateOrder);
+
+            $updateOrder = Order::where('id', $updateTransaction->order->id)->first();
+            $updateOrder->shiprocket_order_id = $response['order_id'];
+            $updateOrder->shipment_id = $response['shipment_id'];
+            $updateOrder->save();
+
             \Log::info($response);
             Mail::to($updateOrder->email)->send(new Invoice($updateTransaction->order->id));
 
