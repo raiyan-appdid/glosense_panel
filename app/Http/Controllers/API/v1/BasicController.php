@@ -13,9 +13,11 @@ use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Promocode;
 use App\Models\Slider;
+use App\Services\ShipRocket\GenerateTokenService;
 use Illuminate\Support\Facades\Mail;
 use DB;
 use Hash;
+use Illuminate\Support\Facades\Http;
 
 class BasicController extends Controller
 {
@@ -94,5 +96,27 @@ class BasicController extends Controller
                 'message' => 'Invalid Otp',
             ]);
         }
+    }
+
+    public function getOrderById(Request $request)
+    {
+        $token = new GenerateTokenService;
+        $token = $token->getToken();
+
+        return response([
+            'success' => true,
+            'token' => $token,
+        ]);
+        \Log::info($token);
+
+        // https://apiv2.shiprocket.in/v1/external/orders/show/16167171
+
+        // $response = Http::withHeaders([
+        //     'Authorization' => "Bearer $token",
+        //     "Content-Type" => "application/json",
+        // ])->post('https://apiv2.shiprocket.in/v1/external/orders/show/16167171', [
+        //     "order_id" => $updateOrder->order_id,
+        // ]);
+        // $res = $response->json();
     }
 }

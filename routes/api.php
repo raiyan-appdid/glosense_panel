@@ -27,6 +27,8 @@ Route::prefix('v1')->group(function () {
         Route::controller(FavouriteController::class)->prefix('favourite')->group(function () {
             Route::post('store', 'store');
         });
+
+        Route::get('get-order', [BasicController::class, 'getOrderById']);
     });
     Route::prefix('order')->controller(CcAvenueOrderController::class)->group(function () {
         Route::get('store', 'store');
@@ -35,7 +37,6 @@ Route::prefix('v1')->group(function () {
     Route::get('slider', [BasicController::class, 'getSlider']);
     Route::post('promo-code', [BasicController::class, 'verifyPromoCode']);
     Route::post('send-mail', [BasicController::class, 'sendOtpInMail']);
-    Route::post('verify-and-change-password', [BasicController::class, 'verifyOtpAndChangePassword']);
 
 
     Route::get('example', function () {
