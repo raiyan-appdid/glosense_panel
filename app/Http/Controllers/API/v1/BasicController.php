@@ -9,6 +9,7 @@ use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword as MailForgotPassword;
+use App\Models\CcAvenueTransaction;
 use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Promocode;
@@ -103,12 +104,15 @@ class BasicController extends Controller
         $token = new GenerateTokenService;
         $token = $token->getToken();
 
+        $sucessFullTransactionData = CcAvenueTransaction::where('user_id', $request->user()->id)->where('status', 'success')->with(['order'])->get();
         return response([
             'success' => true,
             'token' => $token,
-            'user' => $request->user()
+            'user' => $request->user(),
+            'transaction' => $sucessFullTransactionData,
         ]);
-        \Log::info($token);
+
+
 
         // https://apiv2.shiprocket.in/v1/external/orders/show/16167171
 
