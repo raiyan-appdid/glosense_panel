@@ -106,6 +106,7 @@ class BasicController extends Controller
         return response([
             'success' => true,
             'token' => $token,
+            'user' => $request->user()
         ]);
         \Log::info($token);
 
