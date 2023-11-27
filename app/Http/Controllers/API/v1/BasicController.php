@@ -105,23 +105,24 @@ class BasicController extends Controller
         $token = $token->getToken();
 
         $sucessFullTransactionData = CcAvenueTransaction::where('user_id', $request->user()->id)->where('status', 'success')->with(['order'])->get();
-        return response([
-            'success' => true,
-            'token' => $token,
-            'user' => $request->user(),
-            'transaction' => $sucessFullTransactionData,
-        ]);
+      
 
 
 
         // https://apiv2.shiprocket.in/v1/external/orders/show/16167171
 
-        // $response = Http::withHeaders([
-        //     'Authorization' => "Bearer $token",
-        //     "Content-Type" => "application/json",
-        // ])->post('https://apiv2.shiprocket.in/v1/external/orders/show/16167171', [
-        //     "order_id" => $updateOrder->order_id,
-        // ]);
-        // $res = $response->json();
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer $token",
+            "Content-Type" => "application/json",
+        ])->get('https://apiv2.shiprocket.in/v1/external/orders/show/'. $sucessFullTransactionData[0]->order->order_id);
+        $res = $response->json();
+
+        return response([
+            'success' => true,
+            'token' => $token,
+            'user' => $request->user(),
+            'transaction' => $sucessFullTransactionData,
+            'res' => $res,
+        ]);
     }
 }
