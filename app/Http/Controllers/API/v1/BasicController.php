@@ -114,7 +114,7 @@ class BasicController extends Controller
         $response = Http::withHeaders([
             'Authorization' => "Bearer $token",
             "Content-Type" => "application/json",
-        ])->get('https://apiv2.shiprocket.in/v1/external/orders/show/'. $sucessFullTransactionData[0]->order->order_id);
+        ])->get('https://apiv2.shiprocket.in/v1/external/orders/show/'. $sucessFullTransactionData[0]->transaction_order_id);
         $res = $response->json();
 
         return response([
