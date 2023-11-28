@@ -24,6 +24,7 @@ class CreateOrderService
             "billing_address" => $updateOrder->address,
             "billing_city" => $updateOrder->city,
             "billing_pincode" => $updateOrder->pincode,
+            "gst_number" => $updateOrder->gst ?? '',
             "billing_state" => $updateOrder->state,
             "billing_country" => $updateOrder->country,
             "billing_email" => $updateOrder->email,
