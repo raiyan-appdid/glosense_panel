@@ -103,11 +103,11 @@ class OrderDataTable extends DataTable
             Column::make('sub_total'),
             Column::make('discount'),
             Column::make('created_at'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             // Column::computed('status')
             //     ->exportable(false)
             //     ->printable(false)

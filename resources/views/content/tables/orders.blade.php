@@ -28,7 +28,8 @@
         <x-form id="edit-order" method="POST" class="" :route="route('admin.orders.update')">
         
             <div class="col-md-12 col-12 ">
-                <x-input name="name" />
+                <x-input name="shiprocket_order_id" />
+                <x-input name="shipment_id" />
                 <x-input name="id" type="hidden" />
             </div>
           

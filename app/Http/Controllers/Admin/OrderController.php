@@ -27,6 +27,14 @@ class OrderController extends Controller
 
     public function update(Request $request)
     {
+        $name = Order::findOrFail($request->id);
+        $name->shiprocket_order_id = $request->shiprocket_order_id;
+        $name->shipment_id = $request->shipment_id;
+        $name->save();
+        return response([
+            'message' => 'order updated successfully',
+            'table' => 'order-table',
+        ]);
     }
 
     public function status(Request $request)
