@@ -21,13 +21,13 @@ class OrderDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('action', function ($value) {
-            //     $edit_route = route('admin.orders.edit', $value->id);
-            //     $edit_callback = 'setValue';
-            //     $modal = '#edit-order-modal';
-            //     $delete_route = route('admin.orders.destroy', $value->id);
-            //     return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
-            // })
+            ->addColumn('action', function ($value) {
+                $edit_route = route('admin.orders.edit', $value->id);
+                $edit_callback = 'setValue';
+                $modal = '#edit-order-modal';
+                $delete_route = route('admin.orders.destroy', $value->id);
+                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
