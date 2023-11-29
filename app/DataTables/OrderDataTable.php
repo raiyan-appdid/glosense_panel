@@ -88,6 +88,13 @@ class OrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center'),
+            Column::make('shiprocket_order_id'),
+            Column::make('shipment_id'),
             Column::make('order_id'),
             Column::make('promocode_id'),
             Column::make('name'),
@@ -103,11 +110,7 @@ class OrderDataTable extends DataTable
             Column::make('sub_total'),
             Column::make('discount'),
             Column::make('created_at'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+           
             // Column::computed('status')
             //     ->exportable(false)
             //     ->printable(false)
