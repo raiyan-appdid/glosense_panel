@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
     Route::get('slider', [BasicController::class, 'getSlider']);
     Route::post('promo-code', [BasicController::class, 'verifyPromoCode']);
     Route::post('send-mail', [BasicController::class, 'sendOtpInMail']);
+    Route::post('verify-and-change-password', [BasicController::class, 'verifyOtpAndChangePassword']);
 
 
     Route::get('example', function () {
