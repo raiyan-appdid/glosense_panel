@@ -122,6 +122,7 @@ class BasicController extends Controller
                 'token' => $token,
                 'response' => $res,
                 'fetch_order_code' => $response->status(),
+                'order_data' => $orderData[0],
             ]);
         }
         return response([
