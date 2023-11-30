@@ -120,6 +120,7 @@ class BasicController extends Controller
             'success' => true,
             'token' => $token,
             'response' => $res,
+            'code' => $response->status(),
         ]);
     }
 }
