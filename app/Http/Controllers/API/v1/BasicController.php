@@ -105,22 +105,28 @@ class BasicController extends Controller
         $token = new GenerateTokenService;
         $token = $token->getToken();
 
-        $sucessFullTransactionData = Order::where('user_id', $request->user()->id)->where('status', 'success')->with(['order'])->get();
-      
+        $orderData = Order::where('user_id', $request->user()->id)->where('shiprocket_order_id', '!=', null)->get();
 
-        // https://apiv2.shiprocket.in/v1/external/orders/show/16167171
 
-        $response = Http::withHeaders([
-            'Authorization' => "Bearer $token",
-            "Content-Type" => "application/json",
-        ])->get('https://apiv2.shiprocket.in/v1/external/orders/show/444021491');
-        $res = $response->json();
+        // https://apiv2.shiprocket.in/v1/external/orders/show/444021491
 
+        if (count($orderData) > 0) {
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer $token",
+                "Content-Type" => "application/json",
+            ])->get('https://apiv2.shiprocket.in/v1/external/orders/show/' . $orderData[0]->shiprocket_order_id);
+            $res = $response->json();
+
+            return response([
+                'success' => true,
+                'token' => $token,
+                'response' => $res,
+                'fetch_order_code' => $response->status(),
+            ]);
+        }
         return response([
-            'success' => true,
-            'token' => $token,
-            'response' => $res,
-            'fetch_order_code' => $response->status(),
+            'success' => false,
+            'fetch_order_code' => 404,
         ]);
     }
 }
