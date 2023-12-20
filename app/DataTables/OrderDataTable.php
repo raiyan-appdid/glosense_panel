@@ -46,7 +46,11 @@ class OrderDataTable extends DataTable
      */
     public function query(Order $model)
     {
-        return $model->newQuery();
+        $model =  $model->newQuery();
+        if (request()->has('promo_id')) {
+            $model = $model->where('promocode_id', request()->promo_id);
+        }
+        return $model;
     }
 
     /**
@@ -89,10 +93,10 @@ class OrderDataTable extends DataTable
         return [
             Column::make('id'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('shiprocket_order_id'),
             Column::make('shipment_id'),
             Column::make('order_id'),
@@ -111,7 +115,7 @@ class OrderDataTable extends DataTable
             Column::make('sub_total'),
             Column::make('discount'),
             Column::make('created_at'),
-           
+
             // Column::computed('status')
             //     ->exportable(false)
             //     ->printable(false)

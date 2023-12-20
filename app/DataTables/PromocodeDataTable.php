@@ -51,9 +51,6 @@ class PromocodeDataTable extends DataTable
     public function query(Promocode $model)
     {
         $model = $model->newQuery();
-        if (request()->has('promo_id')) {
-            $model = $model->where('promocode_id', request()->promo_id);
-        }
         return $model;
     }
 
