@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Order;
 use App\Models\Promocode;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -30,7 +31,8 @@ class PromocodeDataTable extends DataTable
             })
             ->addColumn('Orders Count', function ($value) {
 
-                return $value->with('orders');
+                $data = Order::where('promocode_id', $value->id)->count();
+                return $data;
 
                 return $value->whereHas('orders', function ($q) {
                     return $q->where('status', 'Payment Success');
