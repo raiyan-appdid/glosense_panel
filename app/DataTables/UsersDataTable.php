@@ -30,7 +30,7 @@ class UsersDataTable extends DataTable
                 return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
             ->editColumn('created_at', function ($data) {
-                return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
+                return  '<span class="badge badge-light-primary cursor-pointer">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
             // ->addColumn('status', function ($data) {
             //     $route = route('admin.users.status');
