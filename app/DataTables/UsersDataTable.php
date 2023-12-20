@@ -43,6 +43,9 @@ class UsersDataTable extends DataTable
             ->addColumn('first_name', function ($data) {
                 return $data->first_name . ' ' . $data->last_name;
             })
+            ->addColumn('orders', function ($data) {
+                return $data->first_name . ' ' . $data->last_name;
+            })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -103,6 +106,7 @@ class UsersDataTable extends DataTable
                 ->title('Name'),
 
             Column::make('email'),
+            Column::make('orders'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
