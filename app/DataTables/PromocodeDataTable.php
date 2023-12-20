@@ -31,7 +31,7 @@ class PromocodeDataTable extends DataTable
             })
             ->addColumn('Orders Count', function ($value) {
                 $data = Order::where('promocode_id', $value->id)->where('status', 'Payment Success')->count();
-                return  '<span class="badge badge-light-success cursor-pointer">' . $data . '</span>';
+                return  '<a class="badge badge-light-success cursor-pointer href=' . route('admin.orders.index') . "promo_id" . $value->id . '">' . $data . '</a>';
             })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
