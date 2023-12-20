@@ -30,20 +30,8 @@ class PromocodeDataTable extends DataTable
                 return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
             ->addColumn('Orders Count', function ($value) {
-
                 $data = Order::where('promocode_id', $value->id)->count();
                 return  '<span class="badge badge-light-success">' . $data . '</span>';
-
-
-                return $value->whereHas('orders', function ($q) {
-                    return $q->where('status', 'Payment Success');
-                })->count();
-
-                $edit_route = route('admin.promocodes.edit', $value->id);
-                $edit_callback = 'setValue';
-                $modal = '#edit-promocode-modal';
-                $delete_route = route('admin.promocodes.destroy', $value->id);
-                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
