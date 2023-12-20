@@ -51,7 +51,7 @@ class OrderDataTable extends DataTable
             $model = $model->where('promocode_id', request()->promo_id);
         }
         if (request()->has('user_id')) {
-            $model = $model->where('promocode_id', request()->user_id);
+            $model = $model->where('user_id', request()->user_id);
         }
         return $model;
     }
