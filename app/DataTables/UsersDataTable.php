@@ -45,8 +45,8 @@ class UsersDataTable extends DataTable
                 return $data->first_name . ' ' . $data->last_name;
             })
             ->addColumn('orders', function ($data) {
-                $data = Order::where('user_id', $data->id)->where('status', 'Payment Success')->count();
-                return  '<a class="badge badge-light-success cursor-pointer" href="' . route('admin.orders.index') . "?user_id=" . $data->id . '">' . $data . '</a>';
+                $total = Order::where('user_id', $data->id)->where('status', 'Payment Success')->count();
+                return  '<a class="badge badge-light-success cursor-pointer" href="' . route('admin.orders.index') . "?user_id=" . $data->id . '">' . $total . '</a>';
             })
             ->escapeColumns('created_at', 'action');
     }
