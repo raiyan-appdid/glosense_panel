@@ -30,7 +30,7 @@ class PromocodeDataTable extends DataTable
                 return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
             ->addColumn('Orders Count', function ($value) {
-                $data = Order::where('promocode_id', $value->id)->count();
+                $data = Order::where('promocode_id', $value->id)->where('status', 'Payment Success')->count();
                 return  '<span class="badge badge-light-success">' . $data . '</span>';
             })
             ->editColumn('created_at', function ($data) {
