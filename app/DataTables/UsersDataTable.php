@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Order;
 use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -44,7 +45,8 @@ class UsersDataTable extends DataTable
                 return $data->first_name . ' ' . $data->last_name;
             })
             ->addColumn('orders', function ($data) {
-                return $data->first_name . ' ' . $data->last_name;
+                $data = Order::where('user_id', $data->id)->where('status', 'Payment Success')->count();
+                return $data;
             })
             ->escapeColumns('created_at', 'action');
     }
