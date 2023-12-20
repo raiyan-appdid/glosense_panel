@@ -50,6 +50,9 @@ class OrderDataTable extends DataTable
         if (request()->has('promo_id')) {
             $model = $model->where('promocode_id', request()->promo_id);
         }
+        if (request()->has('user_id')) {
+            $model = $model->where('promocode_id', request()->user_id);
+        }
         return $model;
     }
 
