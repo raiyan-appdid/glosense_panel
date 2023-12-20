@@ -32,7 +32,8 @@ class PromocodeDataTable extends DataTable
             ->addColumn('Orders Count', function ($value) {
 
                 $data = Order::where('promocode_id', $value->id)->count();
-                return $data;
+                return  '<span class="badge badge-light-success">' . $data . '</span>';
+
 
                 return $value->whereHas('orders', function ($q) {
                     return $q->where('status', 'Payment Success');
