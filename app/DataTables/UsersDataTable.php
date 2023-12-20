@@ -46,7 +46,8 @@ class UsersDataTable extends DataTable
             })
             ->addColumn('orders', function ($data) {
                 $data = Order::where('user_id', $data->id)->where('status', 'Payment Success')->count();
-                return $data;
+                return  '<span class="badge badge-light-success">' . $data . '</span>';
+
             })
             ->escapeColumns('created_at', 'action');
     }
