@@ -108,6 +108,7 @@ class UsersDataTable extends DataTable
                 ->title('Name'),
 
             Column::make('email'),
+            Column::make('phone'),
             Column::make('orders'),
             Column::make('created_at'),
             Column::computed('action')
