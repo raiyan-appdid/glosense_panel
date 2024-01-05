@@ -29,13 +29,13 @@
     {
       "url": "admin/orders",
       "name": "Orders",
-      "icon": "circle",
+      "icon": "<i data-feather='shopping-cart'></i>",
       "slug": "admin.orders.index"
     },
     {
       "url": "admin/transaction-orders",
       "name": "Transaction Orders",
-      "icon": "circle",
+      "icon": "<i data-feather='database'></i>",
       "slug": "admin.transaction-orders.index"
     }
   ]
