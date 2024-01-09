@@ -37,6 +37,16 @@
       "name": "Transaction Orders",
       "icon": "<i data-feather='database'></i>",
       "slug": "admin.transaction-orders.index"
+    },
+    {
+      "navheader": "Review Management",
+      "slug": ""
+    },
+    {
+      "url": "admin/reviews",
+      "name": "Review",
+      "icon": "<i data-feather='shopping-cart'></i>",
+      "slug": "admin.reviews.index"
     }
   ]
 }
