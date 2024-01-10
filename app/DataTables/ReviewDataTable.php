@@ -23,17 +23,17 @@ class ReviewDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($value) {
-                $edit_route = route('admin.orders.edit', $value->id);
+                $edit_route = route('admin.reviews.edit', $value->id);
                 $edit_callback = 'setValue';
-                $modal = '#edit-order-modal';
-                $delete_route = route('admin.orders.destroy', $value->id);
+                $modal = '#edit-review-modal';
+                $delete_route = route('admin.reviews.destroy', $value->id);
                 return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
             })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
             // ->addColumn('status', function ($data) {
-            //     $route = route('admin.orders.status');
+            //     $route = route('admin.reviews.status');
             //     return view('content.table-component.switch', compact('data', 'route'));
             // })
             ->escapeColumns('created_at', 'action');
@@ -59,7 +59,7 @@ class ReviewDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('order-table')
+            ->setTableId('review-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -89,8 +89,11 @@ class ReviewDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+             Column::computed('action'),
+            // Column::make('id'),
             Column::make('title'),
+            Column::make('description'),
+            Column::make('star'),
             Column::make('created_at'),
 
             // Column::computed('status')
@@ -108,6 +111,6 @@ class ReviewDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Order._' . date('YmdHis');
+        return 'review._' . date('YmdHis');
     }
 }

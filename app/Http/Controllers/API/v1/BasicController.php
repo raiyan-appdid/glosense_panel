@@ -14,6 +14,7 @@ use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Models\Review;
 use App\Models\Slider;
 use App\Services\ShipRocket\GenerateTokenService;
 use Illuminate\Support\Facades\Mail;
@@ -128,6 +129,15 @@ class BasicController extends Controller
         return response([
             'success' => false,
             'fetch_order_code' => 404,
+        ]);
+    }
+
+    public function getAllReviews()
+    {
+        $data = Review::all();
+        return response([
+            'success' => true,
+            'data' => $data,
         ]);
     }
 }

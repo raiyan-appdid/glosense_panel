@@ -181,7 +181,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::get('blocked', 'blockedBlog')->name('blocked');
-        Route::post('/', 'store')->name('store');
+        Route::post('/store', 'store')->name('store');
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::delete('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');

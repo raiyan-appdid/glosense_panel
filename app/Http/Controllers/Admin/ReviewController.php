@@ -18,6 +18,18 @@ class ReviewController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'star' => 'nullable|integer|max:5|min:1'
+        ]);
+        $data = new Review;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->star = $request->star;
+        $data->save();
+        return response([
+            'message' => 'Review Stored',
+            'table' => 'review-table',
+        ]);
     }
     public function edit($id)
     {
@@ -27,6 +39,18 @@ class ReviewController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'star' => 'nullable|integer|max:5|min:1'
+        ]);
+        $data = Review::where('id', $request->id)->first();
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->star = $request->star;
+        $data->save();
+        return response([
+            'message' => 'Review Stored',
+            'table' => 'review-table',
+        ]);
     }
 
     public function status(Request $request)

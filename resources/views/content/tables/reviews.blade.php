@@ -7,7 +7,6 @@
 @section('content')
 
 
-<h2>In Progress</h2>
 
     <section>
         <div class="row match-height">
@@ -20,20 +19,23 @@
     </section>
 
 
-    <x-side-modal title="Add order" id="add-order-modal">
-        <x-form id="add-order" method="POST" class="" :route="route('admin.orders.store')">
+    <x-side-modal title="Add Review" id="add-review-modal">
+        <x-form id="add-review" method="POST" class="" :route="route('admin.reviews.store')">
             <div class="col-md-12 col-12 ">
-                <x-input name="name" />
+                <x-input name="title" />
+                <x-input name="description" />
+                <x-input name="star" />
             </div>
         </x-form>
     </x-side-modal>
-    <x-side-modal title="Update order" id="edit-order-modal">
-        <x-form id="edit-order" method="POST" class="" :route="route('admin.orders.update')">
+    <x-side-modal title="Update Review" id="edit-review-modal">
+        <x-form id="edit-review" method="POST" class="" :route="route('admin.reviews.update')">
 
             <div class="col-md-12 col-12 ">
-                <x-input name="shiprocket_order_id" />
-                <x-input name="shipment_id" />
-                <x-input name="id" type="hidden" />
+                <x-input name="title" />
+                <x-input name="description" />
+                <x-input name="star" />
+                <input type="hidden" name="id" id="id">
             </div>
 
         </x-form>
@@ -43,6 +45,10 @@
     <script>
         $(document).ready(function() {
 
+            $('#review-table_wrapper .dt-buttons').append(
+                `<button type="button" data-show="add-review-modal" class="btn btn-flat-success waves-effect float-md-right">Add</button>`
+            );
+
             $(document).on('click', '[data-show]', function() {
                 const modal = $(this).data('show');
                 $(`#${modal}`).modal('show');
@@ -51,7 +57,9 @@
 
         function setValue(data, modal) {
             $(`${modal} #id`).val(data.id);
-            $(`${modal} #name`).val(data.name);
+            $(`${modal} #title`).val(data.title);
+            $(`${modal} #description`).val(data.description);
+            $(`${modal} #star`).val(data.star);
             $(modal).modal('show');
         }
     </script>

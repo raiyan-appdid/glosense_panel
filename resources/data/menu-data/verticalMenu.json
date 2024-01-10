@@ -45,7 +45,7 @@
     {
       "url": "admin/reviews",
       "name": "Review",
-      "icon": "<i data-feather='shopping-cart'></i>",
+      "icon": "<i data-feather='star'></i>",
       "slug": "admin.reviews.index"
     }
   ]
