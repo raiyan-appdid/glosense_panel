@@ -15,7 +15,7 @@ class ReviewController extends Controller
         $pageConfigs = ['has_table' => true,];
         // $table->with('id', 1);
         $globalStar = Review::first();
-        $globalStar = $globalStar?->global_star ?? 0;
+        $globalStar = $globalStar->global_star ?? 0;
         return $table->render('content.tables.reviews', compact('pageConfigs', 'globalStar'));
     }
     public function store(Request $request)
