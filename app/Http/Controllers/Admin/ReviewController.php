@@ -14,7 +14,9 @@ class ReviewController extends Controller
     {
         $pageConfigs = ['has_table' => true,];
         // $table->with('id', 1);
-        return $table->render('content.tables.reviews', compact('pageConfigs'));
+        $globalStar = Review::first();
+        $globalStar = $globalStar->global_star;
+        return $table->render('content.tables.reviews', compact('pageConfigs', 'globalStar'));
     }
     public function store(Request $request)
     {
@@ -76,5 +78,14 @@ class ReviewController extends Controller
             'message' => 'review deleted successfully',
             'table' => 'review-table',
         ]);
+    }
+
+    public function storeGlobalStar(Request $request)
+    {
+        $request->validate([
+            'global_star' => 'required|integer|max:5|min:0'
+        ]);
+        $data = Review::query()->update(['global_star' => $request->global_star]);
+        return true;
     }
 }

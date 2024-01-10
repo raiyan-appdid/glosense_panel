@@ -186,6 +186,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::delete('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
+        Route::get('store-global-star', 'storeGlobalStar')->name('store-global-star');
     });
     Route::name('transaction-orders.')->prefix('transaction-orders')->controller(CcAvenueTransactionController::class)->group(function () {
         Route::get('/', 'index')->name('index');

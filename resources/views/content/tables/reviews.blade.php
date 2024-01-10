@@ -11,6 +11,11 @@
     <section>
         <div class="row match-height">
             <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <x-input type="number" value="{{ $globalStar }}" name="global_star" />
+                    </div>
+                </div>
                 <x-card>
                     {!! $dataTable->table() !!}
                 </x-card>
@@ -62,5 +67,25 @@
             $(`${modal} #star`).val(data.star);
             $(modal).modal('show');
         }
+
+        $('#global_star').on('input', function(){
+            const val = $(this).val();
+            $.ajax({
+                type: "get",
+                url: "{{ route('admin.reviews.store-global-star') }}",
+                data: {
+                    global_star : val
+                },
+                success: function (response) {
+                    console.log(response);
+                    snb('success', 'Updated On site')
+
+                },
+                error : function(error){
+                    console.log(error);
+                    snb('error', 'Only 1 - 5 numbers are allowed')
+                }
+            });
+        })
     </script>
 @endsection
