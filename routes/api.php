@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
     Route::post('send-mail', [BasicController::class, 'sendOtpInMail']);
     Route::post('verify-and-change-password', [BasicController::class, 'verifyOtpAndChangePassword']);
     Route::get('reviews', [BasicController::class, 'getAllReviews']);
+    Route::post('sms', [BasicController::class, 'sms']);
 
 
     Route::get('example', function () {

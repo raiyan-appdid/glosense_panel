@@ -17,6 +17,7 @@ use App\Models\Promocode;
 use App\Models\Review;
 use App\Models\Slider;
 use App\Services\ShipRocket\GenerateTokenService;
+use App\Services\SmsIntegration;
 use Illuminate\Support\Facades\Mail;
 use DB;
 use Hash;
@@ -138,6 +139,54 @@ class BasicController extends Controller
         return response([
             'success' => true,
             'data' => $data,
+        ]);
+    }
+
+    public function sms(Request $request)
+    {
+        $request->validate([
+            'number' => 'required',
+        ]);
+
+        $otp = random_int(100000, 999999);
+        $data = new ForgotPassword;
+        $data->number = $request->number;
+        $data->otp = $otp;
+        $data->save();
+
+        $message = $data->otp . " is your OTP (One Time Password) for logging into the App. For security reasons, do not share the OTP. Regards Team Appdid Infotech LLP.";
+        $sms = SmsIntegration::action($request->number, $message);
+        if ($sms['status']) {
+            return response([
+                'success' => true,
+                'sent' => true,
+                'message' => 'OTP Sent To Your Number',
+            ]);
+        }
+        return response([
+            'success' => true,
+            'sent' => false,
+            'message' => 'Issue while sending OTP to your number',
+        ]);
+    }
+
+    public function verifySmsOtp(Request $request)
+    {
+        $request->validate([
+            'number' => 'required',
+            'otp' => 'required',
+        ]);
+
+        $data = ForgotPassword::where('number', $request->number)->where('otp', $request->otp)->first();
+        if ($data) {
+            return response([
+                'success' => true,
+                'valid' => true,
+            ]);
+        }
+        return response([
+            'success' => true,
+            'valid' => false,
         ]);
     }
 }
