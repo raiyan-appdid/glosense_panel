@@ -14,9 +14,10 @@ class ReviewController extends Controller
     {
         $pageConfigs = ['has_table' => true,];
         // $table->with('id', 1);
-        $globalStar = Review::first();
-        $globalStar = $globalStar->global_star ?? 0;
-        return $table->render('content.tables.reviews', compact('pageConfigs', 'globalStar'));
+        $data = Review::first();
+        $globalStar = $data->global_star ?? 0;
+        $globalReviews = $data->global_reviews ?? 0;
+        return $table->render('content.tables.reviews', compact('pageConfigs', 'globalStar', 'globalReviews'));
     }
     public function store(Request $request)
     {
@@ -86,6 +87,14 @@ class ReviewController extends Controller
             'global_star' => 'required|integer|max:5|min:0'
         ]);
         $data = Review::query()->update(['global_star' => $request->global_star]);
+        return true;
+    }
+    public function storeGlobalreviews(Request $request)
+    {
+        $request->validate([
+            'global_reviews' => 'required|integer'
+        ]);
+        $data = Review::query()->update(['global_reviews' => $request->global_reviews]);
         return true;
     }
 }

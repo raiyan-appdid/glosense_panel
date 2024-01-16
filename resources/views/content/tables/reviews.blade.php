@@ -15,6 +15,9 @@
                     <div class="col-md-2">
                         <x-input type="number" value="{{ $globalStar }}" name="global_star" />
                     </div>
+                    <div class="col-md-2">
+                        <x-input type="number" value="{{ $globalReviews }}" name="global_reviews" />
+                    </div>
                 </div>
                 <x-card>
                     {!! $dataTable->table() !!}
@@ -84,6 +87,25 @@
                 error : function(error){
                     console.log(error);
                     snb('error', 'Only 1 - 5 numbers are allowed')
+                }
+            });
+        })
+        $('#global_reviews').on('input', function(){
+            const val = $(this).val();
+            $.ajax({
+                type: "get",
+                url: "{{ route('admin.reviews.store-global-reviews') }}",
+                data: {
+                    global_reviews : val
+                },
+                success: function (response) {
+                    console.log(response);
+                    snb('success', 'Updated On site')
+
+                },
+                error : function(error){
+                    console.log(error);
+                    snb('error')
                 }
             });
         })
