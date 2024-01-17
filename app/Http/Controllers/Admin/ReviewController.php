@@ -43,7 +43,7 @@ class ReviewController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'star' => 'nullable|max:5|min:1'
+            'star' => 'nullable|integer|max:5|min:1'
         ]);
         $data = Review::where('id', $request->id)->first();
         $data->title = $request->title;
@@ -84,7 +84,7 @@ class ReviewController extends Controller
     public function storeGlobalStar(Request $request)
     {
         $request->validate([
-            'global_star' => 'required|integer|max:5|min:0'
+            'global_star' => 'required|max:5|min:0'
         ]);
         $data = Review::query()->update(['global_star' => $request->global_star]);
         return true;
