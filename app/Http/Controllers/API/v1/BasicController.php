@@ -189,4 +189,18 @@ class BasicController extends Controller
             'valid' => false,
         ]);
     }
+
+    public function storeReview(Request $request)
+    {
+        $data = new Review;
+        $data->title = $request->user()->first_name;
+        $data->description = $request->description;
+        $data->star = $request->star;
+        $data->user_id = $request->user()->id;
+        $data->save();
+        return response([
+            'message' => 'Review Stored',
+            'table' => 'review-table',
+        ]);
+    }
 }
