@@ -43,7 +43,7 @@ class ReviewController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'star' => 'nullable|integer|max:5|min:1'
+            'star' => 'nullable|max:5|min:1'
         ]);
         $data = Review::where('id', $request->id)->first();
         $data->title = $request->title;
