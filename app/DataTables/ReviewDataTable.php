@@ -32,10 +32,10 @@ class ReviewDataTable extends DataTable
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
-            // ->addColumn('status', function ($data) {
-            //     $route = route('admin.reviews.status');
-            //     return view('content.table-component.switch', compact('data', 'route'));
-            // })
+            ->addColumn('status', function ($data) {
+                $route = route('admin.reviews.status');
+                return view('content.table-component.switch', compact('data', 'route'));
+            })
             ->escapeColumns('created_at', 'action');
     }
 
@@ -91,16 +91,17 @@ class ReviewDataTable extends DataTable
         return [
              Column::computed('action'),
             // Column::make('id'),
+            Column::computed('status')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
+            Column::make('type'),
             Column::make('title'),
             Column::make('description'),
             Column::make('star'),
             Column::make('created_at'),
 
-            // Column::computed('status')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
         ];
     }
 

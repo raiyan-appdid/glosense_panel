@@ -197,6 +197,7 @@ class BasicController extends Controller
         $data->description = $request->review;
         $data->star = $request->star;
         $data->user_id = $request->user()->id;
+        $data->type = "website";
         $data->save();
         return response([
             'message' => 'Review Stored',
