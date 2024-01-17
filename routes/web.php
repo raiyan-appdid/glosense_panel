@@ -179,6 +179,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
     });
     Route::name('reviews.')->prefix('reviews')->controller(ReviewController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/website', 'websiteReview')->name('website');
         Route::get('create', 'create')->name('create');
         Route::get('blocked', 'blockedBlog')->name('blocked');
         Route::post('/store', 'store')->name('store');

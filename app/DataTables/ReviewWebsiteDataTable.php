@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ReviewDataTable extends DataTable
+class ReviewWebsiteDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -48,7 +48,7 @@ class ReviewDataTable extends DataTable
     public function query(Review $model)
     {
         $model =  $model->newQuery();
-        $model->where('type', 'admin');
+        $model->where('type', 'website');
         return $model;
     }
 

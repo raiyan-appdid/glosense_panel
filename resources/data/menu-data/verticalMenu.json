@@ -44,9 +44,15 @@
     },
     {
       "url": "admin/reviews",
-      "name": "Review",
+      "name": "Review Admin",
       "icon": "<i data-feather='star'></i>",
       "slug": "admin.reviews.index"
+    },
+    {
+      "url": "admin/reviews/website",
+      "name": "Review Users",
+      "icon": "<i data-feather='star'></i>",
+      "slug": "admin.reviews.website"
     }
   ]
 }

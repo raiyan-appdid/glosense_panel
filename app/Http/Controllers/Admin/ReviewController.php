@@ -6,6 +6,7 @@ use Hash;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\DataTables\ReviewDataTable;
+use App\DataTables\ReviewWebsiteDataTable;
 use App\Http\Controllers\Controller;
 
 class ReviewController extends Controller
@@ -19,6 +20,17 @@ class ReviewController extends Controller
         $globalReviews = $data->global_reviews ?? 0;
         return $table->render('content.tables.reviews', compact('pageConfigs', 'globalStar', 'globalReviews'));
     }
+
+    public function websiteReview(ReviewWebsiteDataTable $table)
+    {
+        $pageConfigs = ['has_table' => true,];
+        // $table->with('id', 1);
+        $data = Review::first();
+        $globalStar = $data->global_star ?? 0;
+        $globalReviews = $data->global_reviews ?? 0;
+        return $table->render('content.tables.reviews-website', compact('pageConfigs', 'globalStar', 'globalReviews'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
