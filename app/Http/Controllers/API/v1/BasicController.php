@@ -194,7 +194,7 @@ class BasicController extends Controller
     {
         $data = new Review;
         $data->title = $request->user()->first_name;
-        $data->description = $request->description;
+        $data->description = $request->review;
         $data->star = $request->star;
         $data->user_id = $request->user()->id;
         $data->save();
