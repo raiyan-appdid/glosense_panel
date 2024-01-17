@@ -198,6 +198,7 @@ class BasicController extends Controller
         $data->star = $request->star;
         $data->user_id = $request->user()->id;
         $data->type = "website";
+        $data->status = "blocked";
         $data->save();
         return response([
             'message' => 'Review Stored',
