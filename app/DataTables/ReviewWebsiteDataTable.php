@@ -97,7 +97,6 @@ class ReviewWebsiteDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('type'),
             Column::make('title'),
             Column::make('description'),
             Column::make('star'),
