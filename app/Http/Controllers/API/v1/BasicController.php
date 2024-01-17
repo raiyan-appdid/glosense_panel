@@ -135,7 +135,7 @@ class BasicController extends Controller
 
     public function getAllReviews()
     {
-        $data = Review::all();
+        $data = Review::where('status', 'active')->get();
         return response([
             'success' => true,
             'data' => $data,
