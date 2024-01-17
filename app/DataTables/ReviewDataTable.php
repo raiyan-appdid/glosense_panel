@@ -33,7 +33,7 @@ class ReviewDataTable extends DataTable
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
             ->addColumn('status', function ($data) {
-                $route = route('admin.reviews.status');
+            $route = route('admin.reviews.status');
                 return view('content.table-component.switch', compact('data', 'route'));
             })
             ->escapeColumns('created_at', 'action');
