@@ -49,8 +49,12 @@ class CcAvenueOrderController extends Controller
         $data->product_name = "Hair you glo";
         $data->units = $request->units;
         $data->gst = $request->gst;
-        if($request->promocode_id){
-            $data->promocode_id = $request->promocode_id;
+        if ($request->promocode_id) {
+            try {
+                $data->promocode_id = $request->promocode_id;
+            } catch (\Throwable $th) {
+                \Log::info($th);
+            }
         }
 
         // $code = Promocode::where('promocode', $request->promocode)->first();
