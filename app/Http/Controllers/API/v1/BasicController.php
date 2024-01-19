@@ -212,7 +212,7 @@ class BasicController extends Controller
         $data->title = $request->name;
         $data->description = $request->description;
         $data->star = $request->rating;
-        $data->type = "website-not-loggedIn";
+        $data->type = "website";
         $data->status = "blocked";
         $data->save();
         return response([
