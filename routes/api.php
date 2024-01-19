@@ -20,10 +20,6 @@ Route::prefix('v1')->group(function () {
 
         Route::get('user-detail', [UserController::class, 'detail']);
 
-        Route::controller(PostController::class)->prefix('post')->group(function () {
-            Route::post('store', 'store')->name('store');
-        });
-
         Route::controller(FavouriteController::class)->prefix('favourite')->group(function () {
             Route::post('store', 'store');
         });
@@ -41,6 +37,7 @@ Route::prefix('v1')->group(function () {
     Route::get('reviews', [BasicController::class, 'getAllReviews']);
     Route::post('sms', [BasicController::class, 'sms']);
     Route::post('store-review', [BasicController::class, 'storeReview'])->middleware(['auth:sanctum']);
+    Route::post('store-anonymous-review', [BasicController::class, 'storeAnanomyousReview']);
 
 
     Route::get('example', function () {

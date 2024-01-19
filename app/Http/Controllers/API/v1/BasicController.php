@@ -205,4 +205,19 @@ class BasicController extends Controller
             'table' => 'review-table',
         ]);
     }
+
+    public function storeAnanomyousReview(Request $request)
+    {
+        $data = new Review;
+        $data->title = $request->name;
+        $data->description = $request->description;
+        $data->star = $request->rating;
+        $data->type = "website-not-loggedIn";
+        $data->status = "blocked";
+        $data->save();
+        return response([
+            'message' => 'Review Stored',
+            'table' => 'review-table',
+        ]);
+    }
 }
