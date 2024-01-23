@@ -8,8 +8,8 @@ class SmsIntegration
 {
     public static function action($phoneNumber, $message)
     {
-        $apiKey = urlencode('hSujJlRSq2I-XEo8CBoacqW8di87eBZKo8O6vniWOf');
-        $sender = urlencode('APPDID');
+        $apiKey = urlencode('NzU2NzMyMzc1ODU5NmQzOTZiNTU0MzYyNjUzMTQ0Njg=');
+        $sender = urlencode('GLOSENSE');
         $response = Http::asForm()->accept('application/json')->post(
             'https://api.textlocal.in/send/',
             [
