@@ -145,7 +145,7 @@ class BasicController extends Controller
     public function sms(Request $request)
     {
         $request->validate([
-            'number' => 'required|unique:users,phone',
+            'number' => 'required',
         ]);
 
         $otp = random_int(100000, 999999);
