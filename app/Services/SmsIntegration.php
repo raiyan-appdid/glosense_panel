@@ -9,7 +9,7 @@ class SmsIntegration
     public static function action($phoneNumber, $message)
     {
         $apiKey = urlencode('NzU2NzMyMzc1ODU5NmQzOTZiNTU0MzYyNjUzMTQ0Njg=');
-        $sender = urlencode('GLSENSE');
+        $sender = urlencode('GSENSE');
         $response = Http::asForm()->accept('application/json')->post(
             'https://api.textlocal.in/send/',
             [
