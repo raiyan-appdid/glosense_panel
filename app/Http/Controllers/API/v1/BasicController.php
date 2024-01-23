@@ -154,7 +154,8 @@ class BasicController extends Controller
         $data->otp = $otp;
         $data->save();
 
-        $message = $data->otp . " is your OTP (One Time Password) for logging into the App. For security reasons, do not share the OTP. Regards Team Appdid Infotech LLP.";
+        // $message = $data->otp . " is your OTP (One Time Password) for logging into the App. For security reasons, do not share the OTP. Regards Team Appdid Infotech LLP.";
+        $message = "Glosense: Your OTP is " . $data->otp . ". Use it to log in securely. Do not share. Regards, Glosense Lifecare PVT LTD";
         $sms = SmsIntegration::action($request->number, $message);
         if ($sms['status']) {
             return response([
