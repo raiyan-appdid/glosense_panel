@@ -89,7 +89,7 @@ class CcAvenueOrderController extends Controller
             return view('pages.cashfree.checkout', compact('CashfreeEnvironment', 'payment_session_id'));
         } else {
             return response([
-                'success' => true,
+                'success' => false,
                 'message' => 'Error While Creating order Id in Cashfree check logs'
             ]);
         }

@@ -38,7 +38,7 @@ class CashFreePaymentService
                     'order_amount' => 20,
                     'order_currency' => 'INR',
                     "customer_details" =>  [
-                        "customer_id" =>  $userData->id,
+                        "customer_id" =>  (string)$userData->id,
                         "customer_name" => $userData->name,
                         "customer_email" =>  $userData->email,
                         "customer_phone" => $userData->phone
@@ -55,6 +55,9 @@ class CashFreePaymentService
                     'response' => $response->json()
                 ];
             } else {
+                \Log::info("-----validation error from cashfree start-----");
+                \Log::info($response->json());
+                \Log::info("-----validation error from cashfree end-----");
                 return [
                     'status' => false,
                     'message' => "Some data is incorrect"
