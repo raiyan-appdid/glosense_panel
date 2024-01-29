@@ -18,9 +18,9 @@
         const cashfree = Cashfree({
             mode: "{{ $CashfreeEnvironment }}" == "Test" ? "sandbox" : "production"
         });
+        console.log("{{ $payment_session_id }}");
         let checkoutOptions = {
             paymentSessionId: "{{ $payment_session_id }}",
-            redirectTarget: "_self" //optional (_self or _blank)
         }
         cashfree.checkout(checkoutOptions)
     </script>
