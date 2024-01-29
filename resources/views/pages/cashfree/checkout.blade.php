@@ -15,10 +15,10 @@
 
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <script>
+        alert("{{ $payment_session_id }}");
         const cashfree = Cashfree({
             mode: "{{ $CashfreeEnvironment }}" == "Test" ? "sandbox" : "production"
         });
-        console.log("{{ $payment_session_id }}");
         let checkoutOptions = {
             paymentSessionId: "{{ $payment_session_id }}",
         }
