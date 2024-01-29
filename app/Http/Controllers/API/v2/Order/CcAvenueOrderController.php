@@ -70,10 +70,10 @@ class CcAvenueOrderController extends Controller
         $order =  $cashFreePaymentService->createOrder($data->order_id, $userData);
         if ($order['status']) {
             \Log::info($order);
-            $cf_order_id =  $order['response'][0]['cf_order_id'];
-            $payment_session_id =  $order['response'][0]['payment_session_id'];
-            $cash_free_order_id =  $order['response'][0]['order_id'];
-            $order_status =  $order['response'][0]['order_status'];
+            $cf_order_id =  $order['response']['cf_order_id'];
+            $payment_session_id =  $order['response']['payment_session_id'];
+            $cash_free_order_id =  $order['response']['order_id'];
+            $order_status =  $order['response']['order_status'];
 
             $transaction = new CcAvenueTransaction;
             $transaction->user_id = $data->user_id;
