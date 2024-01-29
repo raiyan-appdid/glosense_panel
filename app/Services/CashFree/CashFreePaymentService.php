@@ -25,7 +25,7 @@ class CashFreePaymentService
         }
     }
 
-    public function createOrder($orderId)
+    public function createOrder($orderId, $userData)
     {
         try {
             $response = Http::withHeaders([
@@ -38,10 +38,10 @@ class CashFreePaymentService
                     'order_amount' => 20,
                     'order_currency' => 'INR',
                     "customer_details" =>  [
-                        "customer_id" =>  request()->user()->id,
-                        "customer_name" => request()->user()->name,
-                        "customer_email" =>  request()->user()->email,
-                        "customer_phone" => request()->user()->phone
+                        "customer_id" =>  $userData->id,
+                        "customer_name" => $userData->name,
+                        "customer_email" =>  $userData->email,
+                        "customer_phone" => $userData->phone
                     ],
                     "order_meta" => [
                         "return_url" => "https://b8af79f41056.eu.ngrok.io?order_id={order_id}",

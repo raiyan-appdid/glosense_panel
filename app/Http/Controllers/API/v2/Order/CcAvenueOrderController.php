@@ -7,6 +7,7 @@ use App\Models\CcAvenueOrder;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Models\User;
 use App\Services\CashFree\CashFreePaymentService;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
@@ -65,7 +66,8 @@ class CcAvenueOrderController extends Controller
         $data->save();
 
         //create order in cashfree
-        $order =  $cashFreePaymentService->createOrder($data->order_id);
+        $userData = User::where('id', $request->id)->first();
+        $order =  $cashFreePaymentService->createOrder($data->order_id, $userData);
         if ($order['status']) {
             $cf_order_id =  $order['response']['cf_order_id'];
             $payment_session_id =  $order['response']['payment_session_id'];
