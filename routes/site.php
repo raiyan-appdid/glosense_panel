@@ -8,7 +8,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('google/callback', 'googleCallback')->name('google.callback');
     Route::get('google/login', 'googleLogin')->name('google.login');
     Route::get('user-logout', 'logout')->name('user-logout');
-    Route::get('/', 'index')->name('/');
+    // Route::get('/', 'index')->name('/');
     Route::get('home', 'home')->name('home');
     Route::get('about', 'about')->name('about');
     Route::get('contact', 'contact')->name('contact');

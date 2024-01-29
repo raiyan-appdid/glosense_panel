@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API\v1\Order;
+namespace App\Http\Controllers\API\v2\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\CcAvenueOrder;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Services\CashFree\CashFreePaymentService;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
 use PDO;
@@ -16,7 +17,7 @@ use function Termwind\render;
 
 class CcAvenueOrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, CashFreePaymentService $cashFreePaymentService)
     {
         // return $request->all();
         $request->validate([
@@ -45,6 +46,7 @@ class CcAvenueOrderController extends Controller
         $data->pincode = $request->pincode;
         $data->country = $request->country;
         $data->number = $request->number;
+        $data->payment_gateway = 'cashfree';
         $data->email = $request->email;
         $data->product_name = "Hair you glo";
         $data->units = $request->units;
@@ -57,37 +59,36 @@ class CcAvenueOrderController extends Controller
             }
         }
 
-        // $code = Promocode::where('promocode', $request->promocode)->first();
-        // if ($code) {
-        //     $data->price = 1299 - $code->discount;
-        //     $data->sub_total = 1299  - $code->discount;
-        // } else {
         $data->price = $request->sub_total;
         $data->sub_total = $request->total;
-        // }
-
         $data->discount = $request->discount;
         $data->save();
 
+        //create order in cashfree
+        $order =  $cashFreePaymentService->createOrder($data->order_id);
+        if ($order['status']) {
+            $cf_order_id =  $order['response']['cf_order_id'];
+            $payment_session_id =  $order['response']['payment_session_id'];
+            $cash_free_order_id =  $order['response']['order_id'];
+            $order_status =  $order['response']['order_status'];
 
-        $CCAvenueorderId = Str::uuid();
+            $transaction = new CcAvenueTransaction;
+            $transaction->user_id = $data->user_id;
+            $transaction->order_id = $data->id;
+            $transaction->payment_gateway = 'cashfree';
+            $transaction->cf_order_id = $cf_order_id;
+            $transaction->status = $order_status;
+            $transaction->payment_session_id = $payment_session_id;
+            $transaction->cash_free_order_id = $cash_free_order_id;
+            $transaction->save();
 
-        $transaction = new CcAvenueTransaction;
-        $transaction->user_id = $data->user_id;
-        $transaction->order_id = $data->id;
-        $transaction->transaction_order_id = $CCAvenueorderId;
-        $transaction->save();
-
-        $paymentService = new PaymentService();
-
-        $order = $paymentService->createOrder(
-            amount: $data->sub_total,
-            redirect_url: route("ccavenue.success"),
-            cancel_url: route("ccavenue.failed"),
-            additional_data: ['billing_name' => $request->name, 'billing_tel' => $request->number, 'billing_email' => $request->email, 'billing_address' => $request->addresss, 'billing_zip' => $request->pincode, 'billing_tel' => $request->number, 'billing_city' => $request->city, 'billing_state' => $request->state, 'billing_country' => $request->country],
-            CCAvenueorderId: $CCAvenueorderId,
-        );
-        // return 'raiyan';
-        return $order->rendered();
+            $CashfreeEnvironment = env('CASHFREE_ENVIRONMENT');
+            return view('pages.cashfree.checkout', compact('CashfreeEnvironment', 'payment_session_id'));
+        } else {
+            return response([
+                'success' => true,
+                'message' => 'Error While Creating order Id in Cashfree check logs'
+            ]);
+        }
     }
 }

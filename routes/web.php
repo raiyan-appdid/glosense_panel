@@ -38,6 +38,9 @@ Route::prefix('ccavenue')->name('ccavenue.')->controller(BasicController::class)
     Route::post('failed', 'failedCallBack')->name('failed');
 });
 
+Route::get('/', function(){
+    return redirect()->route('login');
+});
 
 Route::prefix('admin')->middleware(['web'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
