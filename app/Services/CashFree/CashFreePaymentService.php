@@ -28,6 +28,7 @@ class CashFreePaymentService
     public function createOrder($orderId, $userData)
     {
         try {
+            $returnUrl = route('cashfree.callback') . "?order_id" . $orderId;
             $response = Http::withHeaders([
                 'x-client-id' => $this->apiKey,
                 'x-client-secret' => $this->apiSecret,
@@ -44,7 +45,7 @@ class CashFreePaymentService
                         "customer_phone" => $userData->phone
                     ],
                     "order_meta" => [
-                        "return_url" => route('cashfree.callback'),
+                        "return_url" => $orderId,
                         // "notify_url" => "https://b8af79f41056.eu.ngrok.io/webhook.php",
                     ]
                 ]
