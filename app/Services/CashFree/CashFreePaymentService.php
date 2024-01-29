@@ -61,6 +61,5 @@ class CashFreePaymentService
                 'status' => false,
             ];
         }
-        return $response->json();
     }
 }
