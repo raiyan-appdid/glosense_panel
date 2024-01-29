@@ -10,9 +10,6 @@
 
 <body>
 
-    <h2>Raiyan {{ $CashfreeEnvironment }}</h2>
-    <h2>Memon {{ $payment_session_id }}</h2>
-
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <script>
         const cashfree = Cashfree({
