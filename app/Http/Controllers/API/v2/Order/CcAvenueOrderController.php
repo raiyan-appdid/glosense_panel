@@ -86,7 +86,7 @@ class CcAvenueOrderController extends Controller
             $transaction->save();
 
             $CashfreeEnvironment = env('CASHFREE_ENVIRONMENT');
-            return redirect('http://localhost:3000/payment-checkout');
+            return redirect('http://localhost:3000/payment-checkout?cashfreeenvironment=' . $CashfreeEnvironment . "&payment_session_id=" . $payment_session_id);
             return view('pages.cashfree.checkout', compact('CashfreeEnvironment', 'payment_session_id'));
         } else {
             return response([
