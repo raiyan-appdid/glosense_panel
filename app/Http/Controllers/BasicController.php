@@ -77,4 +77,9 @@ class BasicController extends Controller
 
         // return [$updateTransaction, $updateOrder];
     }
+
+    public function cashfreeCallback(Request $request)
+    {
+        return $request->all();
+    }
 }

@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/ccavenue/failed',
         '/ccavenue/success',
+        '/cashfree/callback',
     ];
 }

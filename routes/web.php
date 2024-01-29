@@ -37,6 +37,9 @@ Route::prefix('ccavenue')->name('ccavenue.')->controller(BasicController::class)
     Route::post('success', 'successCallBack')->name('success');
     Route::post('failed', 'failedCallBack')->name('failed');
 });
+Route::prefix('cashfree')->name('cashfree.')->controller(BasicController::class)->group(function () {
+    Route::post('callback', 'cashfreeCallback')->name('callback');
+});
 
 Route::get('/', function(){
     return redirect()->route('login');

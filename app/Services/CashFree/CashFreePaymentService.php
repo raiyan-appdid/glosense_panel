@@ -44,8 +44,8 @@ class CashFreePaymentService
                         "customer_phone" => $userData->phone
                     ],
                     "order_meta" => [
-                        "return_url" => "https://b8af79f41056.eu.ngrok.io?order_id={order_id}",
-                        "notify_url" => "https://b8af79f41056.eu.ngrok.io/webhook.php",
+                        "return_url" => route('cashfree.callback'),
+                        // "notify_url" => "https://b8af79f41056.eu.ngrok.io/webhook.php",
                     ]
                 ]
             );
