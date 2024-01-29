@@ -47,7 +47,7 @@ class CashFreePaymentService
                     ],
                     "order_meta" => [
                         "return_url" => $returnUrl,
-                        // "notify_url" => "https://b8af79f41056.eu.ngrok.io/webhook.php",
+                        "notify_url" => $returnUrl,
                     ]
                 ]
             );
