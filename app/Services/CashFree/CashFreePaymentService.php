@@ -28,7 +28,7 @@ class CashFreePaymentService
     public function createOrder($orderId, $userData)
     {
         try {
-            $returnUrl = route('cashfree.callback') . "?order_id" . $orderId;
+            $returnUrl = route('cashfree.callback') . "?order_id=" . $orderId;
             \Log::info($returnUrl);
             $response = Http::withHeaders([
                 'x-client-id' => $this->apiKey,
