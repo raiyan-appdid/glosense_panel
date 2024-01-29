@@ -15,14 +15,14 @@
 
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <script>
-        // const cashfree = Cashfree({
-        //     mode: "{{ $CashfreeEnvironment }}" == "Test" ? "sandbox" : "production"
-        // });
-        // let checkoutOptions = {
-        //     paymentSessionId: "{{ $payment_session_id }}",
-        //     redirectTarget: "_self" //optional (_self or _blank)
-        // }
-        // cashfree.checkout(checkoutOptions)
+        const cashfree = Cashfree({
+            mode: "{{ $CashfreeEnvironment }}" == "Test" ? "sandbox" : "production"
+        });
+        let checkoutOptions = {
+            paymentSessionId: "{{ $payment_session_id }}",
+            redirectTarget: "_self" //optional (_self or _blank)
+        }
+        cashfree.checkout(checkoutOptions)
     </script>
 </body>
 
