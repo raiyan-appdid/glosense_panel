@@ -49,10 +49,17 @@ class CashFreePaymentService
                     ]
                 ]
             );
-            return [
-                'status' => true,
-                'response' => $response->json()
-            ];
+            if ($response->status() == 200) {
+                return [
+                    'status' => true,
+                    'response' => $response->json()
+                ];
+            } else {
+                return [
+                    'status' => false,
+                    'message' => "Some data is incorrect"
+                ];
+            }
         } catch (\Throwable $th) {
             \Log::info("-------Error while creating order start-----------");
             \Log::info($th);
