@@ -29,7 +29,6 @@ class CashFreePaymentService
     {
         try {
             $returnUrl = route('cashfree.callback') . "?order_id=" . $orderId;
-            \Log::info($returnUrl);
             $response = Http::withHeaders([
                 'x-client-id' => $this->apiKey,
                 'x-client-secret' => $this->apiSecret,
@@ -47,7 +46,7 @@ class CashFreePaymentService
                     ],
                     "order_meta" => [
                         "return_url" => $returnUrl,
-                        "notify_url" => $returnUrl,
+                        // "notify_url" => $returnUrl,
                     ]
                 ]
             );
