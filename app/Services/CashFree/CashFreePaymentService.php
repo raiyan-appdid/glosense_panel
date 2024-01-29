@@ -50,7 +50,7 @@ class CashFreePaymentService
                 ]
             );
             return [
-                'success' => true,
+                'status' => true,
                 'response' => $response->json()
             ];
         } catch (\Throwable $th) {
@@ -58,7 +58,7 @@ class CashFreePaymentService
             \Log::info($th);
             \Log::info("-------Error while creating order end-----------");
             return [
-                'success' => false,
+                'status' => false,
             ];
         }
         return $response->json();
