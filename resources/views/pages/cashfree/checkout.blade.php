@@ -15,7 +15,6 @@
 
     <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <script>
-        alert("{{ $payment_session_id }}");
         const cashfree = Cashfree({
             mode: "{{ $CashfreeEnvironment }}" == "Test" ? "sandbox" : "production"
         });
