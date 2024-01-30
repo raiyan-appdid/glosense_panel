@@ -68,7 +68,7 @@ class CcAvenueOrderController extends Controller
 
         //create order in cashfree
         $userData = User::where('id', $request->user_id)->first();
-        $order =  $cashFreePaymentService->createOrder($data->order_id, $userData);
+        $order =  $cashFreePaymentService->createOrder($data->order_id, $userData, $data->sub_total);
         if ($order['status']) {
             \Log::info($order);
             $cf_order_id =  $order['response']['cf_order_id'];

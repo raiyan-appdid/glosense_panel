@@ -28,7 +28,7 @@ class CashFreePaymentService
         }
     }
 
-    public function createOrder($orderId, $userData)
+    public function createOrder($orderId, $userData, $amount)
     {
         try {
             $returnUrl = route('cashfree.callback') . "?order_id=" . $orderId;
@@ -39,7 +39,7 @@ class CashFreePaymentService
             ])->accept('application/json')->post(
                 $this->createOrderUrl,
                 [
-                    'order_amount' => 1,
+                    'order_amount' => $amount,
                     'order_currency' => 'INR',
                     "customer_details" =>  [
                         "customer_id" =>  (string)$userData->id,
