@@ -9,6 +9,7 @@ class CashFreePaymentService
     public $apiKey;
     public $apiSecret;
     public $createOrderUrl;
+    public $fetchOrderUrl;
     public $apiVersion = '2022-09-01';
 
     public function __construct()
@@ -18,10 +19,12 @@ class CashFreePaymentService
             $this->apiKey = env('CASHFREE_TEST_API_KEY');
             $this->apiSecret = env('CASHFREE_TEST_SECRET_KEY');
             $this->createOrderUrl = "https://sandbox.cashfree.com/pg/orders";
+            $this->fetchOrderUrl = "https://api.cashfree.com/pg/orders/";
         } else {
             $this->apiKey = env('CASHFREE_LIVE_API_KEY');
             $this->apiSecret = env('CASHFREE_LIVE_SECRET_KEY');
             $this->createOrderUrl = "https://api.cashfree.com/pg/orders";
+            $this->fetchOrderUrl = "https://api.cashfree.com/pg/orders/";
         }
     }
 
@@ -72,5 +75,16 @@ class CashFreePaymentService
                 'status' => false,
             ];
         }
+    }
+
+    public function fetchOrder($orderId)
+    {
+        $response = Http::withHeaders([
+            'x-api-version' => $this->apiVersion,
+            'x-client-id' => $this->apiKey,
+            'x-client-secret' => $this->apiSecret,
+        ])->accept('application/json')->get($this->fetchOrderUrl . $orderId);
+
+        return $response->json();
     }
 }
