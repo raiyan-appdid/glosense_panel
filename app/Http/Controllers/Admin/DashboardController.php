@@ -10,7 +10,6 @@ use App\Models\Product;
 use App\Models\Promocode;
 use App\Models\Testimonial;
 use App\Models\User;
-use App\Services\CashFree\CashFreePaymentService;
 use App\Services\ccavenue\PaymentService;
 use Barryvdh\DomPDF\PDF;
 use Http;
@@ -21,10 +20,6 @@ class DashboardController extends Controller
 
     public function home()
     {
-
-        $new = new CashFreePaymentService;
-        $data = $new->fetchOrder("ord_716135");
-        return $data;
 
 
         // $this->workingKey = env('CC_WORKING_KEY');

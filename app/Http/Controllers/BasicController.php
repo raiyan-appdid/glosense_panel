@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Invoice;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
+use App\Services\CashFree\CashFreePaymentService;
 use App\Services\ccavenue\helpers\CCCrypto;
 use App\Services\ShipRocket\CreateOrderService;
 use App\Services\ShipRocket\GenerateTokenService;
@@ -80,6 +81,12 @@ class BasicController extends Controller
 
     public function cashfreeCallback(Request $request)
     {
+
+        $new = new CashFreePaymentService;
+        $data = $new->fetchOrder($request->order_id);
+        return $data;
+
+
         return $request->all();
     }
 }
