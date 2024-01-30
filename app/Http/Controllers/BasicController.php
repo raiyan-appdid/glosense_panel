@@ -82,8 +82,11 @@ class BasicController extends Controller
     public function cashfreeCallback(Request $request)
     {
 
+
+        $orderData = Order::where('order_id', $request->order_id)->with(['transaction'])->first();
+
         $new = new CashFreePaymentService;
-        $data = $new->fetchOrder($request->order_id);
+        $data = $new->fetchOrder($orderData->transaction->cash_free_order_id);
         return $data;
 
 
