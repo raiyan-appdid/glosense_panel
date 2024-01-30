@@ -48,7 +48,7 @@ class CcAvenueOrderController extends Controller
         $data->pincode = $request->pincode;
         $data->country = $request->country;
         $data->number = $request->number;
-        $data->payment_gateway = 'cashfree';
+        $data->payment_gateway = 'cashfree live';
         $data->email = $request->email;
         $data->product_name = "Hair you glo";
         $data->units = $request->units;
