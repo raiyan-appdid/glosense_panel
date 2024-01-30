@@ -87,7 +87,7 @@ class BasicController extends Controller
 
         $new = new CashFreePaymentService;
         $data = $new->fetchOrder($orderData->transaction->cash_free_order_id);
-        return $data;
+        return $data['status'];
         return $data['order_status'];
         return $data;
 
