@@ -87,8 +87,34 @@ class BasicController extends Controller
         $response = $cashfreeInstance->fetchOrder($orderData->transaction->cash_free_order_id);
 
         if ($response['status']) {
-            return $response['response'];
+            $response = $response['response'];
+            if ($response['order_status'] == "PAID") {
+                $orderData->status = "PAID";
+                $transactionStatus = CcAvenueTransaction::where('id', $orderData->transaction->id)->with(['order'])->first();
+                $transactionStatus->payment_response_json = $response;
+                $transactionStatus->status = 'PAID';
+                $transactionStatus->save();
+
+                $token = new GenerateTokenService;
+                $token = $token->getToken();
+                $shiprocketOrder = new CreateOrderService;
+                $response = $shiprocketOrder->create($token, $orderData);
+
+                $orderData->shiprocket_order_id = $response['order_id'];
+                $orderData->shipment_id = $response['shipment_id'];
+                $orderData->save();
+
+                \Log::info($response);
+                Mail::to($orderData->email)->send(new Invoice($transactionStatus->order->id));
+
+                $url = "https://glosense.in/order-placed";
+                return redirect()->away($url);
+            }
+            $url = "https://glosense.in/order-cancelled";
+            return redirect()->away($url);
         }
+        $url = "https://glosense.in/order-cancelled";
+        return redirect()->away($url);
 
         return response([
             'success' => false,
