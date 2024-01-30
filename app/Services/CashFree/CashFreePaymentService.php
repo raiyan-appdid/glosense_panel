@@ -85,6 +85,19 @@ class CashFreePaymentService
             'x-client-secret' => $this->apiSecret,
         ])->accept('application/json')->get($this->fetchOrderUrl . $orderId);
 
-        return $response->json();
+
+        if ($response->status() == 200) {
+            return [
+                'status' => true,
+                'response' => $response->json(),
+            ];
+        }
+        \Log::info("-------Error while Fetching order start-----------");
+        \Log::info($response->json());
+        \Log::info("-------Error while Fetching order end-----------");
+        return [
+            'status' => false,
+            'message' => 'Something went Wrong check logs'
+        ];
     }
 }
