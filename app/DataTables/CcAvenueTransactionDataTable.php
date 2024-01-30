@@ -81,9 +81,12 @@ class CcAvenueTransactionDataTable extends DataTable
             Column::make('user_id'),
             Column::make('order_id'),
             Column::make('transaction_order_id'),
+            Column::make('cf_order_id'),
+            Column::make('payment_session_id'),
+            Column::make('cash_free_order_id'),
             Column::make('tracking_id'),
             Column::make('status'),
-            Column::make('payment_response_json'),
+            // Column::make('payment_response_json'),
             Column::make('created_at'),
 
         ];
