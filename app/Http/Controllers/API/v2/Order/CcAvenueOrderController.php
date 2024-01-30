@@ -20,6 +20,7 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request, CashFreePaymentService $cashFreePaymentService)
     {
+        \Log::info("-----------------raiyan-------------");
         // return $request->all();
         $request->validate([
             // 'tnc' => 'required',
