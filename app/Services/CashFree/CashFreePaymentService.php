@@ -39,7 +39,7 @@ class CashFreePaymentService
             ])->accept('application/json')->post(
                 $this->createOrderUrl,
                 [
-                    'order_amount' => 20,
+                    'order_amount' => 1,
                     'order_currency' => 'INR',
                     "customer_details" =>  [
                         "customer_id" =>  (string)$userData->id,
