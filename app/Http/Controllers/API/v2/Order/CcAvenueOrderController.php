@@ -20,7 +20,6 @@ class CcAvenueOrderController extends Controller
 {
     public function store(Request $request, CashFreePaymentService $cashFreePaymentService)
     {
-        \Log::info("-----------------raiyan-------------");
         // return $request->all();
         $request->validate([
             // 'tnc' => 'required',
@@ -70,7 +69,6 @@ class CcAvenueOrderController extends Controller
         $userData = User::where('id', $request->user_id)->first();
         $order =  $cashFreePaymentService->createOrder($data->order_id, $userData, $data->sub_total);
         if ($order['status']) {
-            \Log::info($order);
             $cf_order_id =  $order['response']['cf_order_id'];
             $payment_session_id =  $order['response']['payment_session_id'];
             $cash_free_order_id =  $order['response']['order_id'];
