@@ -76,9 +76,9 @@ class AuthController extends Controller
         ]);
         $user = User::where('phone', $request->phone)->first();
         if (!$user) {
-            $data = new User;
-            $data->phone = $request->phone;
-            $data->save();
+            $user = new User;
+            $user->phone = $request->phone;
+            $user->save();
         }
         $response = [
             'success' => true,
