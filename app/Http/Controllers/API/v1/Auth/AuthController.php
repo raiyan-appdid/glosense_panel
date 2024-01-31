@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
+use App\Models\RegisterOtp;
 use Illuminate\Support\Facades\Hash;
 use Kreait\Firebase\Exception\Auth\FailedToVerifyToken;
 
@@ -80,6 +81,9 @@ class AuthController extends Controller
             $user->phone = $request->phone;
             $user->save();
         }
+
+        $updateRegisterOtp = RegisterOtp::where('phone', $request->phone)->update(['is_verified', 1]);
+
         $response = [
             'success' => true,
             'user' => $user,
