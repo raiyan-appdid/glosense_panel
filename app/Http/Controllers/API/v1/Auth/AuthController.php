@@ -67,6 +67,27 @@ class AuthController extends Controller
         return response($response, 200);
     }
 
+
+    public function loginOneSms(Request $request)
+    {
+        // return $request->all();
+        $t = $request->validate([
+            'phone' => 'required',
+        ]);
+        $user = User::where('phone', $request->phone)->first();
+        if (!$user) {
+            $data = new User;
+            $data->phone = $request->phone;
+            $data->save();
+        }
+        $response = [
+            'success' => true,
+            'user' => $user,
+            'token' => $user->createToken('user')->plainTextToken,
+        ];
+        return response($response, 200);
+    }
+
     // public function login(Request $request)
     // {
     //     // return $request->all();

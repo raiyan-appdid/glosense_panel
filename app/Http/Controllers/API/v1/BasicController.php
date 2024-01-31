@@ -14,6 +14,7 @@ use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Models\RegisterOtp;
 use App\Models\Review;
 use App\Models\Slider;
 use App\Services\ShipRocket\GenerateTokenService;
@@ -145,16 +146,15 @@ class BasicController extends Controller
     public function sms(Request $request)
     {
         $request->validate([
-            'number' => 'required',
+            'phone' => 'required',
         ]);
 
         $otp = random_int(100000, 999999);
-        $data = new ForgotPassword;
-        $data->number = $request->number;
+        $data = new RegisterOtp;
+        $data->phone = $request->phone;
         $data->otp = $otp;
         $data->save();
 
-        // $message = $data->otp . " is your OTP (One Time Password) for logging into the App. For security reasons, do not share the OTP. Regards Team Appdid Infotech LLP.";
         $message = "Glosense: Your OTP is " . $data->otp . ". Use it to log in securely. Do not share. Regards, Glosense Lifecare PVT LTD";
         $sms = SmsIntegration::action($request->number, $message);
         if ($sms['status']) {
@@ -174,11 +174,11 @@ class BasicController extends Controller
     public function verifySmsOtp(Request $request)
     {
         $request->validate([
-            'number' => 'required',
+            'phone' => 'required',
             'otp' => 'required',
         ]);
 
-        $data = ForgotPassword::where('number', $request->number)->where('otp', $request->otp)->first();
+        $data = RegisterOtp::where('phone', $request->phone)->where('otp', $request->otp)->where('is_verified', 0)->first();
         if ($data) {
             return response([
                 'success' => true,
