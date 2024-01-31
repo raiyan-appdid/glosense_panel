@@ -7,6 +7,7 @@ use App\Models\CcAvenueOrder;
 use App\Models\CcAvenueTransaction;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Models\User;
 use App\Services\ccavenue\PaymentService;
 use Illuminate\Http\Request;
 use PDO;
@@ -32,6 +33,15 @@ class CcAvenueOrderController extends Controller
             // 'total_price' => 'required',
         ]);
 
+
+        try {
+            $userStore = User::where('id', $request->user_id)->first();
+            $userStore->email = $request->email;
+            $userStore->first_name = $request->name;
+            $userStore->save();
+        } catch (\Throwable $th) {
+            \Log::info($th);
+        }
 
 
 

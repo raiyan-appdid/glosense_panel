@@ -34,6 +34,15 @@ class CcAvenueOrderController extends Controller
             // 'total_price' => 'required',
         ]);
 
+        try {
+            $userStore = User::where('id', $request->user_id)->first();
+            $userStore->email = $request->email;
+            $userStore->first_name = $request->name;
+            $userStore->save();
+        } catch (\Throwable $th) {
+            \Log::info($th);
+        }
+
 
 
 
