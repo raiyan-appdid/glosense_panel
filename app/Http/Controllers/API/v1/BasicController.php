@@ -156,7 +156,7 @@ class BasicController extends Controller
         $data->save();
 
         $message = "Glosense: Your OTP is " . $data->otp . ". Use it to log in securely. Do not share. Regards, Glosense Lifecare PVT LTD";
-        $sms = SmsIntegration::action($request->number, $message);
+        $sms = SmsIntegration::action($request->phone, $message);
         if ($sms['status']) {
             return response([
                 'success' => true,
