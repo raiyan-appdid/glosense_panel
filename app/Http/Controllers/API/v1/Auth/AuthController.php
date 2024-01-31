@@ -82,7 +82,7 @@ class AuthController extends Controller
             $user->save();
         }
 
-        $updateRegisterOtp = RegisterOtp::where('phone', $request->phone)->update(['is_verified', 1]);
+        $updateRegisterOtp = RegisterOtp::where('phone', $request->phone)->update(['is_verified' => 1]);
 
         $response = [
             'success' => true,
