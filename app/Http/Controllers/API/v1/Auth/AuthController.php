@@ -72,7 +72,7 @@ class AuthController extends Controller
     {
         // return $request->all();
         $t = $request->validate([
-            'phone' => 'required',
+            'phone' => 'required|min:10',
         ]);
         $user = User::where('phone', $request->phone)->first();
         if (!$user) {
