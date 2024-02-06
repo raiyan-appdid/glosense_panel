@@ -105,15 +105,15 @@ class AuthController extends Controller
         $jsonData = $response->json();
 
 
-        $user = User::where('email', $jsonData->email)->first();
+        $user = User::where('email', $jsonData['email'])->first();
         if (!$user) {
             $user = new User;
-            $user->email = $jsonData->email;
+            $user->email = $jsonData['email'];
             $user->save();
         }
 
         $response = [
-            'tp' => $jsonData->email,
+            'tp' => $jsonData['email'],
             'success' => true,
             'user' => $user,
             'token' => $user->createToken('user')->plainTextToken,
