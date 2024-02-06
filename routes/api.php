@@ -15,6 +15,7 @@ Route::prefix('v1')->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'loginOne');
         Route::post('login-sms', 'loginOneSms');
+        Route::post('login-email', 'loginEmail');
         Route::post('logout', 'logout')->middleware(['auth:sanctum']);
     });
     Route::group(['middleware' => 'auth:sanctum'], function () {

@@ -9,6 +9,7 @@ use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
 use App\Models\RegisterOtp;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Kreait\Firebase\Exception\Auth\FailedToVerifyToken;
 
 class AuthController extends Controller
@@ -90,6 +91,19 @@ class AuthController extends Controller
             'token' => $user->createToken('user')->plainTextToken,
         ];
         return response($response, 200);
+    }
+
+
+    public function loginEmail(Request $request)
+    {
+        $request->validate([
+            'google_token' => 'required',
+        ]);
+        $response = Http::withHeaders([
+            "Content-Type" => "application/json",
+        ])->get('https://www.googleapis.com/oauth2/v1/userinfo?access_token=' . $request->google_token);
+        $jsonData = $response->json();
+        return $jsonData;
     }
 
     // public function login(Request $request)
