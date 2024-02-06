@@ -109,20 +109,16 @@ class AuthController extends Controller
         if (!$user) {
             $user = new User;
             $user->email = $jsonData['email'];
+            $user->name = $jsonData['name'];
             $user->save();
         }
 
         $response = [
-            'tp' => $jsonData['email'],
             'success' => true,
             'user' => $user,
             'token' => $user->createToken('user')->plainTextToken,
         ];
         return response($response, 200);
-
-
-
-        return $jsonData;
     }
 
     // public function login(Request $request)
