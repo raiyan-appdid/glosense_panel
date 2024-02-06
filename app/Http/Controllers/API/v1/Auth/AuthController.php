@@ -103,6 +103,25 @@ class AuthController extends Controller
             "Content-Type" => "application/json",
         ])->get('https://www.googleapis.com/oauth2/v1/userinfo?access_token=' . $request->google_token);
         $jsonData = $response->json();
+
+
+        $user = User::where('email', $jsonData->email)->first();
+        if (!$user) {
+            $user = new User;
+            $user->email = $jsonData->email;
+            $user->save();
+        }
+
+        $response = [
+            'tp' => $jsonData->email,
+            'success' => true,
+            'user' => $user,
+            'token' => $user->createToken('user')->plainTextToken,
+        ];
+        return response($response, 200);
+
+
+
         return $jsonData;
     }
 
