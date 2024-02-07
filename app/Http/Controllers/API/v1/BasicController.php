@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword as MailForgotPassword;
 use App\Models\CcAvenueTransaction;
+use App\Models\Extra;
 use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Order;
@@ -219,6 +220,15 @@ class BasicController extends Controller
         return response([
             'message' => 'Review Stored',
             'table' => 'review-table',
+        ]);
+    }
+
+    public function getHeading()
+    {
+        $data = Extra::first();
+        return response([
+            'success' => true,
+            'heading' => $data->heading,
         ]);
     }
 }
