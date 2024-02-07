@@ -78,7 +78,7 @@ class CcAvenueOrderController extends Controller
         //create order in razorpay
         $userData = User::where('id', $request->user_id)->first();
         $razorPayOrderId = RazorPayIntegration::createOrder($data->sub_total);
-        if ($razorPayOrderId['status']) {
+        if ($razorPayOrderId['success']) {
 
             $rzrOdId = $razorPayOrderId['razorpay_order_id'];
 
