@@ -128,7 +128,6 @@ class BasicController extends Controller
     public function callBackRazorpay(Request $request)
     {
 
-        return $request->all();
         $orderData = Order::where('order_id', $request->order_id)->with(['transaction'])->first();
 
         $checkPayment = RazorPayIntegration::fetchOrder($request->razorpay_order_id);
