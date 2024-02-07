@@ -7,6 +7,7 @@ use App\Models\CcAvenueTransaction;
 use App\Models\Order;
 use App\Services\CashFree\CashFreePaymentService;
 use App\Services\ccavenue\helpers\CCCrypto;
+use App\Services\RazorPayIntegration;
 use App\Services\ShipRocket\CreateOrderService;
 use App\Services\ShipRocket\GenerateTokenService;
 use Illuminate\Http\Request;
@@ -107,6 +108,8 @@ class BasicController extends Controller
                 \Log::info($response);
                 Mail::to($orderData->email)->send(new Invoice($transactionStatus->order->id));
 
+
+
                 $url = "https://glosense.in/order-placed";
                 return redirect()->away($url);
             }
@@ -124,6 +127,52 @@ class BasicController extends Controller
 
     public function callBackRazorpay(Request $request)
     {
+
+        $orderData = Order::where('order_id', $request->order_id)->with(['transaction'])->first();
+
+        $checkPayment = RazorPayIntegration::fetchOrder($request->razorpay_order_id);
+        if ($checkPayment['success']) {
+            $status = $checkPayment['status'];
+            $razorpayOrderData = CcAvenueTransaction::where('razorpay_order_id', $request->razorpay_order_id)->first();
+            $razorpayOrderData->status = $status;
+            $razorpayOrderData->save();
+            if ($status == 'paid' || $status == 'captured') {
+                $orderData->status = "PAID";
+                $transactionStatus = CcAvenueTransaction::where('id', $orderData->transaction->id)->with(['order'])->first();
+                // $transactionStatus->payment_response_json = $response;
+                $transactionStatus->status = 'PAID';
+                $transactionStatus->save();
+
+                $token = new GenerateTokenService;
+                $token = $token->getToken();
+                $shiprocketOrder = new CreateOrderService;
+                $response = $shiprocketOrder->create($token, $orderData);
+
+                $orderData->shiprocket_order_id = $response['order_id'];
+                $orderData->shipment_id = $response['shipment_id'];
+                $orderData->save();
+
+                \Log::info($response);
+                Mail::to($orderData->email)->send(new Invoice($transactionStatus->order->id));
+
+                $url = "https://glosense.in/order-placed";
+                return redirect()->away($url);
+            }
+        }
+
+        $url = "https://glosense.in/order-cancelled";
+        return redirect()->away($url);
+
+
+        return response([
+            'success' => false,
+            'errors' => 'Payment is failed or not yet captured',
+            'message' => 'Not getting status-paid in fetch api of razorpay',
+        ]);
+
+
+
+
         return $request->all();
     }
 }
