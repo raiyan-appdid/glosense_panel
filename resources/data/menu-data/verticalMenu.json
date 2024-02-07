@@ -53,6 +53,12 @@
       "name": "Review Users",
       "icon": "<i data-feather='star'></i>",
       "slug": "admin.reviews.website"
+    },
+    {
+      "url": "admin/extras",
+      "name": "Extras",
+      "icon": "<i data-feather='star'></i>",
+      "slug": "admin.extras.index"
     }
   ]
 }

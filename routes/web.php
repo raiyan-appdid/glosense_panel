@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeliveryChargeController;
 use App\Http\Controllers\Admin\EnquiryController;
+use App\Http\Controllers\Admin\ExtraController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -227,6 +228,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::delete('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
+    });
+
+    Route::name('extras.')->prefix('extras')->controller(ExtraController::class)->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::post('store', 'store')->name('store');
     });
     /*=================================================================>
     /==========================Units Management =====================>
