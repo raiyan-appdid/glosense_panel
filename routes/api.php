@@ -41,7 +41,7 @@ Route::prefix('v1')->group(function () {
     Route::post('verify-sms-otp', [BasicController::class, 'verifySmsOtp']);
     Route::post('store-review', [BasicController::class, 'storeReview'])->middleware(['auth:sanctum']);
     Route::post('store-anonymous-review', [BasicController::class, 'storeAnanomyousReview']);
-    Route::post('get-heading', [BasicController::class, 'getHeading']);
+    Route::get('get-heading', [BasicController::class, 'getHeading']);
 
 
     Route::get('example', function () {
