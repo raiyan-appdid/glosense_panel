@@ -147,7 +147,7 @@ class BasicController extends Controller
                 $token = $token->getToken();
                 $shiprocketOrder = new CreateOrderService;
                 $response = $shiprocketOrder->create($token, $orderData);
-
+                \Log::info($response);
                 $orderData->shiprocket_order_id = $response['order_id'];
                 $orderData->shipment_id = $response['shipment_id'];
                 $orderData->save();
