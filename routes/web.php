@@ -42,7 +42,7 @@ Route::prefix('cashfree')->name('cashfree.')->controller(BasicController::class)
     Route::get('callback', 'cashfreeCallback')->name('callback');
 });
 Route::prefix('razorpay')->name('razorpay.')->controller(BasicController::class)->group(function () {
-    Route::get('callback', 'callBackRazorpay')->name('callback');
+    Route::post('callback', 'callBackRazorpay')->name('callback');
 });
 
 Route::get('/', function(){
