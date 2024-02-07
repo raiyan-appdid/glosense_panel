@@ -121,4 +121,9 @@ class BasicController extends Controller
             'message' => 'Something went wrong',
         ]);
     }
+
+    public function callBackRazorpay(Request $request)
+    {
+        return $request->all();
+    }
 }

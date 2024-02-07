@@ -41,6 +41,9 @@ Route::prefix('ccavenue')->name('ccavenue.')->controller(BasicController::class)
 Route::prefix('cashfree')->name('cashfree.')->controller(BasicController::class)->group(function () {
     Route::get('callback', 'cashfreeCallback')->name('callback');
 });
+Route::prefix('razorpay')->name('razorpay.')->controller(BasicController::class)->group(function () {
+    Route::get('callback', 'callBackRazorpay')->name('callback');
+});
 
 Route::get('/', function(){
     return redirect()->route('login');
