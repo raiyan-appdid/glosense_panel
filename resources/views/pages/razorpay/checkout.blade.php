@@ -21,7 +21,7 @@
             // "description": "Test Transaction",
             // "image": "{{ asset('images/logo/logo.png') }}",
             "order_id": "{{ $rzrOdId }}",
-            "callback_url": "{{ route('razorpay.callback') }} }}?order_id=" + "{{ $rzrOdId }}",
+            "callback_url": "{{ route('razorpay.callback') }}?order_id=" + "{{ $rzrOdId }}",
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
                 "name": "Raiyan Memon", //your customer's name
                 "email": "raiyan.appdid@gmail.com",
@@ -36,6 +36,7 @@
         };
 
         callRazorpay(options)
+
         function callRazorpay(options) {
             var rzp1 = new Razorpay(options);
             rzp1.open();
