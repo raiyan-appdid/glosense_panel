@@ -20,7 +20,7 @@
             "name": "Glosense", //your business name
             // "description": "Test Transaction",
             // "image": "{{ asset('images/logo/logo.png') }}",
-            "order_id": {{ $rzrOdId }},
+            "order_id": "{{ $rzrOdId }}",
             "callback_url": "{{ route('razorpay.callback') }} }}",
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
                 "name": "Gaurav Kumar", //your customer's name
