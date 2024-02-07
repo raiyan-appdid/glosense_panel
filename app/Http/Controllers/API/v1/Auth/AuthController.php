@@ -109,7 +109,7 @@ class AuthController extends Controller
         if (!$user) {
             $user = new User;
             $user->email = $jsonData['email'];
-            $user->name = $jsonData['name'];
+            $user->first_name = $jsonData['name'];
             $user->save();
         }
 
