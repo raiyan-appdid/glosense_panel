@@ -21,11 +21,11 @@
             // "description": "Test Transaction",
             // "image": "{{ asset('images/logo/logo.png') }}",
             "order_id": "{{ $rzrOdId }}",
-            "callback_url": "{{ route('razorpay.callback') }} }}",
+            "callback_url": "{{ route('razorpay.callback') }} }}?order_id=" + "{{ $rzrOdId }}",
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-                "name": "Gaurav Kumar", //your customer's name
-                "email": "gaurav.kumar@example.com",
-                "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+                "name": "Raiyan Memon", //your customer's name
+                "email": "raiyan.appdid@gmail.com",
+                "contact": "7227867397" //Provide the customer's phone number for better conversion rates 
             },
             // "notes": {
             //     "address": "Razorpay Corporate Office"
