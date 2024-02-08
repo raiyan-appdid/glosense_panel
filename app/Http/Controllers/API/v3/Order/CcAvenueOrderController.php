@@ -87,7 +87,7 @@ class CcAvenueOrderController extends Controller
             $transaction = new CcAvenueTransaction;
             $transaction->user_id = $data->user_id;
             $transaction->order_id = $data->id;
-            $transaction->payment_gateway = 'razorpay test';
+            $transaction->payment_gateway = 'razorpay live';
             $transaction->razorpay_order_id = $rzrOdId;
             $transaction->save();
 
