@@ -23,9 +23,9 @@
             "order_id": "{{ $rzrOdId }}",
             "callback_url": "{{ route('razorpay.callback') }}?order_id=" + "{{ $orderId }}",
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-                "name": "Raiyan Memon", //your customer's name
-                "email": "raiyan.appdid@gmail.com",
-                "contact": "7227867397" //Provide the customer's phone number for better conversion rates 
+                "name": "{{ $userName ?? '' }}", //your customer's name
+                "email": "{{ $userEmail ?? '' }}",
+                "contact": "{{ $userEmail ?? '' }}" //Provide the customer's phone number for better conversion rates 
             },
             // "notes": {
             //     "address": "Razorpay Corporate Office"

@@ -76,7 +76,9 @@ class CcAvenueOrderController extends Controller
         $data->save();
 
         $orderId = $data->order_id;
-
+        $userName = $data->name;
+        $userEmail = $data->email;
+        $userNumber = $data->number;
         //create order in razorpay
         $userData = User::where('id', $request->user_id)->first();
         $razorPayOrderId = RazorPayIntegration::createOrder($data->sub_total);
@@ -91,7 +93,7 @@ class CcAvenueOrderController extends Controller
             $transaction->razorpay_order_id = $rzrOdId;
             $transaction->save();
 
-            return view('pages.razorpay.checkout', compact('rzrOdId', 'orderId'));
+            return view('pages.razorpay.checkout', compact('rzrOdId', 'orderId', 'userName', 'userEmail', 'userEmail'));
         } else {
             return response([
                 'success' => false,
