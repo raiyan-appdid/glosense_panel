@@ -25,7 +25,7 @@
             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
                 "name": "{{ $userName ?? '' }}", //your customer's name
                 "email": "{{ $userEmail ?? '' }}",
-                "contact": "{{ $userEmail ?? '' }}" //Provide the customer's phone number for better conversion rates 
+                "contact": "{{ $userNumber ?? '' }}", //Provide the customer's phone number for better conversion rates 
             },
             // "notes": {
             //     "address": "Razorpay Corporate Office"

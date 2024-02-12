@@ -93,7 +93,10 @@ class CcAvenueOrderController extends Controller
             $transaction->razorpay_order_id = $rzrOdId;
             $transaction->save();
 
-            return view('pages.razorpay.checkout', compact('rzrOdId', 'orderId', 'userName', 'userEmail', 'userEmail'));
+            // \Log::info($userName);
+            // \Log::info($userEmail);
+
+            return view('pages.razorpay.checkout', compact('rzrOdId', 'orderId', 'userName', 'userNumber', 'userEmail'));
         } else {
             return response([
                 'success' => false,
