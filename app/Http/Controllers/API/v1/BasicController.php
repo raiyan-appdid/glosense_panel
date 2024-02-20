@@ -229,6 +229,7 @@ class BasicController extends Controller
         return response([
             'success' => true,
             'heading' => $data->heading,
+            'image' => $data->image,
         ]);
     }
 }
