@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Extra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExtraController extends Controller
 {
@@ -17,10 +18,22 @@ class ExtraController extends Controller
 
     public function store(Request $request)
     {
-        $data = Extra::updateOrCreate(
-            ['id' => 1],
-            ['heading' => $request->heading],
-        );
+
+        if ($request->image) {
+            $url =  Storage::disk('do')->putFile('extras', $request->file('image'), 'public');
+            $spaceUrl = Storage::disk('do')->url($url);
+            $image = $spaceUrl;
+            $data = Extra::updateOrCreate(
+                ['id' => 1],
+                ['heading' => $request->heading, 'image' => $image],
+            );
+        } else {
+            $data = Extra::updateOrCreate(
+                ['id' => 1],
+                ['heading' => $request->heading],
+            );
+        }
+
         return 'saved';
     }
 }
