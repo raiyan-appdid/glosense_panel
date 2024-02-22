@@ -138,9 +138,19 @@ class BasicController extends Controller
     public function getAllReviews()
     {
         $data = Review::where('status', 'active')->get();
+        $oneStar = Review::where('start', 1)->count();
+        $twoStar = Review::where('start', 2)->count();
+        $threeStar = Review::where('start', 3)->count();
+        $fourStar = Review::where('start', 4)->count();
+        $fiveStar = Review::where('start', 5)->count();
         return response([
             'success' => true,
             'data' => $data,
+            'oneStar' => $oneStar,
+            'twoStar' => $twoStar,
+            'threeStar' => $threeStar,
+            'fourStar' => $fourStar,
+            'fiveStar' => $fiveStar,
         ]);
     }
 
