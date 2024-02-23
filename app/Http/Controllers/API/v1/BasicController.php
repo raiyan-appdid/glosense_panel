@@ -137,7 +137,7 @@ class BasicController extends Controller
 
     public function getAllReviews()
     {
-        $data = Review::where('status', 'active')->simplePaginate(5);
+        $data = Review::where('status', 'active')->get();
         $oneStar = Review::where('star', 1)->count();
         $twoStar = Review::where('star', 2)->count();
         $threeStar = Review::where('star', 3)->count();
