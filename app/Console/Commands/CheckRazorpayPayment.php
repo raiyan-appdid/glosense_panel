@@ -9,6 +9,7 @@ use App\Services\ShipRocket\CreateOrderService;
 use App\Services\ShipRocket\GenerateTokenService;
 use Illuminate\Console\Command;
 use App\Mail\Invoice;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class CheckRazorpayPayment extends Command
@@ -35,9 +36,15 @@ class CheckRazorpayPayment extends Command
     public function handle()
     {
 
-        $OrdersWithStatusPending = Order::where('status', 'pending')->orderBy('id', 'desc')->with('transaction', function ($q) {
-            $q->where('payment_gateway', "razorpay live");
-        })->where('shiprocket_order_id', null)->count();
+        $sevenDaysAgo = Carbon::now()->subDays(7);
+        $OrdersWithStatusPending = Order::where('status', 'pending')
+            ->where('created_at', '>=', $sevenDaysAgo)
+            ->orderBy('id', 'desc')
+            ->with('transaction', function ($q) {
+                $q->where('payment_gateway', 'razorpay live');
+            })
+            ->where('shiprocket_order_id', null)
+            ->get();
         \Log::info($OrdersWithStatusPending);
 
         // foreach ($OrdersWithStatusPending as  $OrdersWithStatusPending) {
