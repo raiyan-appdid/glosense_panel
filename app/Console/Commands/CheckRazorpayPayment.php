@@ -37,35 +37,35 @@ class CheckRazorpayPayment extends Command
 
         $OrdersWithStatusPending = Order::where('status', 'pending')->orderBy('id', 'desc')->with('transaction', function ($q) {
             $q->where('payment_gateway', "razorpay live");
-        })->first();
+        })->whereNotNull('shiprocket_order_id')->first();
         \Log::info($OrdersWithStatusPending);
 
         // foreach ($OrdersWithStatusPending as  $OrdersWithStatusPending) {
-        if ($OrdersWithStatusPending->transaction?->razorpay_order_id ?? "" != "") {
+        // if ($OrdersWithStatusPending->transaction?->razorpay_order_id ?? "" != "") {
 
-            $checkPayment = RazorPayIntegration::fetchOrder($OrdersWithStatusPending->transaction->razorpay_order_id);
-            if ($checkPayment['success']) {
-                $status = $checkPayment['status'];
-                $razorpayOrderData = CcAvenueTransaction::where('razorpay_order_id', $OrdersWithStatusPending->transaction->razorpay_order_id)->first();
-                $razorpayOrderData->status = $status;
-                $razorpayOrderData->save();
-                if ($status == 'paid' || $status == 'captured') {
-                    $OrdersWithStatusPending->status = "PAID";
-                    $transactionStatus = CcAvenueTransaction::where('id', $OrdersWithStatusPending->transaction->id)->with(['order'])->first();
-                    $transactionStatus->status = 'PAID';
-                    $transactionStatus->save();
+        //     $checkPayment = RazorPayIntegration::fetchOrder($OrdersWithStatusPending->transaction->razorpay_order_id);
+        //     if ($checkPayment['success']) {
+        //         $status = $checkPayment['status'];
+        //         $razorpayOrderData = CcAvenueTransaction::where('razorpay_order_id', $OrdersWithStatusPending->transaction->razorpay_order_id)->first();
+        //         $razorpayOrderData->status = $status;
+        //         $razorpayOrderData->save();
+        //         if ($status == 'paid' || $status == 'captured') {
+        //             $OrdersWithStatusPending->status = "PAID";
+        //             $transactionStatus = CcAvenueTransaction::where('id', $OrdersWithStatusPending->transaction->id)->with(['order'])->first();
+        //             $transactionStatus->status = 'PAID';
+        //             $transactionStatus->save();
 
-                    $token = new GenerateTokenService;
-                    $token = $token->getToken();
-                    $shiprocketOrder = new CreateOrderService;
-                    $response = $shiprocketOrder->create($token, $OrdersWithStatusPending);
-                    $OrdersWithStatusPending->shiprocket_order_id = $response['order_id'];
-                    $OrdersWithStatusPending->shipment_id = $response['shipment_id'];
-                    $OrdersWithStatusPending->save();
-                    Mail::to($OrdersWithStatusPending->email)->send(new Invoice($transactionStatus->order->id));
-                }
-            }
-        }
+        //             $token = new GenerateTokenService;
+        //             $token = $token->getToken();
+        //             $shiprocketOrder = new CreateOrderService;
+        //             $response = $shiprocketOrder->create($token, $OrdersWithStatusPending);
+        //             $OrdersWithStatusPending->shiprocket_order_id = $response['order_id'];
+        //             $OrdersWithStatusPending->shipment_id = $response['shipment_id'];
+        //             $OrdersWithStatusPending->save();
+        //             Mail::to($OrdersWithStatusPending->email)->send(new Invoice($transactionStatus->order->id));
+        //         }
+        //     }
+        // }
         // }
 
 
