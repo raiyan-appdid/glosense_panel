@@ -20,6 +20,9 @@
                     <div class="col-md-2">
                         <img src="{{ $extra?->image }}" width="100%" alt="">
                     </div>
+                    <div class="col-md-10">
+                        <x-input type="file" :required="false" name="pdf" />
+                    </div>
                 </div>
             </div>
         </x-form>
@@ -29,10 +32,8 @@
 
 @section('page-script')
     <script>
-
-        function test(){
+        function test() {
             window.location.reload();
         }
-        
     </script>
 @endsection

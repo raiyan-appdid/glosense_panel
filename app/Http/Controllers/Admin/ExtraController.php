@@ -27,6 +27,14 @@ class ExtraController extends Controller
                 ['id' => 1],
                 ['heading' => $request->heading, 'image' => $image],
             );
+        } elseif ($request->pdf) {
+            $url =  Storage::disk('do')->putFile('extras', $request->file('pdf'), 'public');
+            $spaceUrl = Storage::disk('do')->url($url);
+            $image = $spaceUrl;
+            $data = Extra::updateOrCreate(
+                ['id' => 1],
+                ['heading' => $request->heading, 'pdf' => $image],
+            );
         } else {
             $data = Extra::updateOrCreate(
                 ['id' => 1],
