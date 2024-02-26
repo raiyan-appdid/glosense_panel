@@ -29,8 +29,15 @@ class CheckRazorpayPayment extends Command
     public function handle()
     {
 
-        $OrdersWithStatusPending = Order::where('status', 'pending')->with(['transaction'])->get();
+        $OrdersWithStatusPending = Order::where('status', 'pending')->with(['transaction'])->first();
         \Log::info($OrdersWithStatusPending);
+
+        // foreach ($OrdersWithStatusPending as $key => $value) {
+        //     # code...
+        // }
+
+
+
         return Command::SUCCESS;
     }
 }
