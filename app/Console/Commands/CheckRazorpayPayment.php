@@ -37,7 +37,7 @@ class CheckRazorpayPayment extends Command
 
         $OrdersWithStatusPending = Order::where('status', 'pending')->orderBy('id', 'desc')->with('transaction', function ($q) {
             $q->where('payment_gateway', "razorpay live");
-        })->where('shiprocket_order_id', null)->first();
+        })->where('shiprocket_order_id', null)->count();
         \Log::info($OrdersWithStatusPending);
 
         // foreach ($OrdersWithStatusPending as  $OrdersWithStatusPending) {
