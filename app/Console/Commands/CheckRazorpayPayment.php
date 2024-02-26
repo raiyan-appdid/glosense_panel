@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Order;
 use Illuminate\Console\Command;
 
 class CheckRazorpayPayment extends Command
@@ -28,8 +29,8 @@ class CheckRazorpayPayment extends Command
     public function handle()
     {
 
-        
-
+        $OrdersWithStatusPending = Order::where('status', 'pending')->with(['transaction'])->get();
+        \Log::info($OrdersWithStatusPending);
         return Command::SUCCESS;
     }
 }
