@@ -80,6 +80,7 @@ class CcAvenueTransactionDataTable extends DataTable
             Column::make('id'),
             Column::make('user_id'),
             Column::make('order_id'),
+            Column::make('razorpay_order_id'),
             Column::make('transaction_order_id'),
             Column::make('cf_order_id'),
             Column::make('payment_session_id'),
