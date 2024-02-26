@@ -44,7 +44,7 @@ class CheckRazorpayPayment extends Command
                 $q->where('payment_gateway', 'razorpay live');
             })
             ->where('shiprocket_order_id', null)
-            ->count();
+            ->get();
         \Log::info($OrdersWithStatusPending);
 
         // foreach ($OrdersWithStatusPending as  $OrdersWithStatusPending) {
