@@ -30,7 +30,7 @@ class ProvidedEmailDataTable extends DataTable
             // })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })
+            });
             // ->addColumn('status', function ($data) {
             //     $route = route('admin.providedemails.status');
             //     return view('content.table-component.switch', compact('data', 'route'));
