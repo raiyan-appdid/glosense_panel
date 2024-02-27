@@ -21,20 +21,21 @@ class ProvidedEmailDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($value) {
-                $edit_route = route('admin.providedemails.edit', $value->id);
-                $edit_callback = 'setValue';
-                $modal = '#edit-providedemail-modal';
-                $delete_route = route('admin.providedemails.destroy', $value->id);
-                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
-            })
+            // ->addColumn('action', function ($value) {
+            //     $edit_route = route('admin.providedemails.edit', $value->id);
+            //     $edit_callback = 'setValue';
+            //     $modal = '#edit-providedemail-modal';
+            //     $delete_route = route('admin.providedemails.destroy', $value->id);
+            //     return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            // })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })->addColumn('status', function ($data) {
-                $route = route('admin.providedemails.status');
-                return view('content.table-component.switch', compact('data', 'route'));
             })
-            ->escapeColumns('created_at', 'action');
+            // ->addColumn('status', function ($data) {
+            //     $route = route('admin.providedemails.status');
+            //     return view('content.table-component.switch', compact('data', 'route'));
+            // })
+            // ->escapeColumns('created_at', 'action');
     }
 
     /**
