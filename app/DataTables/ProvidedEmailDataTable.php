@@ -21,13 +21,13 @@ class ProvidedEmailDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('action', function ($value) {
-            //     $edit_route = route('admin.providedemails.edit', $value->id);
-            //     $edit_callback = 'setValue';
-            //     $modal = '#edit-providedemail-modal';
-            //     $delete_route = route('admin.providedemails.destroy', $value->id);
-            //     return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
-            // })
+            ->addColumn('action', function ($value) {
+                $edit_route = route('admin.provided-emails.edit', $value->id);
+                $edit_callback = 'setValue';
+                $modal = '#edit-providedemail-modal';
+                $delete_route = route('admin.provided-emails.destroy', $value->id);
+                return view('content.table-component.action', compact('edit_route', 'delete_route', 'edit_callback', 'modal'));
+            })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
@@ -90,11 +90,11 @@ class ProvidedEmailDataTable extends DataTable
             // Column::make('id'), 
             Column::make('email'),
             Column::make('created_at'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             // Column::computed('status')
             //     ->exportable(false)
             //     ->printable(false)
