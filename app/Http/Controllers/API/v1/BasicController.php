@@ -15,6 +15,7 @@ use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Order;
 use App\Models\Promocode;
+use App\Models\ProvidedEmail;
 use App\Models\RegisterOtp;
 use App\Models\Review;
 use App\Models\Slider;
@@ -242,6 +243,20 @@ class BasicController extends Controller
             'success' => true,
             'heading' => $data->heading,
             'image' => $data->image,
+        ]);
+    }
+
+    public function storeEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+        ]);
+        $data = new ProvidedEmail;
+        $data->email = $request->email;
+        $data->save();
+        return response([
+            'success' => true,
+            'message' => 'stored'
         ]);
     }
 }

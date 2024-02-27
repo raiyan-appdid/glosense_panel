@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PromocodeController;
+use App\Http\Controllers\Admin\ProvidedEmailController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SuccessStoryController;
@@ -45,7 +46,7 @@ Route::prefix('razorpay')->name('razorpay.')->controller(BasicController::class)
     Route::post('callback', 'callBackRazorpay')->name('callback');
 });
 
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('login');
 });
 
@@ -151,6 +152,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::post('update', 'update')->name('update');
         Route::put('status', 'status')->name('status');
     });
+    Route::name('provided-emails.')->prefix('provided-emails')->controller(ProvidedEmailController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('blocked', 'blockedImage')->name('blocked');
+        Route::post('/', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::delete('destroy/{id}', 'destroy')->name('destroy');
+        Route::post('update', 'update')->name('update');
+        Route::put('status', 'status')->name('status');
+    });
     /*=================================================================>
     /==========================Testimonial Management =====================>
     /=================================================================*/
@@ -233,7 +243,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'web'])->gr
         Route::put('status', 'status')->name('status');
     });
 
-    Route::name('extras.')->prefix('extras')->controller(ExtraController::class)->group(function(){
+    Route::name('extras.')->prefix('extras')->controller(ExtraController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('store', 'store')->name('store');
     });

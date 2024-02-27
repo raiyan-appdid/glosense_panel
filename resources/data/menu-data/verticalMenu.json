@@ -43,6 +43,12 @@
       "slug": ""
     },
     {
+      "url": "admin/provided-emails",
+      "name": "Provided Emails",
+      "icon": "<i data-feather='star'></i>",
+      "slug": "admin.provided-emails.index"
+    },
+    {
       "url": "admin/reviews",
       "name": "Review Admin",
       "icon": "<i data-feather='star'></i>",
