@@ -9,6 +9,7 @@ use Laravolt\Avatar\Avatar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword as MailForgotPassword;
+use App\Models\Analytic;
 use App\Models\CcAvenueTransaction;
 use App\Models\Extra;
 use App\Models\ForgotPassword;
@@ -257,6 +258,17 @@ class BasicController extends Controller
         return response([
             'success' => true,
             'message' => 'stored'
+        ]);
+    }
+
+    public function storeAnalytics(Request $request)
+    {
+        $data = new Analytic;
+        $data->user_id = $request->user()->id;
+        $data->save();
+        return response([
+            'success' => true,
+            'message' => 'stored',
         ]);
     }
 }
