@@ -45,7 +45,7 @@ class AnalyticDataTable extends DataTable
      */
     public function query(Analytic $model)
     {
-        return $model->newQuery();
+        return $model->with(['user'])->newQuery();
     }
 
     /**
@@ -86,7 +86,7 @@ class AnalyticDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'), Column::make('user_id'),
+            Column::make('id'), Column::make('user_id', 'user.first_name'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
