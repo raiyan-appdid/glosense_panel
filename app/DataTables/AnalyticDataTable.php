@@ -30,7 +30,13 @@ class AnalyticDataTable extends DataTable
             })
             ->editColumn('created_at', function ($data) {
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
-            })->addColumn('status', function ($data) {
+            })
+
+            ->editColumn('user_id', function ($data) {
+                return json_encode($data);
+            })
+
+            ->addColumn('status', function ($data) {
                 $route = route('admin.analytics.status');
                 return view('content.table-component.switch', compact('data', 'route'));
             })
@@ -86,7 +92,8 @@ class AnalyticDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'), Column::make('user_id', 'user.first_name'),
+            Column::make('id'),
+            Column::make('user_id', 'user.first_name'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
