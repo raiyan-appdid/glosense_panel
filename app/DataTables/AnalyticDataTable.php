@@ -96,11 +96,11 @@ class AnalyticDataTable extends DataTable
             ->hidden(),
             Column::make('user', 'user.first_name'),
             Column::make('created_at'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
             // Column::computed('status')
             //     ->exportable(false)
             //     ->printable(false)
