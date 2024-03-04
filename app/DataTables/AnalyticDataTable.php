@@ -33,7 +33,7 @@ class AnalyticDataTable extends DataTable
             })
 
             ->editColumn('user_id', function ($data) {
-                return json_encode($data);
+                return $data->user->first_name;
             })
 
             ->addColumn('status', function ($data) {
