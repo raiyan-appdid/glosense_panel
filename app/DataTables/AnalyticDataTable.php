@@ -86,7 +86,7 @@ class AnalyticDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'), Column::make('user', 'user.name'),
+            Column::make('id'), Column::make('user', 'user.first_name'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)
