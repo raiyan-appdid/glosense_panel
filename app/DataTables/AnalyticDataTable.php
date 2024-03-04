@@ -32,7 +32,7 @@ class AnalyticDataTable extends DataTable
                 return  '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($data->created_at)) . '</span>';
             })
 
-            ->editColumn('user_id', function ($data) {
+            ->editColumn('user', function ($data) {
                 return $data->user->first_name;
             })
 
@@ -92,8 +92,8 @@ class AnalyticDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('user_id', 'user.first_name'),
+            // Column::make('id'),
+            Column::make('user', 'user.first_name'),
             Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

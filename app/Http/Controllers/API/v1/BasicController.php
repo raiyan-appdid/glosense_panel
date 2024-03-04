@@ -265,6 +265,7 @@ class BasicController extends Controller
     {
         $data = new Analytic;
         $data->user_id = $request->user()->id;
+        $data->for = 'buy now';
         $data->save();
         return response([
             'success' => true,
