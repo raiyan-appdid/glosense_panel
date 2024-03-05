@@ -21,7 +21,7 @@ class ProductPageImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|mimes:png,jpg,jpeg,svg,webp'
+            'image' => 'required'
         ]);
         $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
         $spaceUrl = Storage::disk('do')->url($url);
@@ -45,7 +45,7 @@ class ProductPageImageController extends Controller
     {
         $request->validate([
             'id' => 'required|numeric',
-            'image' => 'required|mimes:png,jpg,jpeg,svg,webp'
+            'image' => 'required'
         ]);
         $slider = ProductPageImage::findOrFail($request->id);
         if ($request->has('image')) {
