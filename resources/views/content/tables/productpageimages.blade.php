@@ -7,8 +7,8 @@
 @section('content')
 
     <section>
-        <div class="row match-height">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row match-height justify-content-center">
+            <div class="col-lg-8 col-md-8 col-sm-12">
                 <x-card>
                     {!! $dataTable->table() !!}
                 </x-card>
