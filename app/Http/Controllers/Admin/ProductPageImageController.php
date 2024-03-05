@@ -21,7 +21,7 @@ class ProductPageImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required'
+            // 'image' => 'required'
         ]);
         $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
         $spaceUrl = Storage::disk('do')->url($url);
