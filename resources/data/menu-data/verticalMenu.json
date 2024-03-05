@@ -49,6 +49,12 @@
       "slug": "admin.analytics.index"
     },
     {
+      "url": "admin/product-page-images",
+      "name": "Product Images",
+      "icon": "<i data-feather='image'></i>",
+      "slug": "admin.product-page-images.index"
+    },
+    {
       "url": "admin/provided-emails",
       "name": "Provided Emails",
       "icon": "<i data-feather='star'></i>",

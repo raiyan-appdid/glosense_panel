@@ -15,6 +15,7 @@ use App\Models\Extra;
 use App\Models\ForgotPassword;
 use App\Models\Job;
 use App\Models\Order;
+use App\Models\ProductPageImage;
 use App\Models\Promocode;
 use App\Models\ProvidedEmail;
 use App\Models\RegisterOtp;
@@ -271,6 +272,15 @@ class BasicController extends Controller
         return response([
             'success' => true,
             'message' => 'stored',
+        ]);
+    }
+
+    public function productImage()
+    {
+        $data = ProductPageImage::active()->get();
+        return response([
+            'success' => true,
+            'data' => $data,
         ]);
     }
 }

@@ -44,6 +44,7 @@ Route::prefix('v1')->group(function () {
     Route::post('store-anonymous-review', [BasicController::class, 'storeAnanomyousReview']);
     Route::get('get-heading', [BasicController::class, 'getHeading']);
     Route::post('store-email', [BasicController::class, 'storeEmail']);
+    Route::get('product-image', [BasicController::class, 'productImage']);
 
 
     Route::get('example', function () {
