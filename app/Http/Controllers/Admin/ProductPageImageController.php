@@ -20,9 +20,15 @@ class ProductPageImageController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|file'
-        ]);
+        $request->validate(
+            [
+                'image' => 'required|file|max:1500'
+            ],
+
+            [
+                'image.max' => 'Image Must Be smaller than 1.5 MB',
+            ]
+        );
         $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
         $spaceUrl = Storage::disk('do')->url($url);
         $image = $spaceUrl;
@@ -43,10 +49,16 @@ class ProductPageImageController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'id' => 'required|numeric',
-            'image' => 'required'
-        ]);
+        $request->validate(
+            [
+                'id' => 'required',
+                'image' => 'required|file|max:1500'
+            ],
+
+            [
+                'image.max' => 'Image Must Be smaller than 1.5 MB',
+            ]
+        );
         $slider = ProductPageImage::findOrFail($request->id);
         if ($request->has('image')) {
             $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
