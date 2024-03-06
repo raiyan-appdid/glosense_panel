@@ -277,7 +277,7 @@ class BasicController extends Controller
 
     public function productImage()
     {
-        $data = ProductPageImage::active()->get();
+        $data = ProductPageImage::active()->orderBy('rank', 'asc')->get();
         return response([
             'success' => true,
             'data' => $data,
