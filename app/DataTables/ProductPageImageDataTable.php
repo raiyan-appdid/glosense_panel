@@ -94,6 +94,7 @@ class ProductPageImageDataTable extends DataTable
             Column::make('id')
                 ->hidden(),
             Column::make('image'),
+            Column::make('rank'),
             // Column::make('created_at'),
             Column::computed('action')
                 ->exportable(false)

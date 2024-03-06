@@ -22,7 +22,8 @@ class ProductPageImageController extends Controller
     {
         $request->validate(
             [
-                'image' => 'required|file|max:1500'
+                'image' => 'required|file|max:1500',
+                'rank' => 'required',
             ],
 
             [
@@ -33,7 +34,8 @@ class ProductPageImageController extends Controller
         $spaceUrl = Storage::disk('do')->url($url);
         $image = $spaceUrl;
         ProductPageImage::create([
-            'image' => $image
+            'image' => $image,
+            'rank' => $request->rank,
         ]);
         return response([
             'header' => 'Success!',
@@ -52,7 +54,8 @@ class ProductPageImageController extends Controller
         $request->validate(
             [
                 'id' => 'required',
-                'image' => 'required|file|max:1500'
+                'image' => 'nullable|file|max:1500',
+                'rank' => 'required',
             ],
 
             [
@@ -65,8 +68,9 @@ class ProductPageImageController extends Controller
             $spaceUrl = Storage::disk('do')->url($url);
             $image = $spaceUrl;
             $slider->image = $image;
-            $slider->save();
         }
+        $slider->rank = $request->rank;
+        $slider->save();
         return response([
             'header' => 'Updated!',
             'message' => 'Image updated successfully!',

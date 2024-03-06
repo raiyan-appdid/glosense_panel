@@ -21,6 +21,7 @@
         <x-form id="add-productpageimage" method="POST" class="" :route="route('admin.product-page-images.store')">
             <div class="col-md-12 col-12 ">
                 <x-input-file name="image" />
+                <x-input name="rank" />
             </div>
         </x-form>
     </x-side-modal>
@@ -29,6 +30,7 @@
 
             <div class="col-md-12 col-12 ">
                 <x-input-file name="image" />
+                <x-input name="rank" id="edit_rank" />
                 <x-input name="id" type="hidden" />
             </div>
 
@@ -51,6 +53,7 @@
 
             $(`${modal} #id`).val(data.id);
             $(`${modal} #name`).val(data.name);
+            $(`${modal} #edit_rank`).val(data.rank);
             $(modal).modal('show');
         }
     </script>
