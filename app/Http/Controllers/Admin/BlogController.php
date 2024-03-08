@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DataTables\BlogDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -35,6 +36,7 @@ class BlogController extends Controller
 
         $data = new Blog;
         $data->title = $request->title;
+        $data->slug = Str::slug($request->title);
         $data->short_description = $request->short_description;
         $data->content = $request->content;
         if ($request->has('image')) {
@@ -67,6 +69,7 @@ class BlogController extends Controller
         ]);
         $data = Blog::where('id', $request->id)->first();
         $data->title = $request->title;
+        $data->slug = Str::slug($request->title);
         $data->short_description = $request->short_description;
         $data->content = $request->content;
         if ($request->has('image')) {
