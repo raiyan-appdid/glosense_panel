@@ -93,17 +93,17 @@ class BlogDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             Column::make('id'),
             Column::make('title'),
             Column::make('image'),
             Column::make('short_description'),
             // Column::make('content'),
             Column::make('created_at'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
             Column::computed('status')
                 ->exportable(false)
                 ->printable(false)
