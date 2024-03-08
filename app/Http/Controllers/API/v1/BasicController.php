@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword as MailForgotPassword;
 use App\Models\Analytic;
+use App\Models\Blog;
 use App\Models\CcAvenueTransaction;
 use App\Models\Extra;
 use App\Models\ForgotPassword;
@@ -278,6 +279,27 @@ class BasicController extends Controller
     public function productImage()
     {
         $data = ProductPageImage::active()->orderBy('rank', 'asc')->get();
+        return response([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
+    public function allBlogs()
+    {
+        $data = Blog::active()->get();
+        return response([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
+    public function blogDetails(Request $request)
+    {
+        $request->validate([
+            'blog_id' => 'required',
+        ]);
+        $data = Blog::where('id', $request->blog_id)->first();
         return response([
             'success' => true,
             'data' => $data,

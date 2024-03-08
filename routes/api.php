@@ -45,6 +45,8 @@ Route::prefix('v1')->group(function () {
     Route::get('get-heading', [BasicController::class, 'getHeading']);
     Route::post('store-email', [BasicController::class, 'storeEmail']);
     Route::get('product-image', [BasicController::class, 'productImage']);
+    Route::get('all-blogs', [BasicController::class, 'allBlogs']);
+    Route::get('blog-details', [BasicController::class, 'blogDetails']);
 
 
     Route::get('example', function () {

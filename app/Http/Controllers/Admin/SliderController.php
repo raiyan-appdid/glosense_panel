@@ -31,9 +31,7 @@ class SliderController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg,svg,webp|max:512'
         ]);
 
-        // request()->file('image')->store('test', 'do');
         $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
-        // dd('asdf');
         $spaceUrl = Storage::disk('do')->url($url);
 
         $image = $spaceUrl;

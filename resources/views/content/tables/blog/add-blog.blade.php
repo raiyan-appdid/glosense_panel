@@ -7,15 +7,18 @@
 @section('content')
     <section>
         <x-card title="Add Blog">
-            <x-form id="add-article" method="POST" class="" :route="route('admin.blogs.store')">
-                <div class="col-lg-6 col-12">
+            <x-form id="add-blog" method="POST" class="" :route="route('admin.blogs.store')">
+                <div class="col-md-6 col-12 ">
                     <x-input name="title" />
                 </div>
-                <div class="col-lg-6 col-12">
+                <div class="col-md-6">
                     <x-input-file name="image" />
                 </div>
-                <div class="col-lg-12 col-12">
-                    <x-editor type="textarea" name="content" />
+                <div class="col-md-12">
+                    <x-editor name="short_description" label="Short Description" />
+                </div>
+                <div class="col-md-12">
+                    <x-editor name="content" label="Content" />
                 </div>
             </x-form>
         </x-card>
@@ -23,12 +26,5 @@
 
 @endsection
 @section('page-script')
-    <script>
-        function setValue(data, modal) {
-            console.log(data);
-            setTimeout(() => {
-                location.href = data.route;
-            }, 1000);
-        }
-    </script>
+    <script></script>
 @endsection

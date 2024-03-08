@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug');
-            $table->text('content');
-            $table->string('image');
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('content')->nullable();
+            $table->string('image')->nullable();
             $table->enum('status', ['active', 'blocked'])->default('active');
             $table->timestamps();
         });

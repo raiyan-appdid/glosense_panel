@@ -6,9 +6,8 @@ use Hash;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\DataTables\BlogDataTable;
-use App\Helpers\FileUploader;
 use App\Http\Controllers\Controller;
-use Str;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -16,71 +15,73 @@ class BlogController extends Controller
     {
         $pageConfigs = ['has_table' => true,];
         // $table->with('id', 1);
-        return $table->render('content.tables.blog.blogs', compact('pageConfigs'));
+        return $table->render('content.tables.blogs', compact('pageConfigs'));
     }
-    public function blockedBlog(BlogDataTable $table)
-    {
-        $pageConfigs = ['has_table' => true,];
-        $table->with('status', 'blocked');
-        return $table->render('content.tables.blog.blogs', compact('pageConfigs'));
-    }
+
     public function create()
     {
         return view('content.tables.blog.add-blog');
     }
+
     public function store(Request $request)
     {
+
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required',
+            'image' => 'required|file|max:1500',
+            'short_description' => 'required',
             'content' => 'required',
-            'image' => 'required|mimes:png,jpg,svg,jpeg,webp',
         ]);
-        // return $request->all();
-        $image = FileUploader::uploadFile($request->file('image'), 'images/blog');
-        Blog::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'content' => $request->content,
-            'image' => $image
-        ]);
+
+        $data = new Blog;
+        $data->title = $request->title;
+        $data->short_description = $request->short_description;
+        $data->content = $request->content;
+        if ($request->has('image')) {
+            $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
+            $spaceUrl = Storage::disk('do')->url($url);
+            $image = $spaceUrl;
+            $data->image = $image;
+        }
+        $data->save();
         return response([
-            'header' => 'Success!',
-            'message' => 'Blog created successfully!',
+            'header' => 'Blog Added',
+            'message' => 'Blog Added successfully',
             'table' => 'blog-table',
-            'route' => 'admin/blogs'
         ]);
     }
     public function edit($id)
     {
-        $blog = Blog::findOrFail($id);
-        return view('content.forms.edit-blog', compact('blog'));
+        $data = Blog::findOrFail($id);
+        return view('content.tables.blog.edit-blog', compact('data'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
-            'title' => 'required|string',
+            'title' => 'required',
+            'id' => 'required',
+            'image' => 'nullable|file|max:1500',
+            'short_description' => 'required',
             'content' => 'required',
-            'image' => '|mimes:png,jpg,svg,jpeg,webp',
         ]);
-        // return $request->all();
-        $image = null;
-        $blog = Blog::findOrFail($request->id);
-        if ($request->has('file')) {
-            $image = FileUploader::uploadFile($request->file('image'), 'images/blog');
+        $data = Blog::where('id', $request->id)->first();
+        $data->title = $request->title;
+        $data->short_description = $request->short_description;
+        $data->content = $request->content;
+        if ($request->has('image')) {
+            $url =  Storage::disk('do')->putFile('slider', $request->file('image'), 'public');
+            $spaceUrl = Storage::disk('do')->url($url);
+            $image = $spaceUrl;
+            $data->image = $image;
         }
-        $blog->title = $request->title;
-        $blog->slug = Str::slug($request->title);
-        $blog->content = $request->content;
-        ($image) ? $blog->image = $image : '';
-        $blog->save();
+        $data->save();
         return response([
-            'header' => 'Updated!',
-            'message' => 'Blog created successfully!',
-            'table' => 'blog-table'
+            'header' => 'Blog Updated',
+            'message' => 'Blog Updated successfully',
+            'table' => 'blog-table',
         ]);
     }
-
 
     public function status(Request $request)
     {
