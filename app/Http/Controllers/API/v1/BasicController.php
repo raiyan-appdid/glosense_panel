@@ -297,9 +297,9 @@ class BasicController extends Controller
     public function blogDetails(Request $request)
     {
         $request->validate([
-            'blog_id' => 'required',
+            'slug' => 'required',
         ]);
-        $data = Blog::where('id', $request->blog_id)->first();
+        $data = Blog::where('slug', $request->slug)->first();
         return response([
             'success' => true,
             'data' => $data,
