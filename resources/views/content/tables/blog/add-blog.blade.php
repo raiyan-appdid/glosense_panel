@@ -7,7 +7,7 @@
 @section('content')
     <section>
         <x-card title="Add Blog">
-            <x-form id="add-blog" method="POST" class="" :route="route('admin.blogs.store')">
+            <x-form successCallback="editCallback" id="add-blog" method="POST" class="" :route="route('admin.blogs.store')">
                 <div class="col-md-6 col-12 ">
                     <x-input name="title" />
                 </div>
@@ -26,5 +26,9 @@
 
 @endsection
 @section('page-script')
-    <script></script>
+    <script>
+        function editCallback(response) {
+            window.location.href = "{{ route('admin.blogs.index') }}";
+        }
+    </script>
 @endsection
