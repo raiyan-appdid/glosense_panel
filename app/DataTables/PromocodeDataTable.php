@@ -101,6 +101,7 @@ class PromocodeDataTable extends DataTable
             // Column::make('minimum_order_amount'),
             // Column::make('max_discount_amount'),
             Column::make('discount'),
+            Column::make('offer_product'),
             // Column::make('discount_type'),
             Column::make('created_at'),
             Column::computed('action')

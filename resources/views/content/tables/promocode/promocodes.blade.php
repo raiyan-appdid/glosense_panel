@@ -34,11 +34,11 @@
             {{-- <div class="col-md-12 col-12 ">
                 <x-input :required="false" name="minimum_order_amount" type="number" />
             </div> --}}
-            {{-- <div class="col-md-12 col-12 ">
-                <x-input :required="false" name="max_discount_amount" type="number" />
-            </div> --}}
             <div class="col-md-12 col-12 ">
-                <x-input  name="discount" type="number" />
+                <x-input name="discount" type="number" />
+            </div>
+            <div class="col-md-12 col-12 ">
+                <x-input type="number" :required="false" name="offer_product" />
             </div>
             {{-- <div class="col-md-12 col-12 ">
                 <select class="select2  form-control " id="" name="discount_type">
@@ -52,7 +52,7 @@
     <x-side-modal title="Update promocode" id="edit-promocode-modal">
         <x-form id="edit-promocode" method="POST" class="" :route="route('admin.promocodes.update')">
             <div class="col-md-12 col-12 ">
-                <x-input  name="promocode" />
+                <x-input name="promocode" />
                 <x-input name="id" type="hidden" />
             </div>
             {{-- <div class="col-md-12 col-12 ">
@@ -72,6 +72,9 @@
             </div> --}}
             <div class="col-md-12 col-12 ">
                 <x-input name="discount" type="number" />
+            </div>
+            <div class="col-md-12 col-12 ">
+                <x-input type="number" :required="false" name="offer_product" />
             </div>
             {{-- <div class="col-md-12 col-12 ">
                 <select class="select2  form-control " id="discount_type" name="discount_type">
@@ -117,6 +120,7 @@
             $(`${modal} #minimum_order_amount`).val(data.minimum_order_amount);
             $(`${modal} #max_discount_amount`).val(data.max_discount_amount);
             $(`${modal} #discount`).val(data.discount);
+            $(`${modal} #offer_product`).val(data.offer_product);
             $(`${modal} #discount_type`).val(data.discount_type).trigger('change');
             $(modal).modal('show');
         }

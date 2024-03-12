@@ -37,6 +37,7 @@ class PromocodeController extends Controller
             'minimum_order_amount' => 1,
             'max_discount_amount' => 1,
             'discount' => $request->discount,
+            'offer_product' => $request->offer_product,
             'discount_type' => 'flat',
         ]);
 
@@ -75,6 +76,7 @@ class PromocodeController extends Controller
             'minimum_order_amount' => 1,
             'max_discount_amount' => 1,
             'discount' => $request->discount,
+            'offer_product' => $request->offer_product,
             'discount_type' => 'flat',
         ]);
         return response([
