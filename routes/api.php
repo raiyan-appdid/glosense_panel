@@ -7,6 +7,7 @@ use App\Http\Controllers\API\v1\UserController;
 use App\Http\Controllers\API\v1\BasicController;
 use App\Http\Controllers\API\v1\Order\CcAvenueOrderController;
 use App\Http\Controllers\API\v1\Post\FavouriteController;
+use App\Http\Controllers\API\v1\ProductPageController;
 
 Route::prefix('v1')->group(function () {
 
@@ -48,6 +49,9 @@ Route::prefix('v1')->group(function () {
     Route::get('all-blogs', [BasicController::class, 'allBlogs']);
     Route::get('blog-details', [BasicController::class, 'blogDetails']);
 
+    Route::prefix('product')->controller(ProductPageController::class)->group(function () {
+        Route::get('text-get', 'getText');
+    });
 
     Route::get('example', function () {
         return "raiyan";

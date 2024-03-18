@@ -55,6 +55,12 @@
       "slug": "admin.analytics.index"
     },
     {
+      "url": "admin/product-page",
+      "name": "Product Page",
+      "icon": "<i data-feather='image'></i>",
+      "slug": "admin.product-page.index"
+    },
+    {
       "url": "admin/product-page-images",
       "name": "Product Images",
       "icon": "<i data-feather='image'></i>",
