@@ -48,7 +48,7 @@ Route::prefix('v1')->group(function () {
     Route::get('product-image', [BasicController::class, 'productImage']);
     Route::get('all-blogs', [BasicController::class, 'allBlogs']);
     Route::get('blog-details', [BasicController::class, 'blogDetails']);
-    Route::get('click-on-blog', [BasicController::class, 'clickOnBlog']);
+    Route::post('click-on-blog', [BasicController::class, 'clickOnBlog']);
 
     Route::prefix('product')->controller(ProductPageController::class)->group(function () {
         Route::get('text-get', 'getText');
