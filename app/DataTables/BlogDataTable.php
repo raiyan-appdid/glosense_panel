@@ -106,6 +106,7 @@ class BlogDataTable extends DataTable
             Column::make('id'),
             Column::make('title'),
             Column::make('image'),
+            Column::make('views'),
             Column::make('short_description'),
             // Column::make('content'),
             Column::make('created_at'),
