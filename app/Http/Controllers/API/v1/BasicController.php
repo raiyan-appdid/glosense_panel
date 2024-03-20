@@ -305,4 +305,11 @@ class BasicController extends Controller
             'data' => $data,
         ]);
     }
+
+    public function clickOnBlog(Request $request)
+    {
+        $data = Blog::where('slug', $request->slug)->first();
+        $data->views = $data->views + 1;
+        $data->save();
+    }
 }
