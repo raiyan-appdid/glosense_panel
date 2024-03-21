@@ -246,6 +246,7 @@ class BasicController extends Controller
             'success' => true,
             'heading' => $data->heading,
             'image' => $data->image,
+            'product_page_image' => $data->product_page_image,
         ]);
     }
 
