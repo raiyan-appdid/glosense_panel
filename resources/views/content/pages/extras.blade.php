@@ -15,14 +15,20 @@
                 <x-input name="heading" value="{{ $extra?->heading }}" />
                 <div class="row">
                     <div class="col-md-10">
-                        <x-input type="file" :required="false" name="image" />
+                        <x-input type="file" label="Index Page Pop Image" :required="false" name="image" />
                     </div>
                     <div class="col-md-2">
                         <img src="{{ $extra?->image }}" width="100%" alt="">
                     </div>
                     <div class="col-md-10">
-                        <x-input type="file" :required="false" name="pdf" />
+                        <x-input type="file" label="Product Page Pop Image" :required="false" name="product_page_image" />
                     </div>
+                    <div class="col-md-2">
+                        <img src="{{ $extra?->product_page_image }}" width="100%" alt="">
+                    </div>
+                    {{-- <div class="col-md-10">
+                        <x-input type="file" :required="false" name="pdf" />
+                    </div> --}}
                 </div>
             </div>
         </x-form>
