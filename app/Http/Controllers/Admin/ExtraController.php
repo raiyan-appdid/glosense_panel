@@ -18,14 +18,13 @@ class ExtraController extends Controller
 
     public function store(Request $request)
     {
-
         if ($request->image) {
             $url =  Storage::disk('do')->putFile('extras', $request->file('image'), 'public');
             $spaceUrl = Storage::disk('do')->url($url);
             $image = $spaceUrl;
             $data = Extra::updateOrCreate(
                 ['id' => 1],
-                ['heading' => $request->heading, 'image' => $image],
+                ['heading' => $request->heading, 'image' => $image, 'productt_page_pop_title' => $request->productt_page_pop_title],
             );
         }
         if ($request->product_page_image) {
@@ -34,12 +33,12 @@ class ExtraController extends Controller
             $image = $spaceUrl;
             $data = Extra::updateOrCreate(
                 ['id' => 1],
-                ['heading' => $request->heading, 'product_page_image' => $image],
+                ['heading' => $request->heading, 'product_page_image' => $image, 'productt_page_pop_title' => $request->productt_page_pop_title],
             );
         }
         $data = Extra::updateOrCreate(
             ['id' => 1],
-            ['heading' => $request->heading],
+            ['heading' => $request->heading, 'productt_page_pop_title' => $request->productt_page_pop_title],
         );
 
 

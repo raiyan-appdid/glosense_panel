@@ -247,6 +247,7 @@ class BasicController extends Controller
             'heading' => $data->heading,
             'image' => $data->image,
             'product_page_image' => $data->product_page_image,
+            'product_page_pop_title' => $data->productt_page_pop_title,
         ]);
     }
 
