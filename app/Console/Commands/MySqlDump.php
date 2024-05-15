@@ -34,7 +34,7 @@ class MySqlDump extends Command
         $password = $this->argument('password');
         $path = database_path() . $ds . 'backups' . $ds . date('Y') . $ds . date('m') . $ds;
         $file = date('Y-m-d') . '_mysqldump.sql';
-        $command = sprintf('mysqldump %s -u forge -p\'%s\' > %s', $schema, $password, $path . $file);
+        $command = sprintf('mysqldump %s -u raiyan -p\'%s\' > %s', $schema, $password, $path . $file);
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
