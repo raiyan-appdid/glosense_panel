@@ -11,7 +11,7 @@ class MySqlDump extends Command
      *
      * @var string
      */
-    protected $signature = 'db:mysqldump {database_name} {password}';
+    protected $signature = 'db:mysqldump';
 
     /**
      * The console command description.
@@ -29,11 +29,12 @@ class MySqlDump extends Command
     public function handle()
     {
         $ds = DIRECTORY_SEPARATOR;
-        $schema = $this->argument('database_name'); //your database name
-        $password = $this->argument('password'); //your database password
+        $schema = env('DB_DATABASE');
+        $password = env('DB_PASSWORD');
+        $user = env('DB_USERNAME');
         $path = database_path() . $ds . 'backups' . $ds . date('Y') . $ds . date('m') . $ds;
         $file = date('d-m-Y') . '_mysqldump.sql';
-        $command = sprintf('mysqldump %s -u raiyan -p\'%s\' > %s', $schema, $password, $path . $file);
+        $command = sprintf('mysqldump %s -u ' . $user . ' -p\'%s\' > %s', $schema, $password, $path . $file);
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
