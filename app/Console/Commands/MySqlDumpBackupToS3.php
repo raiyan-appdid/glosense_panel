@@ -34,6 +34,7 @@ class MySqlDumpBackupToS3 extends Command
         if (file_exists($path)) {
             $content = File::get($path);
             $projectName = env('APP_NAME');
+            \Log::info($projectName);
             $url =  Storage::disk('do')->put('mysql-backups/' . $projectName . '/' . date('M-Y') . '/' . date('d-M-Y') . '_backup.sql', $content, 'private');
             if ($url) {
                 File::delete($path);
