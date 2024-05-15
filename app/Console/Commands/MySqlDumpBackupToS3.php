@@ -31,7 +31,6 @@ class MySqlDumpBackupToS3 extends Command
     {
         $ds = DIRECTORY_SEPARATOR;
         $path = database_path() . $ds . 'backups' . $ds . date('Y') . $ds . date('m') . $ds . date('d-m-Y') . '_mysqldump.sql';
-        \Log::info(date('M-Y'));
         if (file_exists($path)) {
             $content = File::get($path);
             $projectName = env('APP_NAME');
