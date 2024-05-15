@@ -31,10 +31,10 @@ class MySqlDumpBackupToS3 extends Command
     {
         $ds = DIRECTORY_SEPARATOR;
         $path = database_path() . $ds . 'backups' . $ds . date('Y') . $ds . date('m') . $ds . date('d-m-Y') . '_mysqldump.sql';
+        $projectName = env('APP_NAME');
+        \Log::info($projectName);
         if (file_exists($path)) {
             $content = File::get($path);
-            $projectName = env('APP_NAME');
-            \Log::info($projectName);
             $url =  Storage::disk('do')->put('mysql-backups/' . $projectName . '/' . date('M-Y') . '/' . date('d-M-Y') . '_backup.sql', $content, 'private');
             if ($url) {
                 File::delete($path);
