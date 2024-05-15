@@ -20,7 +20,7 @@ class MySqlDumpBackupToS3 extends Command
      *
      * @var string
      */
-    protected $description = 'This command excess the backup file created by db:mysqldump command and store that file into appdidZ digital ocean s3.';
+    protected $description = 'This command excess the backup file created by db:mysqldump command and store that file into appdid digital ocean s3.';
 
     /**
      * Execute the console command.
@@ -32,7 +32,6 @@ class MySqlDumpBackupToS3 extends Command
         $ds = DIRECTORY_SEPARATOR;
         $path = database_path() . $ds . 'backups' . $ds . date('Y') . $ds . date('m') . $ds . date('d-m-Y') . '_mysqldump.sql';
         $projectName = env('APP_NAME');
-        \Log::info($projectName);
         if (file_exists($path)) {
             $content = File::get($path);
             $url =  Storage::disk('do')->put('mysql-backups/' . $projectName . '/' . date('M-Y') . '/' . date('d-M-Y') . '_backup.sql', $content, 'private');
