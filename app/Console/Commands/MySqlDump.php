@@ -39,5 +39,6 @@ class MySqlDump extends Command
             mkdir($path, 0755, true);
         }
         exec($command);
+        exec('php artisan db:mysqlbackup');
     }
 }
